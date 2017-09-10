@@ -2,9 +2,12 @@
   "version": "2.8.5",
   "private": true,
   "scripts": {
-    "browser": "cross-env NODE_ENV=development WEBPACK_CONFIG=browser_dev webpack-dev-server --open",
-    "build": "cross-env NODE_ENV=production WEBPACK_CONFIG=browser_prod,server_prod webpack --colors",
-    "build-analyze": "cross-env BUNDLE_ANALYZER=1 NODE_ENV=production WEBPACK_CONFIG=browser_prod,server_prod webpack --colors",
+    "browser":
+      "cross-env NODE_ENV=development WEBPACK_CONFIG=browser_dev webpack-dev-server --open",
+    "build":
+      "cross-env NODE_ENV=production SERVER_PROD_PORT=$PORT WEBPACK_CONFIG=browser_prod,server_prod webpack --colors",
+    "build-analyze":
+      "cross-env BUNDLE_ANALYZER=1 NODE_ENV=production WEBPACK_CONFIG=browser_prod,server_prod webpack --colors",
     "build-browser": "cross-env NODE_ENV=production WEBPACK_CONFIG=browser_prod webpack --colors",
     "build-run": "npm run build && npm run server",
     "build-static": "cross-env NODE_ENV=production WEBPACK_CONFIG=static webpack --colors",
