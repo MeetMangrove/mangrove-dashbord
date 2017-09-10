@@ -1,0 +1,13 @@
+.titleBlockHeader {
+  color: #ea355a;
+  letter-spacing: 0.42px;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 18px;
+}
+
+.whiteBlockHeader {
+  padding: 11px 20px;
+  background-color: white;
+  margin-top: 20px;
+}

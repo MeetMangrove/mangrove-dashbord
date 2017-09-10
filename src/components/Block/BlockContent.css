@@ -1,0 +1,56 @@
+.whiteBlockContent {
+  background-color: white;
+  padding: 23px 21px;
+  margin-top: 7px;
+}
+
+.listContentItemLogo {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.listContentWrapper {
+  margin-top: 15px;
+}
+
+.listContentItemContent {
+  font-size: 14px;
+  color: #4a4a4a;
+  letter-spacing: 0.33px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  position: relative;
+  margin-left: 5px;
+  transition: color 0.5s;
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+
+  &:hover {
+    text-decoration: none;
+    color: #4a4a4a;
+  }
+}
+
+/*.list-content-item-wrapper:hover .list-content-item-content:before {
+  transform: scale3d(1, 1, 1);
+}
+
+.list-content-item-content:before {
+  background-color: #4a4a4a;
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 10%;
+  opacity: 0.1;
+  transform: scale3d(0, 1, 1);
+  transform-origin: 0% 50%;
+  transition: transform 0.5s;
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.list-content-item-content:hover,
+.list-content-item-content:active {
+  text-decoration: none;
+}*/
