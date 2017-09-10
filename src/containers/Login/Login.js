@@ -5,6 +5,8 @@ import { graphql } from 'react-apollo'
 
 import LocalStorageManager from 'src/utils/LocalStorageManager'
 
+import LoginComponent from 'src/components/Login/Login'
+
 import signinUser from 'src/graphql/Auth/Mutation/SigninUser.gql'
 import userQuery from 'src/graphql/Auth/Query/isLoggedIn.gql'
 
@@ -17,7 +19,6 @@ class Login extends Component {
 
   static defaultProps = {
     history: {},
-    createUser: () => {},
     signinUser: () => {},
     data: {}
   }
@@ -25,15 +26,10 @@ class Login extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      email: '',
-      password: ''
-    }
+    this.loginUser = this.loginUser.bind(this)
   }
 
-  loginUser = () => {
-    const { email, password } = this.state
-
+  loginUser = (email, password) => {
     this.props
       .signinUser({ variables: { email, password } })
       .then(response => {
@@ -50,29 +46,7 @@ class Login extends Component {
       return <div>Loading</div>
     }
 
-    return (
-      <div className="w-100 pa4 flex justify-center">
-        <div style={{ maxWidth: 400 }} className="">
-          <input
-            className="w-100 pa3 mv2"
-            value={this.state.email}
-            placeholder="Email"
-            onChange={e => this.setState({ email: e.target.value })}
-          />
-          <input
-            className="w-100 pa3 mv2"
-            type="password"
-            value={this.state.password}
-            placeholder="Password"
-            onChange={e => this.setState({ password: e.target.value })}
-          />
-
-          <button className="pa3 bg-black-10 bn dim ttu pointer" onClick={this.loginUser}>
-            Log in
-          </button>
-        </div>
-      </div>
-    )
+    return <LoginComponent requestLogin={this.loginUser} />
   }
 }
 

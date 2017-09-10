@@ -77,10 +77,10 @@
   "dependencies": {
     "apollo-local-query": "^0.3.0",
     "apollo-server-koa": "^1.1.2",
-    "auth0-lock": "^10.20.0",
-    "auth0-lock-passwordless": "^2.2.3",
     "boxen": "^1.2.1",
+    "bulma": "^0.5.1",
     "chalk": "^2.1.0",
+    "classnames": "^2.2.5",
     "graphql": "^0.11.3",
     "ip": "^1.1.5",
     "isomorphic-fetch": "^2.2.1",
@@ -106,9 +106,7 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "regenerator-runtime": "^0.11.0",
-    "seamless-immutable": "^7.1.2",
-    "semantic-ui-css": "^2.2.12",
-    "semantic-ui-react": "^0.72.0"
+    "seamless-immutable": "^7.1.2"
   },
   "engines": {
     "node": ">=7",

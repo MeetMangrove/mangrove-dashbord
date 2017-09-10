@@ -30,7 +30,7 @@ class HomeContainer extends Component {
       <div>
         <Konami easterEgg={this.handleEasterEgg} />
         {rickroll && (
-          <div className="white-container">
+          <div className="whiteContainer">
             <span role="img" aria-label="fire">
               🔥
             </span>

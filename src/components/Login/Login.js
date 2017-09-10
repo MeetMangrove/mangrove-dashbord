@@ -1,21 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import ClassName from 'classnames'
 
 import { Link } from 'react-router-dom'
 
-// import css from './login.css'
+import css from './login.css'
 
 export default class Login extends Component {
   static propTypes = {
-    auth: PropTypes.object,
-    history: PropTypes.object,
-    requestLogin: PropTypes.object
+    requestLogin: PropTypes.func
   }
 
   static defaultProps = {
-    auth: {},
-    history: {},
-    requestLogin: {}
+    requestLogin: () => {}
   }
 
   constructor(props) {
@@ -28,13 +25,17 @@ export default class Login extends Component {
     this.handleClickLogin = this.handleClickLogin.bind(this)
   }
 
-  handleClickLogin() {
+  handleClickLogin(e) {
+    e.preventDefault()
+
     const email = this.emailInput.value
     const password = this.passwordInput.value
-    console.log('email', email)
-    console.log('password', password)
+
     if (email !== '' && password !== '') {
       this.setState({ isLoginLoading: true })
+      setTimeout(() => {
+        this.props.requestLogin(email, password)
+      }, 300)
     }
   }
 
@@ -42,35 +43,42 @@ export default class Login extends Component {
     const { isLoginLoading } = this.state
     return (
       <div>
-        <h3 className="title-login">You{"'"}re a Mangrove member? Log in here:</h3>
-        <input
-          className="input-login"
-          name="email"
-          placeholder="email"
-          type="text"
-          ref={email => {
-            this.emailInput = email
-          }}
-        />
-        <input
-          className="input-login"
-          placeholder="password"
-          type="password"
-          ref={password => {
-            this.passwordInput = password
-          }}
-        />
-        <div className="btn-login-wrapper">
-          <button
-            className={isLoginLoading ? 'btn-login align-center bar' : 'btn-login align-center'}
-            onClick={this.handleClickLogin}
-            size="lg"
-          >
-            {!isLoginLoading && <span>Log in</span>}
-            {isLoginLoading && <div className="loader" />}
-          </button>
-        </div>
-        <div className="forgot-password">
+        <form onSubmit={this.handleClickLogin}>
+          <h3 className={css.titleLogin}>You{"'"}re a Mangrove member? Log in here:</h3>
+          <input
+            className={css.inputLogin}
+            name="email"
+            placeholder="email"
+            type="text"
+            ref={email => {
+              this.emailInput = email
+            }}
+          />
+          <input
+            className={css.inputLogin}
+            placeholder="password"
+            type="password"
+            ref={password => {
+              this.passwordInput = password
+            }}
+          />
+          <div className={css.btnLoginWrapper}>
+            <button
+              className={
+                isLoginLoading ? (
+                  ClassName(css.btnLogin, css.alignCenter, css.bar)
+                ) : (
+                  ClassName(css.btnLogin, css.alignCenter)
+                )
+              }
+              size="lg"
+            >
+              {!isLoginLoading && <span>Log in</span>}
+              {isLoginLoading && <div className={css.loader} />}
+            </button>
+          </div>
+        </form>
+        <div className={css.forgotPassword}>
           <Link to="/login/forgot-password">Forgot password ?</Link>
         </div>
       </div>

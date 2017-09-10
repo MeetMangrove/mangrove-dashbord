@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import ClassNames from 'classnames'
 
 import Header from 'src/components/Header/Header'
 import Footer from 'src/components/Footer/Footer'
 
-import './PrivateLayout.css'
+import css from './PrivateLayout.css'
 
 export default class PrivateLayout extends Component {
   static propTypes = {
@@ -17,9 +18,9 @@ export default class PrivateLayout extends Component {
 
   render() {
     return (
-      <div className="fill">
+      <div className="fill container is-fluid">
         <Header />
-        <div className="wrapper wrapper-private">{this.props.children}</div>
+        <div className={ClassNames(css.wrapper, css.wrapperPrivate)}>{this.props.children}</div>
         <Footer />
       </div>
     )

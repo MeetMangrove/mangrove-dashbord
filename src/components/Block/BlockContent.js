@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 // import { Link } from 'react-router-dom'
-import { Grid } from 'semantic-ui-react'
 
 // import TwitterLogo from 'src/components/Icons/TwitterLogo'
 // import FacebookLogo from 'src/components/Icons/FacebookLogo'
@@ -17,9 +16,9 @@ export default class BlockContent extends Component {
   render() {
     return (
       <div className={css.blockContent}>
-        <Grid>
-          <Grid.Column mobile={16} tablet={8} computer={4} lg="12" />
-        </Grid>
+        <div>
+          <div />
+        </div>
       </div>
     )
   }
