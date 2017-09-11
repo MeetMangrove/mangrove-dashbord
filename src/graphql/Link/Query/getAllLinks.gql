@@ -1,0 +1,9 @@
+query {
+  allLinks(filter: { type: Misc }, orderBy: createdAt_ASC) {
+    id
+    description
+    url
+    icon
+    title
+  }
+}
