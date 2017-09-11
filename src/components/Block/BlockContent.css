@@ -24,18 +24,18 @@
   margin-left: 5px;
   transition: color 0.5s;
   transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-
-  &:hover {
-    text-decoration: none;
-    color: #4a4a4a;
-  }
 }
 
-/*.list-content-item-wrapper:hover .list-content-item-content:before {
+.listContentItemContent:hover {
+  text-decoration: none;
+  color: #4a4a4a;
+}
+
+.listContentItemWrapper:hover .listContentItemContent:before {
   transform: scale3d(1, 1, 1);
 }
 
-.list-content-item-content:before {
+.listContentItemContent:before {
   background-color: #4a4a4a;
   content: '';
   position: absolute;
@@ -50,7 +50,7 @@
   transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
-.list-content-item-content:hover,
-.list-content-item-content:active {
+.listContentItemContent:hover,
+.listContentItemContent:active {
   text-decoration: none;
-}*/
+}

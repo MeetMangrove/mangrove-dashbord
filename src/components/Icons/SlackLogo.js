@@ -18,8 +18,8 @@ export default class SlackLogo extends Component {
     const { width, height, className } = this.props
     return (
       <svg
-        width={width || 256}
-        height={height || 256}
+        width={width || '256'}
+        height={height || '256'}
         className={className || ''}
         viewBox="0 0 256 256"
       >

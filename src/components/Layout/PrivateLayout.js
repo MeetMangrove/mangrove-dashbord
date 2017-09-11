@@ -18,9 +18,11 @@ export default class PrivateLayout extends Component {
 
   render() {
     return (
-      <div className="fill container is-fluid">
+      <div className="fill">
         <Header />
-        <div className={ClassNames(css.wrapper, css.wrapperPrivate)}>{this.props.children}</div>
+        <div className={ClassNames(css.wrapper, css.wrapperPrivate, 'container')}>
+          {this.props.children}
+        </div>
         <Footer />
       </div>
     )

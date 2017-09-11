@@ -1,11 +1,11 @@
 {
-  "version": "2.8.5",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "browser":
       "cross-env NODE_ENV=development WEBPACK_CONFIG=browser_dev webpack-dev-server --open",
     "build":
-      "cross-env NODE_ENV=production SERVER_PROD_PORT=$PORT WEBPACK_CONFIG=browser_prod,server_prod webpack --colors",
+      "cross-env NODE_ENV=production WEBPACK_CONFIG=browser_prod,server_prod webpack --colors",
     "build-analyze":
       "cross-env BUNDLE_ANALYZER=1 NODE_ENV=production WEBPACK_CONFIG=browser_prod,server_prod webpack --colors",
     "build-browser": "cross-env NODE_ENV=production WEBPACK_CONFIG=browser_prod webpack --colors",
@@ -16,8 +16,7 @@
     "lint": "eslint .",
     "server": "node dist/server",
     "server-dev": "cross-env NODE_ENV=development WEBPACK_CONFIG=server_dev webpack --colors",
-    "start": "npm run build && npm run server",
-    "dev": "run-p browser server-dev",
+    "start": "run-p browser server-dev",
     "static": "serve -s dist/public",
     "test": "jest"
   },
@@ -85,7 +84,6 @@
     "bulma": "^0.5.1",
     "chalk": "^2.1.0",
     "classnames": "^2.2.5",
-    "cross-env": "^5.0.5",
     "graphql": "^0.11.3",
     "ip": "^1.1.5",
     "isomorphic-fetch": "^2.2.1",

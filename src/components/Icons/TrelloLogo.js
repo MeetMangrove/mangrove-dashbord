@@ -9,8 +9,8 @@ export default class TrelloLogo extends Component {
   }
 
   static defaultProps = {
-    width: 200,
-    height: 200,
+    width: '200',
+    height: '200',
     className: ''
   }
 
@@ -18,8 +18,8 @@ export default class TrelloLogo extends Component {
     const { width, height, className } = this.props
     return (
       <svg
-        width={width || 200}
-        height={height || 200}
+        width={width || '200'}
+        height={height || '200'}
         className={className || ''}
         viewBox="0 0 200 200"
       >

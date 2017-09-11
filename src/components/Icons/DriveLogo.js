@@ -9,8 +9,8 @@ export default class DriveLogo extends Component {
   }
 
   static defaultProps = {
-    width: 139,
-    height: 120.4,
+    width: '139',
+    height: '120.4',
     className: ''
   }
 
@@ -18,8 +18,8 @@ export default class DriveLogo extends Component {
     const { width, height, className } = this.props
     return (
       <svg
-        width={width || 139}
-        height={height || 120.4}
+        width={width || '139'}
+        height={height || '120.4'}
         className={className || ''}
         viewBox="0 0 139 120.4"
       >

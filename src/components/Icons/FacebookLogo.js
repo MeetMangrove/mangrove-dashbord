@@ -9,8 +9,8 @@ export default class FacebookLogo extends Component {
   }
 
   static defaultProps = {
-    width: 266.893,
-    height: 266.895,
+    width: '266.893',
+    height: '266.895',
     className: ''
   }
 
@@ -18,8 +18,8 @@ export default class FacebookLogo extends Component {
     const { width, height, className } = this.props
     return (
       <svg
-        width={width || 266.893}
-        height={height || 266.895}
+        width={width || '266.893'}
+        height={height || '266.895'}
         className={className || ''}
         viewBox="0 0 266.893 266.895"
       >

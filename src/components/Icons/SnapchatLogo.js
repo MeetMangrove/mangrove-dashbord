@@ -9,8 +9,8 @@ export default class SnapchatLogo extends Component {
   }
 
   static defaultProps = {
-    width: 300,
-    height: 300,
+    width: '300',
+    height: '300',
     className: ''
   }
 
@@ -18,8 +18,8 @@ export default class SnapchatLogo extends Component {
     const { width, height, className } = this.props
     return (
       <svg
-        width={width || 300}
-        height={height || 300}
+        width={width || '300'}
+        height={height || '300'}
         className={className || ''}
         viewBox="0 0 300 300"
       >

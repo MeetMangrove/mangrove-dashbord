@@ -400,10 +400,16 @@ exports.default = new Config();
 /* 7 */
 /***/ (function(module, exports) {
 
-module.exports = require("chalk");
+module.exports = require("classnames");
 
 /***/ }),
 /* 8 */
+/***/ (function(module, exports) {
+
+module.exports = require("chalk");
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -435,12 +441,6 @@ function getServerURL(host = "localhost", port = "8081", allowSSL = true) {
   if (port === '80') return stub;
   return `${stub}:${port}`;
 }
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports) {
-
-module.exports = require("classnames");
 
 /***/ }),
 /* 10 */
@@ -483,7 +483,7 @@ module.exports = __webpack_require__(12);
 "use strict";
 
 
-var _chalk = __webpack_require__(7);
+var _chalk = __webpack_require__(8);
 
 var _chalk2 = _interopRequireDefault(_chalk);
 
@@ -556,7 +556,7 @@ var _boxen = __webpack_require__(14);
 
 var _boxen2 = _interopRequireDefault(_boxen);
 
-var _chalk = __webpack_require__(7);
+var _chalk = __webpack_require__(8);
 
 var _chalk2 = _interopRequireDefault(_chalk);
 
@@ -564,7 +564,7 @@ var _ip = __webpack_require__(15);
 
 var _ip2 = _interopRequireDefault(_ip);
 
-var _env = __webpack_require__(8);
+var _env = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -697,21 +697,21 @@ var _app = __webpack_require__(34);
 
 var _app2 = _interopRequireDefault(_app);
 
-var _redux = __webpack_require__(59);
+var _redux = __webpack_require__(60);
 
 var _redux2 = _interopRequireDefault(_redux);
 
-var _ssr = __webpack_require__(63);
+var _ssr = __webpack_require__(64);
 
 var _ssr2 = _interopRequireDefault(_ssr);
 
-var _apollo = __webpack_require__(64);
+var _apollo = __webpack_require__(65);
 
 var _config = __webpack_require__(6);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _paths = __webpack_require__(65);
+var _paths = __webpack_require__(66);
 
 var _paths2 = _interopRequireDefault(_paths);
 
@@ -1075,7 +1075,7 @@ _config2.default.routes.forEach(route => {
 // `koa-bodyparser` is used to process POST requests.  Check that it's enabled
 // (default) and apply a custom config if we need one
 if (_config2.default.enableBodyParser) {
-  app.use(__webpack_require__(67)(
+  app.use(__webpack_require__(68)(
   // Pass in any options that may have been set in userland
   _config2.default.bodyParserOptions));
 }
@@ -1241,6 +1241,8 @@ var _LocalStorageManager = __webpack_require__(4);
 
 var _LocalStorageManager2 = _interopRequireDefault(_LocalStorageManager);
 
+__webpack_require__(59);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _config2.default.setGraphQLEndpoint('https://api.graph.cool/simple/v1/cj78t448l01n00132a5m3q928/');
@@ -1248,11 +1250,8 @@ _config2.default.setGraphQLEndpoint('https://api.graph.cool/simple/v1/cj78t448l0
 if (false) {
   _config2.default.setApolloNetworkOptions({
     credentials: 'include'
-    //   uri: 'https://api.graph.cool/simple/v1/cj78t448l01n00132a5m3q928'
   });
 
-  // Add Apollo request middleware to use the latest JWT token on every
-  // request, so that our previously logged in state can be 'remembered'
   _config2.default.addApolloMiddleware((req, next) => {
     const jwt = _LocalStorageManager2.default.getUserToken();
     req.options.headers = _extends({}, req.options.headers, {
@@ -1325,6 +1324,10 @@ var _Home = __webpack_require__(44);
 
 var _Home2 = _interopRequireDefault(_Home);
 
+var _RessourcesList = __webpack_require__(69);
+
+var _RessourcesList2 = _interopRequireDefault(_RessourcesList);
+
 var _PrivateRoute = __webpack_require__(49);
 
 var _PrivateRoute2 = _interopRequireDefault(_PrivateRoute);
@@ -1344,9 +1347,6 @@ var _EmptyLayout2 = _interopRequireDefault(_EmptyLayout);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Layout
-
-
-// Routes
 const Layout = () => _react2.default.createElement(
   'div',
   null,
@@ -1356,10 +1356,12 @@ const Layout = () => _react2.default.createElement(
     _react2.default.createElement(_PublicRoute2.default, { layout: _PrivateLayout2.default, path: '/register', component: _Register2.default, exact: true }),
     _react2.default.createElement(_PublicRoute2.default, { layout: _PrivateLayout2.default, path: '/login', component: _Login2.default, exact: true }),
     _react2.default.createElement(_PublicRoute2.default, { layout: _EmptyLayout2.default, path: '/logout', component: _Logout2.default, exact: true }),
-    _react2.default.createElement(_PrivateRoute2.default, { layout: _PrivateLayout2.default, path: '/', component: _Home2.default, exact: true })
+    _react2.default.createElement(_PrivateRoute2.default, { layout: _PrivateLayout2.default, path: '/', component: _Home2.default, exact: true }),
+    _react2.default.createElement(_PrivateRoute2.default, { layout: _PrivateLayout2.default, path: '/links', component: _RessourcesList2.default, exact: true })
   )
 );
 
+// Routes
 exports.default = Layout;
 
 /***/ }),
@@ -1470,7 +1472,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _classnames = __webpack_require__(9);
+var _classnames = __webpack_require__(7);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -1806,55 +1808,15 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _BlockHeader = __webpack_require__(45);
-
-var _BlockHeader2 = _interopRequireDefault(_BlockHeader);
-
-var _BlockContent = __webpack_require__(46);
-
-var _BlockContent2 = _interopRequireDefault(_BlockContent);
-
-var _reactKonami = __webpack_require__(48);
-
-var _reactKonami2 = _interopRequireDefault(_reactKonami);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 let HomeContainer = class HomeContainer extends _react.Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      rickroll: false
-    };
-
-    this.handleEasterEgg = this.handleEasterEgg.bind(this);
-  }
-  componentDidMount() {}
-
-  handleEasterEgg() {
-    this.setState({ rickroll: true });
-  }
-
   render() {
-    const { rickroll } = this.state;
     return _react2.default.createElement(
       'div',
       null,
-      _react2.default.createElement(_reactKonami2.default, { easterEgg: this.handleEasterEgg }),
-      rickroll && _react2.default.createElement(
-        'div',
-        { className: 'whiteContainer' },
-        _react2.default.createElement(
-          'span',
-          { role: 'img', 'aria-label': 'fire' },
-          '\uD83D\uDD25'
-        ),
-        'Konami code !!'
-      ),
-      _react2.default.createElement(_BlockHeader2.default, null),
-      _react2.default.createElement(_BlockContent2.default, null)
+      'Hello Home'
     );
   }
 };
@@ -1878,31 +1840,33 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _BlockHeader = __webpack_require__(78);
+
+var _BlockHeader2 = _interopRequireDefault(_BlockHeader);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// import { Link } from 'react-router-dom'
-
-// import css from './BlockHeader.css'
 
 let BlockHeader = class BlockHeader extends _react.Component {
   componentDidMount() {}
 
   render() {
     return _react2.default.createElement(
-      "div",
-      { className: "block-header" },
+      'div',
+      { className: _BlockHeader2.default.blockHeader },
       _react2.default.createElement(
-        "div",
-        { className: "white-block-header" },
+        'div',
+        { className: _BlockHeader2.default.whiteBlockHeader },
         _react2.default.createElement(
-          "div",
-          { className: "title-block-header" },
-          "Books"
+          'div',
+          { className: _BlockHeader2.default.titleBlockHeader },
+          'Links'
         )
       )
     );
   }
 };
+// import { Link } from 'react-router-dom'
+
 exports.default = BlockHeader;
 
 /***/ }),
@@ -1921,36 +1885,76 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _classnames = __webpack_require__(7);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _TwitterLogo = __webpack_require__(71);
+
+var _TwitterLogo2 = _interopRequireDefault(_TwitterLogo);
+
+var _FacebookLogo = __webpack_require__(72);
+
+var _FacebookLogo2 = _interopRequireDefault(_FacebookLogo);
+
+var _SlackLogo = __webpack_require__(73);
+
+var _SlackLogo2 = _interopRequireDefault(_SlackLogo);
+
+var _TrelloLogo = __webpack_require__(76);
+
+var _TrelloLogo2 = _interopRequireDefault(_TrelloLogo);
+
 var _BlockContent = __webpack_require__(47);
 
 var _BlockContent2 = _interopRequireDefault(_BlockContent);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import SnapChatLogo from 'src/components/Icons/SnapchatLogo'
+// import DriveLogo from 'src/components/Icons/DriveLogo'
+
+// import { Link } from 'react-router-dom'
 let BlockContent = class BlockContent extends _react.Component {
+
   componentDidMount() {}
 
   render() {
+    const { links } = this.props;
+
     return _react2.default.createElement(
       'div',
-      { className: _BlockContent2.default.blockContent },
-      _react2.default.createElement(
+      { className: (0, _classnames2.default)(_BlockContent2.default.listContentWrapper, _BlockContent2.default.whiteBlockContent, 'column') },
+      links && links.map(link => _react2.default.createElement(
         'div',
-        null,
-        _react2.default.createElement('div', null)
-      )
+        { className: _BlockContent2.default.listContentItemWrapper },
+        _react2.default.createElement(
+          'div',
+          { key: link.id, className: (0, _classnames2.default)(_BlockContent2.default.listContentItemContent) },
+          link.icon === 'Slack' && _react2.default.createElement(_SlackLogo2.default, { className: _BlockContent2.default.listContentItemLogo, width: '29', height: '29' }),
+          link.icon === 'Facebook' && _react2.default.createElement(_FacebookLogo2.default, { className: _BlockContent2.default.listContentItemLogo, width: '29', height: '29' }),
+          link.icon === 'Trello' && _react2.default.createElement(_TrelloLogo2.default, { className: _BlockContent2.default.listContentItemLogo, width: '29', height: '29' }),
+          link.icon === 'Twitter' && _react2.default.createElement(_TwitterLogo2.default, { className: _BlockContent2.default.listContentItemLogo, width: '29', height: '29' }),
+          _react2.default.createElement(
+            'a',
+            { href: link.url },
+            link.title
+          )
+        )
+      ))
     );
   }
 };
-// import { Link } from 'react-router-dom'
-
-// import TwitterLogo from 'src/components/Icons/TwitterLogo'
-// import FacebookLogo from 'src/components/Icons/FacebookLogo'
-// import SlackLogo from 'src/components/Icons/SlackLogo'
-// import SnapChatLogo from 'src/components/Icons/SnapchatLogo'
-// import DriveLogo from 'src/components/Icons/DriveLogo'
-// import TrelloLogo from 'src/components/Icons/TrelloLogo'
-
+BlockContent.propTypes = {
+  links: _propTypes2.default.array
+};
+BlockContent.defaultProps = {
+  links: []
+};
 exports.default = BlockContent;
 
 /***/ }),
@@ -1961,7 +1965,8 @@ module.exports = {
 	"whiteBlockContent": "whiteBlockContent-PEzJ0_nwMzxZKeDE7R2wv",
 	"listContentItemLogo": "listContentItemLogo-1VYC0oeATQQ8qN1_4Zb6Q",
 	"listContentWrapper": "listContentWrapper-3-9dI8pQxg8g565sCrq47x",
-	"listContentItemContent": "listContentItemContent-2XfBFhQGi6YD1Fduj0obOI"
+	"listContentItemContent": "listContentItemContent-2XfBFhQGi6YD1Fduj0obOI",
+	"listContentItemWrapper": "listContentItemWrapper-1NmT5wj9u2OcWajoEihgFS"
 };
 
 /***/ }),
@@ -2121,7 +2126,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _classnames = __webpack_require__(9);
+var _classnames = __webpack_require__(7);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -2146,11 +2151,11 @@ let PrivateLayout = class PrivateLayout extends _react.Component {
   render() {
     return _react2.default.createElement(
       'div',
-      { className: 'fill container is-fluid' },
+      { className: 'fill' },
       _react2.default.createElement(_Header2.default, null),
       _react2.default.createElement(
         'div',
-        { className: (0, _classnames2.default)(_PrivateLayout2.default.wrapper, _PrivateLayout2.default.wrapperPrivate) },
+        { className: (0, _classnames2.default)(_PrivateLayout2.default.wrapper, _PrivateLayout2.default.wrapperPrivate, 'container') },
         this.props.children
       ),
       _react2.default.createElement(_Footer2.default, null)
@@ -2181,6 +2186,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
+var _classnames = __webpack_require__(7);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
 var _MangroveLogo = __webpack_require__(53);
 
 var _MangroveLogo2 = _interopRequireDefault(_MangroveLogo);
@@ -2200,23 +2209,73 @@ let Header = class Header extends _react.Component {
       null,
       _react2.default.createElement(
         'header',
-        { className: _Header2.default.header },
+        null,
         _react2.default.createElement(
           'nav',
-          { className: (_Header2.default.navbar, _Header2.default.navbarToggleableMd) },
+          { className: (0, _classnames2.default)(_Header2.default.header, 'navbar') },
           _react2.default.createElement(
-            _reactRouterDom.Link,
-            { className: (_Header2.default.navbarBrand, _Header2.default.linkHeader), to: '/' },
-            _react2.default.createElement(_MangroveLogo2.default, { className: _Header2.default.logo }),
-            'Mangrove Dashboard'
+            'div',
+            { className: 'navbar-brand' },
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { className: 'navbar-item', to: '/' },
+              _react2.default.createElement(_MangroveLogo2.default, null),
+              'Mangrove Dashboard'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'navbar-burger burger', 'data-target': 'navMenubd-example' },
+              _react2.default.createElement('span', null),
+              _react2.default.createElement('span', null),
+              _react2.default.createElement('span', null)
+            )
           ),
           _react2.default.createElement(
             'div',
-            { className: (_Header2.default.collapse, _Header2.default.navbarCollapse), id: 'navbarText' },
+            { id: 'navMenubd-example', className: 'navbar-menu' },
             _react2.default.createElement(
-              'span',
-              { className: _Header2.default.navbarText },
-              _react2.default.createElement(_reactRouterDom.Link, { to: '/login', className: _Header2.default.linkLogin })
+              'div',
+              { className: 'navbar-start' },
+              _react2.default.createElement(
+                'div',
+                { className: 'navbar-item' },
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { to: '/links' },
+                  'Ressources'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'navbar-item' },
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { to: '/bookclub' },
+                  'Bookclub'
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'navbar-end' },
+              _react2.default.createElement(
+                'div',
+                { className: 'navbar-item' },
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { to: '/register' },
+                  'Register'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'navbar-item' },
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { to: '/login' },
+                  'Login'
+                )
+              )
             )
           )
         )
@@ -2285,10 +2344,7 @@ exports.default = MangroveLogo;
 /***/ (function(module, exports) {
 
 module.exports = {
-	"header": "header-2zG4F7jLvGK6KP6LE87cJC",
-	"logo": "logo-1R6EsLBT0JSYnuTx7vyhgQ",
-	"linkHeader": "linkHeader-E3-rDVWztfHUwfykwJat-",
-	"linkLogin": "linkLogin-3SltHzo1KKAnTOWNl7Hn7H"
+	"header": "header-2zG4F7jLvGK6KP6LE87cJC"
 };
 
 /***/ }),
@@ -2319,7 +2375,7 @@ const Footer = () => _react2.default.createElement(
   { className: 'footer' },
   _react2.default.createElement(
     'div',
-    { className: 'credits-footer' },
+    { className: 'container credits-footer is-centered' },
     'Made with',
     ' ',
     _react2.default.createElement(
@@ -2391,6 +2447,12 @@ exports.default = EmptyLayout;
 
 /***/ }),
 /* 59 */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2422,13 +2484,13 @@ immutability, to prevent weird side effects.
 
 exports.default = createNewStore;
 
-var _redux = __webpack_require__(60);
+var _redux = __webpack_require__(61);
 
-var _reduxThunk = __webpack_require__(61);
+var _reduxThunk = __webpack_require__(62);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _seamlessImmutable = __webpack_require__(62);
+var _seamlessImmutable = __webpack_require__(63);
 
 var _seamlessImmutable2 = _interopRequireDefault(_seamlessImmutable);
 
@@ -2494,25 +2556,25 @@ function createNewStore(apolloClient) {
 }
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux");
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-thunk");
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports) {
 
 module.exports = require("seamless-immutable");
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2581,7 +2643,7 @@ Html.propTypes = {
 exports.default = Html;
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2600,7 +2662,7 @@ var _config = __webpack_require__(6);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _env = __webpack_require__(8);
+var _env = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2654,7 +2716,7 @@ function browserClient() {
 }
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2663,7 +2725,7 @@ function browserClient() {
 // ----------------------
 // IMPORTS
 
-const path = __webpack_require__(66);
+const path = __webpack_require__(67);
 
 // ----------------------
 
@@ -2707,16 +2769,445 @@ module.exports = {
 };
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports) {
 
 module.exports = require("path");
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports) {
 
 module.exports = require("koa-bodyparser");
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactApollo = __webpack_require__(3);
+
+var _reactKonami = __webpack_require__(48);
+
+var _reactKonami2 = _interopRequireDefault(_reactKonami);
+
+var _Block = __webpack_require__(77);
+
+var _Block2 = _interopRequireDefault(_Block);
+
+var _getAllLinks = __webpack_require__(70);
+
+var _getAllLinks2 = _interopRequireDefault(_getAllLinks);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+let RessourcesListContainer = class RessourcesListContainer extends _react.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      rickroll: false
+    };
+
+    this.handleEasterEgg = this.handleEasterEgg.bind(this);
+  }
+
+  componentDidMount() {}
+
+  handleEasterEgg() {
+    this.setState({ rickroll: true });
+  }
+
+  render() {
+    const { rickroll } = this.state;
+
+    const { allLinks, loading } = this.props.data;
+
+    return _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(_reactKonami2.default, { easterEgg: this.handleEasterEgg }),
+      rickroll && _react2.default.createElement(
+        'div',
+        { className: 'whiteContainer' },
+        _react2.default.createElement(
+          'span',
+          { role: 'img', 'aria-label': 'fire' },
+          '\uD83D\uDD25'
+        ),
+        'Konami code !!'
+      ),
+      !loading && allLinks && _react2.default.createElement(
+        'div',
+        { className: 'columns' },
+        _react2.default.createElement(
+          'div',
+          { className: 'column' },
+          _react2.default.createElement(_Block2.default, { links: allLinks })
+        )
+      )
+    );
+  }
+};
+RessourcesListContainer.propTypes = {
+  data: _propTypes2.default.object
+};
+RessourcesListContainer.defaultProps = {
+  data: {}
+};
+exports.default = (0, _reactApollo.graphql)(_getAllLinks2.default)(RessourcesListContainer);
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports) {
+
+
+    var doc = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","variableDefinitions":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":null,"name":{"kind":"Name","value":"allLinks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"type"},"value":{"kind":"EnumValue","value":"Misc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"createdAt_ASC"}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":null,"name":{"kind":"Name","value":"id"},"arguments":[],"directives":[],"selectionSet":null},{"kind":"Field","alias":null,"name":{"kind":"Name","value":"description"},"arguments":[],"directives":[],"selectionSet":null},{"kind":"Field","alias":null,"name":{"kind":"Name","value":"url"},"arguments":[],"directives":[],"selectionSet":null},{"kind":"Field","alias":null,"name":{"kind":"Name","value":"icon"},"arguments":[],"directives":[],"selectionSet":null},{"kind":"Field","alias":null,"name":{"kind":"Name","value":"title"},"arguments":[],"directives":[],"selectionSet":null}]}}]}}],"loc":{"start":0,"end":125}};
+    doc.loc.source = {"body":"query {\n  allLinks(filter: { type: Misc }, orderBy: createdAt_ASC) {\n    id\n    description\n    url\n    icon\n    title\n  }\n}\n","name":"GraphQL request","locationOffset":{"line":1,"column":1}};
+  
+
+    var names = {};
+    function unique(defs) {
+      return defs.filter(
+        function(def) {
+          if (def.kind !== 'FragmentDefinition') return true;
+          var name = def.name.value
+          if (names[name]) {
+            return false;
+          } else {
+            names[name] = true;
+            return true;
+          }
+        }
+      )
+    }
+  
+module.exports = doc;
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+let TwitterLogo = class TwitterLogo extends _react.Component {
+
+  render() {
+    const { width, height, className } = this.props;
+    return _react2.default.createElement(
+      'svg',
+      {
+        width: width || '300.00006',
+        height: height || '244.18703',
+        className: className || '',
+        viewBox: '0 0 300.00006 244.18703'
+      },
+      _react2.default.createElement('path', {
+        d: 'M94.719 243.187c112.46 0 173.956-93.168 173.956-173.956 0-2.647-.054-5.28-.173-7.903A124.323 124.323 0 0 0 299 29.668c-10.955 4.87-22.744 8.147-35.11 9.625 12.623-7.569 22.314-19.543 26.885-33.817a122.61 122.61 0 0 1-38.824 14.84C240.794 8.433 224.911 1 207.322 1c-33.763 0-61.144 27.38-61.144 61.132 0 4.798.537 9.465 1.586 13.94C96.948 73.517 51.89 49.188 21.738 12.194a60.978 60.978 0 0 0-8.278 30.73c0 21.212 10.793 39.938 27.207 50.893a60.69 60.69 0 0 1-27.69-7.647c-.01.257-.01.507-.01.781 0 29.61 21.076 54.332 49.052 59.934a61.22 61.22 0 0 1-16.122 2.152c-3.934 0-7.766-.387-11.49-1.103C42.19 172.227 64.76 189.904 91.52 190.4c-20.925 16.402-47.287 26.17-75.937 26.17-4.929 0-9.798-.28-14.584-.846 27.059 17.344 59.19 27.464 93.722 27.464',
+        fill: '#1da1f2'
+      })
+    );
+  }
+};
+TwitterLogo.propTypes = {
+  width: _propTypes2.default.string,
+  height: _propTypes2.default.string,
+  className: _propTypes2.default.string
+};
+TwitterLogo.defaultProps = {
+  width: '300.00006',
+  height: '244.18703',
+  className: ''
+};
+exports.default = TwitterLogo;
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+let FacebookLogo = class FacebookLogo extends _react.Component {
+
+  render() {
+    const { width, height, className } = this.props;
+    return _react2.default.createElement(
+      'svg',
+      {
+        width: width || '266.893',
+        height: height || '266.895',
+        className: className || '',
+        viewBox: '0 0 266.893 266.895'
+      },
+      _react2.default.createElement('path', {
+        fill: '#3C5A99',
+        d: 'M248.082 262.307c7.854 0 14.223-6.369 14.223-14.225V18.812c0-7.857-6.368-14.224-14.223-14.224H18.812c-7.857 0-14.224 6.367-14.224 14.224v229.27c0 7.855 6.366 14.225 14.224 14.225h229.27z'
+      }),
+      _react2.default.createElement('path', {
+        fill: '#FFF',
+        d: 'M182.409 262.307v-99.803h33.499l5.016-38.895h-38.515V98.777c0-11.261 3.127-18.935 19.275-18.935l20.596-.009V45.045c-3.562-.474-15.788-1.533-30.012-1.533-29.695 0-50.025 18.126-50.025 51.413v28.684h-33.585v38.895h33.585v99.803h40.166z'
+      })
+    );
+  }
+};
+FacebookLogo.propTypes = {
+  width: _propTypes2.default.string,
+  height: _propTypes2.default.string,
+  className: _propTypes2.default.string
+};
+FacebookLogo.defaultProps = {
+  width: '266.893',
+  height: '266.895',
+  className: ''
+};
+exports.default = FacebookLogo;
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+let SlackLogo = class SlackLogo extends _react.Component {
+
+  render() {
+    const { width, height, className } = this.props;
+    return _react2.default.createElement(
+      'svg',
+      {
+        width: width || '256',
+        height: height || '256',
+        className: className || '',
+        viewBox: '0 0 256 256'
+      },
+      _react2.default.createElement('path', {
+        d: 'M165.964 15.838c-3.89-11.975-16.752-18.528-28.725-14.636-11.975 3.89-18.528 16.752-14.636 28.725l58.947 181.365c4.048 11.187 16.132 17.473 27.732 14.135 12.1-3.483 19.475-16.334 15.614-28.217L165.964 15.838',
+        fill: '#DFA22F'
+      }),
+      _react2.default.createElement('path', {
+        d: 'M74.626 45.516C70.734 33.542 57.873 26.989 45.9 30.879 33.924 34.77 27.37 47.631 31.263 59.606l58.948 181.366c4.047 11.186 16.132 17.473 27.732 14.132 12.099-3.481 19.474-16.332 15.613-28.217L74.626 45.516',
+        fill: '#3CB187'
+      }),
+      _react2.default.createElement('path', {
+        d: 'M240.162 166.045c11.975-3.89 18.526-16.75 14.636-28.726-3.89-11.973-16.752-18.527-28.725-14.636L44.708 181.632c-11.187 4.046-17.473 16.13-14.135 27.73 3.483 12.099 16.334 19.475 28.217 15.614l181.372-58.93',
+        fill: '#CE1E5B'
+      }),
+      _react2.default.createElement('path', {
+        d: 'M82.508 217.27l43.347-14.084-14.086-43.352-43.35 14.09 14.089 43.347',
+        fill: '#392538'
+      }),
+      _react2.default.createElement('path', {
+        d: 'M173.847 187.591c16.388-5.323 31.62-10.273 43.348-14.084l-14.088-43.36-43.35 14.09 14.09 43.354',
+        fill: '#BB242A'
+      }),
+      _react2.default.createElement('path', {
+        d: 'M210.484 74.706c11.974-3.89 18.527-16.751 14.637-28.727-3.89-11.973-16.752-18.526-28.727-14.636L15.028 90.293C3.842 94.337-2.445 106.422.896 118.022c3.481 12.098 16.332 19.474 28.217 15.613l181.371-58.93',
+        fill: '#72C5CD'
+      }),
+      _react2.default.createElement('path', {
+        d: 'M52.822 125.933c11.805-3.836 27.025-8.782 43.354-14.086-5.323-16.39-10.273-31.622-14.084-43.352l-43.36 14.092 14.09 43.346',
+        fill: '#248C73'
+      }),
+      _react2.default.createElement('path', {
+        d: 'M144.16 96.256l43.356-14.088a546179.21 546179.21 0 0 0-14.089-43.36L130.07 52.9l14.09 43.356',
+        fill: '#62803A'
+      })
+    );
+  }
+};
+SlackLogo.propTypes = {
+  width: _propTypes2.default.string,
+  height: _propTypes2.default.string,
+  className: _propTypes2.default.string
+};
+SlackLogo.defaultProps = {
+  width: '53',
+  height: '22',
+  className: ''
+};
+exports.default = SlackLogo;
+
+/***/ }),
+/* 74 */,
+/* 75 */,
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+let TrelloLogo = class TrelloLogo extends _react.Component {
+
+  render() {
+    const { width, height, className } = this.props;
+    return _react2.default.createElement(
+      'svg',
+      {
+        width: width || '200',
+        height: height || '200',
+        className: className || '',
+        viewBox: '0 0 200 200'
+      },
+      _react2.default.createElement(
+        'g',
+        { fill: 'none', fillRule: 'evenodd' },
+        _react2.default.createElement('rect', { fill: '#0079BF', width: '200', height: '200', rx: '25' }),
+        _react2.default.createElement('rect', { fill: '#FFF', x: '113', y: '26', width: '61', height: '87.5', rx: '12' }),
+        _react2.default.createElement('rect', { fill: '#FFF', x: '26', y: '26', width: '61', height: '137.5', rx: '12' })
+      )
+    );
+  }
+};
+TrelloLogo.propTypes = {
+  width: _propTypes2.default.string,
+  height: _propTypes2.default.string,
+  className: _propTypes2.default.string
+};
+TrelloLogo.defaultProps = {
+  width: '200',
+  height: '200',
+  className: ''
+};
+exports.default = TrelloLogo;
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _BlockHeader = __webpack_require__(45);
+
+var _BlockHeader2 = _interopRequireDefault(_BlockHeader);
+
+var _BlockContent = __webpack_require__(46);
+
+var _BlockContent2 = _interopRequireDefault(_BlockContent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+let Block = class Block extends _react.Component {
+
+  componentDidMount() {}
+
+  render() {
+    const { links } = this.props;
+    return _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(_BlockHeader2.default, null),
+      _react2.default.createElement(_BlockContent2.default, { links: links })
+    );
+  }
+};
+Block.propTypes = {
+  links: _propTypes2.default.array
+};
+Block.defaultProps = {
+  links: []
+};
+exports.default = Block;
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports) {
+
+module.exports = {
+	"titleBlockHeader": "titleBlockHeader-1VJblAcxwx6TtAqxK3836N",
+	"whiteBlockHeader": "whiteBlockHeader-2IvujLUGEYLgn-wDFF78Z5"
+};
 
 /***/ })
 /******/ ]);

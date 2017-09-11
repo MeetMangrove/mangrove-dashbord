@@ -5,7 +5,7 @@ import Moment from 'moment'
 
 const Footer = () => (
   <footer className="footer">
-    <div className="credits-footer">
+    <div className="container credits-footer is-centered">
       Made with{' '}
       <span role="img" aria-label="wine">
         🍷
