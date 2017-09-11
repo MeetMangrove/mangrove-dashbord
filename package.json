@@ -16,7 +16,7 @@
     "lint": "eslint .",
     "server": "node dist/server",
     "server-dev": "cross-env NODE_ENV=development WEBPACK_CONFIG=server_dev webpack --colors",
-    "start": "SERVER_PROD_PORT=$PORT npm run server",
+    "start": "npm run build && npm run server",
     "dev": "run-p browser server-dev",
     "static": "serve -s dist/public",
     "test": "jest"
@@ -85,6 +85,7 @@
     "bulma": "^0.5.1",
     "chalk": "^2.1.0",
     "classnames": "^2.2.5",
+    "cross-env": "^5.0.5",
     "graphql": "^0.11.3",
     "ip": "^1.1.5",
     "isomorphic-fetch": "^2.2.1",

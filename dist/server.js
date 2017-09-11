@@ -79,13 +79,13 @@ module.exports = require("prop-types");
 /* 2 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-apollo");
+module.exports = require("react-router-dom");
 
 /***/ }),
 /* 3 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-router-dom");
+module.exports = require("react-apollo");
 
 /***/ }),
 /* 4 */
@@ -123,7 +123,7 @@ exports.default = LocalStorageManager;
 
     var doc = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","variableDefinitions":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":null,"name":{"kind":"Name","value":"user"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":null,"name":{"kind":"Name","value":"id"},"arguments":[],"directives":[],"selectionSet":null},{"kind":"Field","alias":null,"name":{"kind":"Name","value":"email"},"arguments":[],"directives":[],"selectionSet":null},{"kind":"Field","alias":null,"name":{"kind":"Name","value":"profile"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":null,"name":{"kind":"Name","value":"id"},"arguments":[],"directives":[],"selectionSet":null}]}}]}}]}}],"loc":{"start":0,"end":69}};
     doc.loc.source = {"body":"query {\n  user {\n    id\n    email\n    profile {\n      id\n    }\n  }\n}\n","name":"GraphQL request","locationOffset":{"line":1,"column":1}};
-
+  
 
     var names = {};
     function unique(defs) {
@@ -140,7 +140,7 @@ exports.default = LocalStorageManager;
         }
       )
     }
-
+  
 module.exports = doc;
 
 /***/ }),
@@ -493,10 +493,16 @@ function getServerURL(host = "localhost", port = "4000", allowSSL = true) {
 /* 10 */
 /***/ (function(module, exports) {
 
+module.exports = require("classnames");
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
 
     var doc = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},"defaultValue":null},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},"defaultValue":null}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":null,"name":{"kind":"Name","value":"signinUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}]}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":null,"name":{"kind":"Name","value":"token"},"arguments":[],"directives":[],"selectionSet":null}]}}]}}],"loc":{"start":0,"end":126}};
     doc.loc.source = {"body":"mutation($email: String!, $password: String!) {\n  signinUser(email: { email: $email, password: $password }) {\n    token\n  }\n}\n","name":"GraphQL request","locationOffset":{"line":1,"column":1}};
-
+  
 
     var names = {};
     function unique(defs) {
@@ -513,7 +519,7 @@ function getServerURL(host = "localhost", port = "4000", allowSSL = true) {
         }
       )
     }
-
+  
 module.exports = doc;
 
 /***/ }),
@@ -722,7 +728,7 @@ var _koa = __webpack_require__(25);
 
 var _koa2 = _interopRequireDefault(_koa);
 
-var _reactApollo = __webpack_require__(2);
+var _reactApollo = __webpack_require__(3);
 
 var _koaSslify = __webpack_require__(26);
 
@@ -768,15 +774,15 @@ var _app = __webpack_require__(37);
 
 var _app2 = _interopRequireDefault(_app);
 
-var _redux = __webpack_require__(59);
+var _redux = __webpack_require__(62);
 
 var _redux2 = _interopRequireDefault(_redux);
 
-var _ssr = __webpack_require__(63);
+var _ssr = __webpack_require__(66);
 
 var _ssr2 = _interopRequireDefault(_ssr);
 
-var _apollo = __webpack_require__(64);
+var _apollo = __webpack_require__(67);
 
 var _config = __webpack_require__(6);
 
@@ -1146,7 +1152,7 @@ _config2.default.routes.forEach(route => {
 // `koa-bodyparser` is used to process POST requests.  Check that it's enabled
 // (default) and apply a custom config if we need one
 if (_config2.default.enableBodyParser) {
-  app.use(__webpack_require__(65)(
+  app.use(__webpack_require__(68)(
   // Pass in any options that may have been set in userland
   _config2.default.bodyParserOptions));
 }
@@ -1314,8 +1320,6 @@ var _LocalStorageManager2 = _interopRequireDefault(_LocalStorageManager);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import './styles.global.css'
-
 _config2.default.setGraphQLEndpoint('https://api.graph.cool/simple/v1/cj78t448l01n00132a5m3q928/');
 
 if (false) {
@@ -1386,31 +1390,31 @@ var _Login = __webpack_require__(41);
 
 var _Login2 = _interopRequireDefault(_Login);
 
-var _Logout = __webpack_require__(42);
+var _Logout = __webpack_require__(44);
 
 var _Logout2 = _interopRequireDefault(_Logout);
 
-var _Register = __webpack_require__(43);
+var _Register = __webpack_require__(45);
 
 var _Register2 = _interopRequireDefault(_Register);
 
-var _Home = __webpack_require__(45);
+var _Home = __webpack_require__(47);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _PrivateRoute = __webpack_require__(50);
+var _PrivateRoute = __webpack_require__(52);
 
 var _PrivateRoute2 = _interopRequireDefault(_PrivateRoute);
 
-var _PublicRoute = __webpack_require__(51);
+var _PublicRoute = __webpack_require__(53);
 
 var _PublicRoute2 = _interopRequireDefault(_PublicRoute);
 
-var _PrivateLayout = __webpack_require__(52);
+var _PrivateLayout = __webpack_require__(54);
 
 var _PrivateLayout2 = _interopRequireDefault(_PrivateLayout);
 
-var _EmptyLayout = __webpack_require__(58);
+var _EmptyLayout = __webpack_require__(61);
 
 var _EmptyLayout2 = _interopRequireDefault(_EmptyLayout);
 
@@ -1460,15 +1464,19 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRouterDom = __webpack_require__(3);
+var _reactRouterDom = __webpack_require__(2);
 
-var _reactApollo = __webpack_require__(2);
+var _reactApollo = __webpack_require__(3);
 
 var _LocalStorageManager = __webpack_require__(4);
 
 var _LocalStorageManager2 = _interopRequireDefault(_LocalStorageManager);
 
-var _SigninUser = __webpack_require__(10);
+var _Login = __webpack_require__(42);
+
+var _Login2 = _interopRequireDefault(_Login);
+
+var _SigninUser = __webpack_require__(11);
 
 var _SigninUser2 = _interopRequireDefault(_SigninUser);
 
@@ -1483,9 +1491,7 @@ let Login = class Login extends _react.Component {
   constructor(props) {
     super(props);
 
-    this.loginUser = () => {
-      const { email, password } = this.state;
-
+    this.loginUser = (email, password) => {
       this.props.signinUser({ variables: { email, password } }).then(response => {
         _LocalStorageManager2.default.setUserToken(response.data.signinUser.token);
         this.props.history.push('/');
@@ -1494,10 +1500,7 @@ let Login = class Login extends _react.Component {
       });
     };
 
-    this.state = {
-      email: '',
-      password: ''
-    };
+    this.loginUser = this.loginUser.bind(this);
   }
 
   render() {
@@ -1509,32 +1512,7 @@ let Login = class Login extends _react.Component {
       );
     }
 
-    return _react2.default.createElement(
-      'div',
-      { className: 'w-100 pa4 flex justify-center' },
-      _react2.default.createElement(
-        'div',
-        { style: { maxWidth: 400 }, className: '' },
-        _react2.default.createElement('input', {
-          className: 'w-100 pa3 mv2',
-          value: this.state.email,
-          placeholder: 'Email',
-          onChange: e => this.setState({ email: e.target.value })
-        }),
-        _react2.default.createElement('input', {
-          className: 'w-100 pa3 mv2',
-          type: 'password',
-          value: this.state.password,
-          placeholder: 'Password',
-          onChange: e => this.setState({ password: e.target.value })
-        }),
-        _react2.default.createElement(
-          'button',
-          { className: 'pa3 bg-black-10 bn dim ttu pointer', onClick: this.loginUser },
-          'Log in'
-        )
-      )
-    );
+    return _react2.default.createElement(_Login2.default, { requestLogin: this.loginUser });
   }
 };
 Login.propTypes = {
@@ -1544,7 +1522,6 @@ Login.propTypes = {
 };
 Login.defaultProps = {
   history: {},
-  createUser: () => {},
   signinUser: () => {},
   data: {}
 };
@@ -1552,6 +1529,152 @@ exports.default = (0, _reactApollo.graphql)(_SigninUser2.default, { name: 'signi
 
 /***/ }),
 /* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _classnames = __webpack_require__(10);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _reactRouterDom = __webpack_require__(2);
+
+var _login = __webpack_require__(43);
+
+var _login2 = _interopRequireDefault(_login);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+let Login = class Login extends _react.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isLoginLoading: false
+    };
+
+    this.handleClickLogin = this.handleClickLogin.bind(this);
+  }
+
+  handleClickLogin(e) {
+    e.preventDefault();
+
+    const email = this.emailInput.value;
+    const password = this.passwordInput.value;
+
+    if (email !== '' && password !== '') {
+      this.setState({ isLoginLoading: true });
+      setTimeout(() => {
+        this.props.requestLogin(email, password);
+      }, 300);
+    }
+  }
+
+  render() {
+    const { isLoginLoading } = this.state;
+    return _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(
+        'form',
+        { onSubmit: this.handleClickLogin },
+        _react2.default.createElement(
+          'h3',
+          { className: _login2.default.titleLogin },
+          'You',
+          "'",
+          're a Mangrove member? Log in here:'
+        ),
+        _react2.default.createElement('input', {
+          className: _login2.default.inputLogin,
+          name: 'email',
+          placeholder: 'email',
+          type: 'text',
+          ref: email => {
+            this.emailInput = email;
+          }
+        }),
+        _react2.default.createElement('input', {
+          className: _login2.default.inputLogin,
+          placeholder: 'password',
+          type: 'password',
+          ref: password => {
+            this.passwordInput = password;
+          }
+        }),
+        _react2.default.createElement(
+          'div',
+          { className: _login2.default.btnLoginWrapper },
+          _react2.default.createElement(
+            'button',
+            {
+              className: isLoginLoading ? (0, _classnames2.default)(_login2.default.btnLogin, _login2.default.alignCenter, _login2.default.bar) : (0, _classnames2.default)(_login2.default.btnLogin, _login2.default.alignCenter),
+              size: 'lg'
+            },
+            !isLoginLoading && _react2.default.createElement(
+              'span',
+              null,
+              'Log in'
+            ),
+            isLoginLoading && _react2.default.createElement('div', { className: _login2.default.loader })
+          )
+        )
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: _login2.default.forgotPassword },
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: '/login/forgot-password' },
+          'Forgot password ?'
+        )
+      )
+    );
+  }
+};
+Login.propTypes = {
+  requestLogin: _propTypes2.default.func
+};
+Login.defaultProps = {
+  requestLogin: () => {}
+};
+exports.default = Login;
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports) {
+
+module.exports = {
+	"login": "login-1qRkAiIsDBs7k_EoeiTzzT",
+	"btnLogin": "btnLogin-2lr4sD0U6PBSH5itQKG-X7",
+	"bar": "bar-1juZBG43GPT_aKia-Pi3F3",
+	"loader": "loader-f2tGLoWi7tXzFVt3tQw4p",
+	"slide": "slide-2o3IIlW5dpBSbt9wfBHEAa",
+	"btnLoginWrapper": "btnLoginWrapper-32sqyiqIOawBwI2EmG_IFf",
+	"forgotPassword": "forgotPassword-3j4Laeja7jnXZ6rLUM8QNJ",
+	"titleLogin": "titleLogin-2S_HBWNsqI8apL-eztPcDW",
+	"inputLogin": "inputLogin-1U_pDKzFG1m209uIrFLTcx",
+	"input-login": "input-login-18FyfAUfcHGW34BJtGlU31",
+	"input-group-login": "input-group-login-2eP6vIGWtZxIeILD_v_7KG"
+};
+
+/***/ }),
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1569,7 +1692,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRouterDom = __webpack_require__(3);
+var _reactRouterDom = __webpack_require__(2);
 
 var _LocalStorageManager = __webpack_require__(4);
 
@@ -1598,7 +1721,7 @@ Logout.defaultProps = {
 exports.default = (0, _reactRouterDom.withRouter)(Logout);
 
 /***/ }),
-/* 43 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1616,19 +1739,19 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRouterDom = __webpack_require__(3);
+var _reactRouterDom = __webpack_require__(2);
 
-var _reactApollo = __webpack_require__(2);
+var _reactApollo = __webpack_require__(3);
 
 var _LocalStorageManager = __webpack_require__(4);
 
 var _LocalStorageManager2 = _interopRequireDefault(_LocalStorageManager);
 
-var _CreateUser = __webpack_require__(44);
+var _CreateUser = __webpack_require__(46);
 
 var _CreateUser2 = _interopRequireDefault(_CreateUser);
 
-var _SigninUser = __webpack_require__(10);
+var _SigninUser = __webpack_require__(11);
 
 var _SigninUser2 = _interopRequireDefault(_SigninUser);
 
@@ -1719,13 +1842,13 @@ Register.defaultProps = {
 exports.default = (0, _reactApollo.graphql)(_CreateUser2.default, { name: 'createUser' })((0, _reactApollo.graphql)(_isLoggedIn2.default, { options: { fetchPolicy: 'network-only' } })((0, _reactApollo.graphql)(_SigninUser2.default, { name: 'signinUser' })((0, _reactRouterDom.withRouter)(Register))));
 
 /***/ }),
-/* 44 */
+/* 46 */
 /***/ (function(module, exports) {
 
 
     var doc = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},"defaultValue":null},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},"defaultValue":null}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":null,"name":{"kind":"Name","value":"createUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"authProvider"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"email"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}]}}]}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":null,"name":{"kind":"Name","value":"id"},"arguments":[],"directives":[],"selectionSet":null}]}}]}}],"loc":{"start":0,"end":141}};
     doc.loc.source = {"body":"mutation($email: String!, $password: String!) {\n  createUser(authProvider: { email: { email: $email, password: $password } }) {\n    id\n  }\n}\n","name":"GraphQL request","locationOffset":{"line":1,"column":1}};
-
+  
 
     var names = {};
     function unique(defs) {
@@ -1742,11 +1865,11 @@ exports.default = (0, _reactApollo.graphql)(_CreateUser2.default, { name: 'creat
         }
       )
     }
-
+  
 module.exports = doc;
 
 /***/ }),
-/* 45 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1760,15 +1883,15 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _BlockHeader = __webpack_require__(46);
+var _BlockHeader = __webpack_require__(48);
 
 var _BlockHeader2 = _interopRequireDefault(_BlockHeader);
 
-var _BlockContent = __webpack_require__(47);
+var _BlockContent = __webpack_require__(49);
 
 var _BlockContent2 = _interopRequireDefault(_BlockContent);
 
-var _reactKonami = __webpack_require__(49);
+var _reactKonami = __webpack_require__(51);
 
 var _reactKonami2 = _interopRequireDefault(_reactKonami);
 
@@ -1799,7 +1922,7 @@ let HomeContainer = class HomeContainer extends _react.Component {
       _react2.default.createElement(_reactKonami2.default, { easterEgg: this.handleEasterEgg }),
       rickroll && _react2.default.createElement(
         'div',
-        { className: 'white-container' },
+        { className: 'whiteContainer' },
         _react2.default.createElement(
           'span',
           { role: 'img', 'aria-label': 'fire' },
@@ -1817,7 +1940,7 @@ HomeContainer.defaultProps = {};
 exports.default = HomeContainer;
 
 /***/ }),
-/* 46 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1860,7 +1983,7 @@ let BlockHeader = class BlockHeader extends _react.Component {
 exports.default = BlockHeader;
 
 /***/ }),
-/* 47 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1875,15 +1998,12 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(11);
-
-var _BlockContent = __webpack_require__(48);
+var _BlockContent = __webpack_require__(50);
 
 var _BlockContent2 = _interopRequireDefault(_BlockContent);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import { Link } from 'react-router-dom'
 let BlockContent = class BlockContent extends _react.Component {
   componentDidMount() {}
 
@@ -1892,13 +2012,14 @@ let BlockContent = class BlockContent extends _react.Component {
       'div',
       { className: _BlockContent2.default.blockContent },
       _react2.default.createElement(
-        _semanticUiReact.Grid,
+        'div',
         null,
-        _react2.default.createElement(_semanticUiReact.Grid.Column, { mobile: 16, tablet: 8, computer: 4, lg: '12' })
+        _react2.default.createElement('div', null)
       )
     );
   }
 };
+// import { Link } from 'react-router-dom'
 
 // import TwitterLogo from 'src/components/Icons/TwitterLogo'
 // import FacebookLogo from 'src/components/Icons/FacebookLogo'
@@ -1910,7 +2031,7 @@ let BlockContent = class BlockContent extends _react.Component {
 exports.default = BlockContent;
 
 /***/ }),
-/* 48 */
+/* 50 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -1921,13 +2042,13 @@ module.exports = {
 };
 
 /***/ }),
-/* 49 */
+/* 51 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-konami");
 
 /***/ }),
-/* 50 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1947,9 +2068,9 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRouterDom = __webpack_require__(3);
+var _reactRouterDom = __webpack_require__(2);
 
-var _reactApollo = __webpack_require__(2);
+var _reactApollo = __webpack_require__(3);
 
 var _isLoggedIn = __webpack_require__(5);
 
@@ -1994,7 +2115,7 @@ PrivateRoute.defaultProps = {
 exports.default = (0, _reactApollo.graphql)(_isLoggedIn2.default, { options: { fetchPolicy: 'network-only' } })(PrivateRoute);
 
 /***/ }),
-/* 51 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2014,9 +2135,9 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRouterDom = __webpack_require__(3);
+var _reactRouterDom = __webpack_require__(2);
 
-var _reactApollo = __webpack_require__(2);
+var _reactApollo = __webpack_require__(3);
 
 var _isLoggedIn = __webpack_require__(5);
 
@@ -2058,7 +2179,7 @@ PublicRoute.defaultProps = {
 exports.default = (0, _reactApollo.graphql)(_isLoggedIn2.default, { options: { fetchPolicy: 'network-only' } })(PublicRoute);
 
 /***/ }),
-/* 52 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2077,17 +2198,19 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _semanticUiReact = __webpack_require__(11);
+var _classnames = __webpack_require__(10);
 
-var _Header = __webpack_require__(53);
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _Header = __webpack_require__(55);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _Footer = __webpack_require__(55);
+var _Footer = __webpack_require__(58);
 
 var _Footer2 = _interopRequireDefault(_Footer);
 
-var _PrivateLayout = __webpack_require__(57);
+var _PrivateLayout = __webpack_require__(60);
 
 var _PrivateLayout2 = _interopRequireDefault(_PrivateLayout);
 
@@ -2100,11 +2223,11 @@ let PrivateLayout = class PrivateLayout extends _react.Component {
   render() {
     return _react2.default.createElement(
       'div',
-      { className: 'fill' },
+      { className: 'fill container is-fluid' },
       _react2.default.createElement(_Header2.default, null),
       _react2.default.createElement(
         'div',
-        { className: (_PrivateLayout2.default.wrapper, _PrivateLayout2.default.wrapperPrivate) },
+        { className: (0, _classnames2.default)(_PrivateLayout2.default.wrapper, _PrivateLayout2.default.wrapperPrivate) },
         this.props.children
       ),
       _react2.default.createElement(_Footer2.default, null)
@@ -2118,7 +2241,7 @@ PrivateLayout.defaultProps = {};
 exports.default = PrivateLayout;
 
 /***/ }),
-/* 53 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2133,65 +2256,55 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(3);
+var _reactRouterDom = __webpack_require__(2);
 
-var _MangroveLogo = __webpack_require__(54);
+var _MangroveLogo = __webpack_require__(56);
 
 var _MangroveLogo2 = _interopRequireDefault(_MangroveLogo);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Header = __webpack_require__(57);
 
-// import css from './Header.css'
+var _Header2 = _interopRequireDefault(_Header);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 let Header = class Header extends _react.Component {
   componentDidMount() {}
 
   render() {
     return _react2.default.createElement(
-      'header',
-      { className: 'header' },
+      'div',
+      null,
       _react2.default.createElement(
-        'nav',
-        { className: 'navbar navbar-toggleable-md' },
+        'header',
+        { className: _Header2.default.header },
         _react2.default.createElement(
-          'button',
-          {
-            className: 'navbar-toggler navbar-toggler-right',
-            type: 'button',
-            'data-toggle': 'collapse',
-            'data-target': '#navbarText',
-            'aria-controls': 'navbarText',
-            'aria-expanded': 'false',
-            'aria-label': 'Toggle navigation'
-          },
-          'Hell'
-        ),
-        _react2.default.createElement(
-          _reactRouterDom.Link,
-          { className: 'navbar-brand link-header', to: '/' },
-          _react2.default.createElement(_MangroveLogo2.default, { className: 'logo' }),
-          'Mangrove Dashboard'
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'collapse navbar-collapse', id: 'navbarText' },
-          _react2.default.createElement('ul', { className: 'navbar-nav mr-auto' }),
+          'nav',
+          { className: (_Header2.default.navbar, _Header2.default.navbarToggleableMd) },
           _react2.default.createElement(
-            'span',
-            { className: 'navbar-text' },
-            _react2.default.createElement(_reactRouterDom.Link, { to: '/login', className: 'link-login' })
+            _reactRouterDom.Link,
+            { className: (_Header2.default.navbarBrand, _Header2.default.linkHeader), to: '/' },
+            _react2.default.createElement(_MangroveLogo2.default, { className: _Header2.default.logo }),
+            'Mangrove Dashboard'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: (_Header2.default.collapse, _Header2.default.navbarCollapse), id: 'navbarText' },
+            _react2.default.createElement(
+              'span',
+              { className: _Header2.default.navbarText },
+              _react2.default.createElement(_reactRouterDom.Link, { to: '/login', className: _Header2.default.linkLogin })
+            )
           )
         )
       )
     );
   }
 };
-// import { Navbar } from 'reactstrap'
-
 exports.default = Header;
 
 /***/ }),
-/* 54 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2245,7 +2358,18 @@ MangroveLogo.defaultProps = {
 exports.default = MangroveLogo;
 
 /***/ }),
-/* 55 */
+/* 57 */
+/***/ (function(module, exports) {
+
+module.exports = {
+	"header": "header-2zG4F7jLvGK6KP6LE87cJC",
+	"logo": "logo-1R6EsLBT0JSYnuTx7vyhgQ",
+	"linkHeader": "linkHeader-E3-rDVWztfHUwfykwJat-",
+	"linkLogin": "linkLogin-3SltHzo1KKAnTOWNl7Hn7H"
+};
+
+/***/ }),
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2259,7 +2383,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _moment = __webpack_require__(56);
+var _moment = __webpack_require__(59);
 
 var _moment2 = _interopRequireDefault(_moment);
 
@@ -2289,23 +2413,21 @@ const Footer = () => _react2.default.createElement(
 exports.default = Footer;
 
 /***/ }),
-/* 56 */
+/* 59 */
 /***/ (function(module, exports) {
 
 module.exports = require("moment");
 
 /***/ }),
-/* 57 */
+/* 60 */
 /***/ (function(module, exports) {
 
 module.exports = {
-	"wrapperPrivate": "wrapperPrivate-3b3HHygWZsrBgnloEm2_mw",
-	"whiteContainer": "whiteContainer-CqoGLz-TbC1m5XMSdih4s",
 	"fill": "fill-3pStqcZNEWxV4no3aWSUDK"
 };
 
 /***/ }),
-/* 58 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2345,7 +2467,7 @@ EmptyLayout.defaultProps = {};
 exports.default = EmptyLayout;
 
 /***/ }),
-/* 59 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2377,13 +2499,13 @@ immutability, to prevent weird side effects.
 
 exports.default = createNewStore;
 
-var _redux = __webpack_require__(60);
+var _redux = __webpack_require__(63);
 
-var _reduxThunk = __webpack_require__(61);
+var _reduxThunk = __webpack_require__(64);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _seamlessImmutable = __webpack_require__(62);
+var _seamlessImmutable = __webpack_require__(65);
 
 var _seamlessImmutable2 = _interopRequireDefault(_seamlessImmutable);
 
@@ -2449,25 +2571,25 @@ function createNewStore(apolloClient) {
 }
 
 /***/ }),
-/* 60 */
+/* 63 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux");
 
 /***/ }),
-/* 61 */
+/* 64 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-thunk");
 
 /***/ }),
-/* 62 */
+/* 65 */
 /***/ (function(module, exports) {
 
 module.exports = require("seamless-immutable");
 
 /***/ }),
-/* 63 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2536,7 +2658,7 @@ Html.propTypes = {
 exports.default = Html;
 
 /***/ }),
-/* 64 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2549,7 +2671,7 @@ exports.createClient = createClient;
 exports.getNetworkInterface = getNetworkInterface;
 exports.browserClient = browserClient;
 
-var _reactApollo = __webpack_require__(2);
+var _reactApollo = __webpack_require__(3);
 
 var _config = __webpack_require__(6);
 
@@ -2609,7 +2731,7 @@ function browserClient() {
 }
 
 /***/ }),
-/* 65 */
+/* 68 */
 /***/ (function(module, exports) {
 
 module.exports = require("koa-bodyparser");
