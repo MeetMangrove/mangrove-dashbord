@@ -6,20 +6,22 @@ import BlockContent from 'src/components/Block/BlockContent'
 
 export default class Block extends Component {
   static propTypes = {
-    links: PropTypes.array
+    links: PropTypes.array,
+    titleBlock: PropTypes.string
   }
 
   static defaultProps = {
-    links: []
+    links: [],
+    titleBlock: 'Links'
   }
 
   componentDidMount() {}
 
   render() {
-    const { links } = this.props
+    const { links, titleBlock } = this.props
     return (
       <div>
-        <BlockHeader />
+        <BlockHeader titleBlock={titleBlock} />
         <BlockContent links={links} />
       </div>
     )

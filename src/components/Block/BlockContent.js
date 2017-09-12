@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 // import { Link } from 'react-router-dom'
-import ClassName from 'classnames'
+import ClassNames from 'classnames'
 
 import TwitterLogo from 'src/components/Icons/TwitterLogo'
 import FacebookLogo from 'src/components/Icons/FacebookLogo'
@@ -27,11 +27,11 @@ export default class BlockContent extends Component {
     const { links } = this.props
 
     return (
-      <div className={ClassName(css.listContentWrapper, css.whiteBlockContent, 'column')}>
+      <div className={ClassNames(css.listContentWrapper)}>
         {links &&
           links.map(link => (
-            <div className={css.listContentItemWrapper}>
-              <div key={link.id} className={ClassName(css.listContentItemContent)}>
+            <div className={ClassNames(css.listContentItemWrapper)}>
+              <div key={link.id} className={ClassNames(css.listContentItemContent, 'content')}>
                 {link.icon === 'Slack' && (
                   <SlackLogo className={css.listContentItemLogo} width="29" height="29" />
                 )}

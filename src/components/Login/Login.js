@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ClassName from 'classnames'
+import ClassNames from 'classnames'
 
 import { Link } from 'react-router-dom'
 
@@ -42,33 +42,60 @@ export default class Login extends Component {
   render() {
     const { isLoginLoading } = this.state
     return (
-      <div>
+      <div className={ClassNames('column', 'is-half', 'is-offset-one-quarter')}>
         <form onSubmit={this.handleClickLogin}>
           <h3 className={css.titleLogin}>You{"'"}re a Mangrove member? Log in here:</h3>
-          <input
-            className={css.inputLogin}
-            name="email"
-            placeholder="email"
-            type="text"
-            ref={email => {
-              this.emailInput = email
-            }}
-          />
-          <input
-            className={css.inputLogin}
-            placeholder="password"
-            type="password"
-            ref={password => {
-              this.passwordInput = password
-            }}
-          />
+          <div className="columns">
+            <div className="column is-10 is-offset-1 ">
+              <div className="control has-icons-left is-large is-loading">
+                <input
+                  className="input is-large"
+                  name="email"
+                  placeholder="email"
+                  type="text"
+                  ref={email => {
+                    this.emailInput = email
+                  }}
+                />
+                <span className="icon is-medium is-left">
+                  <i className="fa fa-envelope" />
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="columns">
+            <div className="column is-10 is-offset-1 ">
+              <div className="control has-icons-left is-large is-loading">
+                <input
+                  className="input is-large"
+                  placeholder="password"
+                  type="password"
+                  ref={password => {
+                    this.passwordInput = password
+                  }}
+                />
+                <span className="icon is-medium is-left">
+                  <i className="fa fa-envelope" />
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="bd-more-loves">
+            <p className="bd-more-loves-container">
+              <a className="button is-medium is-danger bd-rainbow" href="http://bulma.io/love/">
+                <span>
+                  See more <strong>love</strong> 🤗
+                </span>
+              </a>
+            </p>
+          </div>
           <div className={css.btnLoginWrapper}>
             <button
               className={
                 isLoginLoading ? (
-                  ClassName(css.btnLogin, css.alignCenter, css.bar)
+                  ClassNames(css.btnLogin, css.alignCenter, css.bar)
                 ) : (
-                  ClassName(css.btnLogin, css.alignCenter)
+                  ClassNames(css.btnLogin, css.alignCenter)
                 )
               }
               size="lg"

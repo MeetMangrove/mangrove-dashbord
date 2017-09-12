@@ -9,11 +9,15 @@ import linkQuery from 'src/graphql/Link/Query/getAllLinks.gql'
 
 class RessourcesListContainer extends Component {
   static propTypes = {
-    data: PropTypes.object
+    linkMisc: PropTypes.object,
+    linkRetreat: PropTypes.object,
+    linkSocial: PropTypes.object
   }
 
   static defaultProps = {
-    data: {}
+    linkMisc: {},
+    linkSocial: {},
+    linkRetreat: {}
   }
 
   constructor(props) {
@@ -35,7 +39,7 @@ class RessourcesListContainer extends Component {
   render() {
     const { rickroll } = this.state
 
-    const { allLinks, loading } = this.props.data
+    const { linkMisc, linkSocial, linkRetreat } = this.props
 
     return (
       <div>
@@ -48,17 +52,53 @@ class RessourcesListContainer extends Component {
             Konami code !!
           </div>
         )}
-        {!loading &&
-        allLinks && (
-          <div className="columns">
-            <div className="column">
-              <Block links={allLinks} />
-            </div>
+        <div className="tile is-ancestor">
+          <div className="tile is-parent">
+            <article className="tile is-child">
+              {!linkMisc.loading &&
+              linkMisc.allLinks.length > 0 && (
+                <div className="columns">
+                  <div className="column">
+                    <Block links={linkMisc.allLinks} titleBlock="Retreat" />
+                  </div>
+                </div>
+              )}
+            </article>
           </div>
-        )}
+          <div className="tile is-parent">
+            <article className="tile is-child">
+              {!linkRetreat.loading &&
+              linkRetreat.allLinks.length > 0 && (
+                <div className="columns">
+                  <div className="column">
+                    <Block links={linkRetreat.allLinks} titleBlock="Retreat" />
+                  </div>
+                </div>
+              )}
+            </article>
+          </div>
+          <div className="tile is-parent">
+            <article className="tile is-child">
+              {!linkSocial.loading &&
+              linkSocial.allLinks.length > 0 && (
+                <div className="columns">
+                  <div className="column">
+                    <Block links={linkSocial.allLinks} titleBlock="Social" />
+                  </div>
+                </div>
+              )}
+            </article>
+          </div>
+        </div>
       </div>
     )
   }
 }
 
-export default graphql(linkQuery)(RessourcesListContainer)
+export default graphql(linkQuery, { name: 'linkMisc', options: { variables: { type: 'Misc' } } })(
+  graphql(linkQuery, { name: 'linkRetreat', options: { variables: { type: 'Retreat' } } })(
+    graphql(linkQuery, { name: 'linkSocial', options: { variables: { type: 'Social' } } })(
+      RessourcesListContainer
+    )
+  )
+)

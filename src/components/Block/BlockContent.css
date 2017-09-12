@@ -1,19 +1,17 @@
-.whiteBlockContent {
-  background-color: white;
-  padding: 23px 21px;
-  margin-top: 7px;
-}
-
 .listContentItemLogo {
   display: inline-block;
   vertical-align: middle;
+  margin-right: 10px;
 }
 
-.listContentWrapper {
+.listContentItemWrapper {
   margin-top: 15px;
 }
 
 .listContentItemContent {
+  a {
+    color: #4a4a4a;
+  }
   font-size: 14px;
   color: #4a4a4a;
   letter-spacing: 0.33px;

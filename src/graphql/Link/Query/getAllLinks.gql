@@ -1,9 +1,10 @@
-query {
-  allLinks(filter: { type: Misc }, orderBy: createdAt_ASC) {
+query($type: TypeLink!) {
+  allLinks(filter: { type: $type }, orderBy: position_ASC) {
     id
+    title
     description
     url
     icon
-    title
+    position
   }
 }

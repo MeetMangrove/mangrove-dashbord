@@ -42,6 +42,7 @@ export default class Header extends Component {
                 </div>
                 <div className="navbar-item">
                   <Link to="/login">Login</Link>
+                  <Link to="/logout">Logout</Link>
                 </div>
               </div>
             </div>

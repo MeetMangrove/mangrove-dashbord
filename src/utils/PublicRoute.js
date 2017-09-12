@@ -29,11 +29,18 @@ class PublicRoute extends Component {
   }
 
   render() {
-    const { component, layout, ...rest } = this.props
+    const { data, component, layout, ...rest } = this.props
     return (
-      <Route {...rest} render={props => this.redirectisAuthenticated(layout, props, component)} />
+      <div>
+        {!data.loading && (
+          <Route
+            {...rest}
+            render={props => this.redirectisAuthenticated(layout, props, component)}
+          />
+        )}
+      </div>
     )
   }
 }
 
-export default graphql(userQuery, { options: { fetchPolicy: 'network-only' } })(PublicRoute)
+export default graphql(userQuery)(PublicRoute)

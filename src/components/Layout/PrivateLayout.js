@@ -5,7 +5,7 @@ import ClassNames from 'classnames'
 import Header from 'src/components/Header/Header'
 import Footer from 'src/components/Footer/Footer'
 
-import css from './PrivateLayout.css'
+// import css from './PrivateLayout.css'
 
 export default class PrivateLayout extends Component {
   static propTypes = {
@@ -18,10 +18,10 @@ export default class PrivateLayout extends Component {
 
   render() {
     return (
-      <div className="fill">
+      <div>
         <Header />
-        <div className={ClassNames(css.wrapper, css.wrapperPrivate, 'container')}>
-          {this.props.children}
+        <div className={ClassNames('section', 'container')}>
+          <div className={ClassNames('')}>{this.props.children}</div>
         </div>
         <Footer />
       </div>
