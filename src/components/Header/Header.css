@@ -8,9 +8,9 @@
 }
 
 .logoLink {
-  color: white;
-  letter-spacing: 0.44;
-  font-weight: 600;
+  color: white !important;
+  letter-spacing: 0.44 !important;
+  font-weight: 600 !important;
 }
 
 .logo {
@@ -18,6 +18,15 @@
 }
 
 .logoLink:hover {
+  background-color: transparent !important;
+  color: white !important;
+}
+
+.burgerMenu {
+  color: white !important;
+}
+
+.burgerMenu:hover {
   background-color: transparent !important;
   color: white !important;
 }

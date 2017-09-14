@@ -14,6 +14,11 @@ class Header extends Component {
       showMenu: false
     }
     this.toggleMenu = this.toggleMenu.bind(this)
+    this.closeMenu = this.closeMenu.bind(this)
+  }
+
+  closeMenu() {
+    this.setState({ showMenu: false })
   }
 
   toggleMenu() {
@@ -37,9 +42,9 @@ class Header extends Component {
               <div
                 className={
                   showMenu ? (
-                    ClassNames('navbar-burger', 'burger', 'is-active')
+                    ClassNames('navbar-burger', 'burger', css.burgerMenu, 'is-active')
                   ) : (
-                    ClassNames('navbar-burger', 'burger')
+                    ClassNames('navbar-burger', 'burger', css.burgerMenu)
                   )
                 }
                 onClick={this.toggleMenu}
@@ -57,12 +62,12 @@ class Header extends Component {
             >
               <div className="navbar-start">
                 <div className="navbar-item">
-                  <Link className={css.headerLink} to="/link">
+                  <Link className={css.headerLink} onClick={this.closeMenu} to="/link">
                     Ressources
                   </Link>
                 </div>
                 <div className="navbar-item">
-                  <Link className={css.headerLink} to="/bookclub">
+                  <Link className={css.headerLink} onClick={this.closeMenu} to="/bookclub">
                     Bookclub
                   </Link>
                 </div>
@@ -70,17 +75,17 @@ class Header extends Component {
 
               <div className="navbar-end">
                 <div className="navbar-item">
-                  <Link className={css.headerLink} to="/register">
+                  <Link className={css.headerLink} onClick={this.closeMenu} to="/register">
                     Register
                   </Link>
                 </div>
                 <div className="navbar-item">
-                  <Link className={css.headerLink} to="/login">
+                  <Link className={css.headerLink} onClick={this.closeMenu} to="/login">
                     Login
                   </Link>
                 </div>
                 <div className="navbar-item">
-                  <Link className={css.headerLink} to="/logout">
+                  <Link className={css.headerLink} onClick={this.closeMenu} to="/logout">
                     Logout
                   </Link>
                 </div>
