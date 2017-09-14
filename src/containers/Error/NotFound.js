@@ -27,7 +27,7 @@ class NotFound extends Component {
               <div className="container">
                 <div className="columns">
                   <div className="column">
-                    <p className="title">404 Not Found</p>
+                    <p className="title">{location.path} Not Found</p>
                     <p className="subtitle">🙅‍🙅🙅🙅</p>
                   </div>
                   <div className="column">

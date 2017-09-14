@@ -42,7 +42,7 @@ class Register extends Component {
           .signinUser({ variables: { email, password } })
           .then(r => {
             LocalStorageManager.setUserToken(r.data.signinUser.token)
-            this.props.history.push('/')
+            this.props.history.push('/link')
           })
           .catch(e => {
             console.error(e)

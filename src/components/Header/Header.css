@@ -1,4 +1,23 @@
 .header {
   background-image: linear-gradient(-90deg, #ff512f 0%, #dd2476 100%);
-  height: 82px;
+}
+.headerLink {
+  color: white;
+  letter-spacing: 0.44;
+  font-weight: 600;
+}
+
+.logoLink {
+  color: white;
+  letter-spacing: 0.44;
+  font-weight: 600;
+}
+
+.logo {
+  margin: 5px 10px 0 0;
+}
+
+.logoLink:hover {
+  background-color: transparent !important;
+  color: white !important;
 }

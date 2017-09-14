@@ -24,6 +24,7 @@ export default class Rick extends Component {
         height={height || '412'}
         className={className || ''}
         viewBox="0 0 278 412"
+        className={css.rick}
       >
         <g fill="#A7D5E9" id={css.HAIR}>
           <path

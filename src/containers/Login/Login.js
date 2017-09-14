@@ -34,7 +34,7 @@ class Login extends Component {
       .signinUser({ variables: { email, password } })
       .then(response => {
         LocalStorageManager.setUserToken(response.data.signinUser.token)
-        this.props.history.push('/')
+        this.props.history.push('/link')
       })
       .catch(e => {
         console.error(e)
@@ -42,10 +42,6 @@ class Login extends Component {
   }
 
   render() {
-    if (this.props.data.loading) {
-      return <div>Loading</div>
-    }
-
     return <LoginComponent requestLogin={this.loginUser} />
   }
 }

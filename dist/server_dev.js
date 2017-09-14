@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -85,13 +85,13 @@ module.exports = require("react-router-dom");
 /* 3 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-apollo");
+module.exports = require("classnames");
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports) {
 
-module.exports = require("classnames");
+module.exports = require("react-apollo");
 
 /***/ }),
 /* 5 */
@@ -446,10 +446,16 @@ function getServerURL(host = "localhost", port = "8081", allowSSL = true) {
 /* 10 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-helmet");
+module.exports = require("isomorphic-fetch");
 
 /***/ }),
 /* 11 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-helmet");
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports) {
 
 
@@ -476,14 +482,14 @@ module.exports = require("react-helmet");
 module.exports = doc;
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(13);
+module.exports = __webpack_require__(14);
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -493,9 +499,9 @@ var _chalk = __webpack_require__(8);
 
 var _chalk2 = _interopRequireDefault(_chalk);
 
-var _console = __webpack_require__(14);
+var _console = __webpack_require__(15);
 
-var _server = __webpack_require__(17);
+var _server = __webpack_require__(18);
 
 var _server2 = _interopRequireDefault(_server);
 
@@ -547,7 +553,7 @@ const scripts = ['vendor.js', 'browser.js'].map(key => `/${key}`);
 })();
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -558,7 +564,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.logServerStarted = logServerStarted;
 
-var _boxen = __webpack_require__(15);
+var _boxen = __webpack_require__(16);
 
 var _boxen2 = _interopRequireDefault(_boxen);
 
@@ -566,7 +572,7 @@ var _chalk = __webpack_require__(8);
 
 var _chalk2 = _interopRequireDefault(_chalk);
 
-var _ip = __webpack_require__(16);
+var _ip = __webpack_require__(17);
 
 var _ip2 = _interopRequireDefault(_ip);
 
@@ -609,19 +615,19 @@ function logServerStarted(opt = {}) {
 // Chalk library, to add colour to our console logs
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports) {
 
 module.exports = require("boxen");
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports) {
 
 module.exports = require("ip");
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -633,17 +639,17 @@ Object.defineProperty(exports, "__esModule", {
 exports.staticMiddleware = staticMiddleware;
 exports.createReactHandler = createReactHandler;
 
-var _stream = __webpack_require__(18);
+var _stream = __webpack_require__(19);
 
-var _http = __webpack_require__(19);
+var _http = __webpack_require__(20);
 
 var _http2 = _interopRequireDefault(_http);
 
-var _https = __webpack_require__(20);
+var _https = __webpack_require__(21);
 
 var _https2 = _interopRequireDefault(_https);
 
-__webpack_require__(21);
+__webpack_require__(10);
 
 var _react = __webpack_require__(0);
 
@@ -657,7 +663,7 @@ var _koa = __webpack_require__(23);
 
 var _koa2 = _interopRequireDefault(_koa);
 
-var _reactApollo = __webpack_require__(3);
+var _reactApollo = __webpack_require__(4);
 
 var _koaSslify = __webpack_require__(24);
 
@@ -685,7 +691,7 @@ var _microseconds2 = _interopRequireDefault(_microseconds);
 
 var _reactRouter = __webpack_require__(30);
 
-var _reactHelmet = __webpack_require__(10);
+var _reactHelmet = __webpack_require__(11);
 
 var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
 
@@ -703,21 +709,21 @@ var _app = __webpack_require__(34);
 
 var _app2 = _interopRequireDefault(_app);
 
-var _redux = __webpack_require__(77);
+var _redux = __webpack_require__(78);
 
 var _redux2 = _interopRequireDefault(_redux);
 
-var _ssr = __webpack_require__(81);
+var _ssr = __webpack_require__(82);
 
 var _ssr2 = _interopRequireDefault(_ssr);
 
-var _apollo = __webpack_require__(82);
+var _apollo = __webpack_require__(83);
 
 var _config = __webpack_require__(6);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _paths = __webpack_require__(83);
+var _paths = __webpack_require__(84);
 
 var _paths2 = _interopRequireDefault(_paths);
 
@@ -1081,7 +1087,7 @@ _config2.default.routes.forEach(route => {
 // `koa-bodyparser` is used to process POST requests.  Check that it's enabled
 // (default) and apply a custom config if we need one
 if (_config2.default.enableBodyParser) {
-  app.use(__webpack_require__(85)(
+  app.use(__webpack_require__(86)(
   // Pass in any options that may have been set in userland
   _config2.default.bodyParserOptions));
 }
@@ -1121,28 +1127,22 @@ exports.default = {
 };
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports) {
 
 module.exports = require("stream");
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 module.exports = require("http");
 
 /***/ }),
-/* 20 */
-/***/ (function(module, exports) {
-
-module.exports = require("https");
-
-/***/ }),
 /* 21 */
 /***/ (function(module, exports) {
 
-module.exports = require("isomorphic-fetch");
+module.exports = require("https");
 
 /***/ }),
 /* 22 */
@@ -1241,7 +1241,7 @@ var _LocalStorageManager = __webpack_require__(5);
 
 var _LocalStorageManager2 = _interopRequireDefault(_LocalStorageManager);
 
-__webpack_require__(76);
+__webpack_require__(77);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1336,23 +1336,23 @@ var _RessourceEdit = __webpack_require__(63);
 
 var _RessourceEdit2 = _interopRequireDefault(_RessourceEdit);
 
-var _Search = __webpack_require__(86);
+var _Search = __webpack_require__(67);
 
 var _Search2 = _interopRequireDefault(_Search);
 
-var _PrivateRoute = __webpack_require__(67);
+var _PrivateRoute = __webpack_require__(68);
 
 var _PrivateRoute2 = _interopRequireDefault(_PrivateRoute);
 
-var _PublicRoute = __webpack_require__(68);
+var _PublicRoute = __webpack_require__(69);
 
 var _PublicRoute2 = _interopRequireDefault(_PublicRoute);
 
-var _PrivateLayout = __webpack_require__(69);
+var _PrivateLayout = __webpack_require__(70);
 
 var _PrivateLayout2 = _interopRequireDefault(_PrivateLayout);
 
-var _EmptyLayout = __webpack_require__(75);
+var _EmptyLayout = __webpack_require__(76);
 
 var _EmptyLayout2 = _interopRequireDefault(_EmptyLayout);
 
@@ -1414,7 +1414,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _reactApollo = __webpack_require__(3);
+var _reactApollo = __webpack_require__(4);
 
 var _LocalStorageManager = __webpack_require__(5);
 
@@ -1424,7 +1424,7 @@ var _Login = __webpack_require__(39);
 
 var _Login2 = _interopRequireDefault(_Login);
 
-var _SigninUser = __webpack_require__(11);
+var _SigninUser = __webpack_require__(12);
 
 var _SigninUser2 = _interopRequireDefault(_SigninUser);
 
@@ -1442,7 +1442,7 @@ let Login = class Login extends _react.Component {
     this.loginUser = (email, password) => {
       this.props.signinUser({ variables: { email, password } }).then(response => {
         _LocalStorageManager2.default.setUserToken(response.data.signinUser.token);
-        this.props.history.push('/');
+        this.props.history.push('/link');
       }).catch(e => {
         console.error(e);
       });
@@ -1452,14 +1452,6 @@ let Login = class Login extends _react.Component {
   }
 
   render() {
-    if (this.props.data.loading) {
-      return _react2.default.createElement(
-        'div',
-        null,
-        'Loading'
-      );
-    }
-
     return _react2.default.createElement(_Login2.default, { requestLogin: this.loginUser });
   }
 };
@@ -1495,7 +1487,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _classnames = __webpack_require__(4);
+var _classnames = __webpack_require__(3);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -1721,7 +1713,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _reactApollo = __webpack_require__(3);
+var _reactApollo = __webpack_require__(4);
 
 var _LocalStorageManager = __webpack_require__(5);
 
@@ -1731,7 +1723,7 @@ var _CreateUser = __webpack_require__(43);
 
 var _CreateUser2 = _interopRequireDefault(_CreateUser);
 
-var _SigninUser = __webpack_require__(11);
+var _SigninUser = __webpack_require__(12);
 
 var _SigninUser2 = _interopRequireDefault(_SigninUser);
 
@@ -1752,7 +1744,7 @@ let Register = class Register extends _react.Component {
       this.props.createUser({ variables: { email, password } }).then(() => {
         this.props.signinUser({ variables: { email, password } }).then(r => {
           _LocalStorageManager2.default.setUserToken(r.data.signinUser.token);
-          this.props.history.push('/');
+          this.props.history.push('/link');
         }).catch(e => {
           console.error(e);
           this.props.history.push('/');
@@ -1900,7 +1892,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _reactHelmet = __webpack_require__(10);
+var _reactHelmet = __webpack_require__(11);
 
 var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
 
@@ -1942,7 +1934,8 @@ let NotFound = class NotFound extends _react.Component {
                   _react2.default.createElement(
                     'p',
                     { className: 'title' },
-                    '404 Not Found'
+                    location.path,
+                    ' Not Found'
                   ),
                   _react2.default.createElement(
                     'p',
@@ -1991,7 +1984,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _classnames = __webpack_require__(4);
+var _classnames = __webpack_require__(3);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -2011,7 +2004,8 @@ let Rick = class Rick extends _react.Component {
         width: width || '278',
         height: height || '412',
         className: className || '',
-        viewBox: '0 0 278 412'
+        viewBox: '0 0 278 412',
+        className: _Rick2.default.rick
       },
       _react2.default.createElement(
         'g',
@@ -2121,7 +2115,7 @@ exports.default = Rick;
 /***/ (function(module, exports) {
 
 module.exports = {
-	"svg-container": "svg-container-AFQy4ocLc1ERnvT5w715D",
+	"rick": "rick-3eCHsUNgirJ-Rg2nifo7EA",
 	"drool": "drool-3TQ-P8vvk4W-pcZ3As6lW1",
 	"drool-animation": "drool-animation-3aDWB_sCnTXxOD-w0Rl9dO",
 	"eyebrow": "eyebrow-3IMQGCpiIsj8HO40hzVRB8",
@@ -2138,19 +2132,7 @@ module.exports = {
 /* 48 */
 /***/ (function(module, exports) {
 
-module.exports = {
-	"svg-container": "svg-container-1PwSdi2i-Y8CcJP3BD3BOp",
-	"drool": "drool-VSn0s1s7n9Srq_K_RTPit",
-	"drool-animation": "drool-animation-39EtpH8fHJzT10vfMt8_wA",
-	"eyebrow": "eyebrow-hMG9JnVDW43vSFVUhplS0",
-	"hair_1": "hair_1-3Szg8FYsGSHpB1ORxvwo3E",
-	"twitch": "twitch-ntcjLNQ-Vy7jKAMkSmRWa",
-	"hair_x": "hair_x-1--KcanSb_yqby-JHcM1qt",
-	"hair-animation": "hair-animation-3VdumJVtRNyb1dvf59gELe",
-	"hair_y": "hair_y-3a2tAEozS5QsEZzvZFhikZ",
-	"light_twitch": "light_twitch-2CSbbTPyN4agSE-IalXdFp",
-	"HAIR": "HAIR-3e7uZrpseLD-mK1sh_kKm6"
-};
+
 
 /***/ }),
 /* 49 */
@@ -2171,7 +2153,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactApollo = __webpack_require__(3);
+var _reactApollo = __webpack_require__(4);
 
 var _reactRouterDom = __webpack_require__(2);
 
@@ -2400,7 +2382,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _classnames = __webpack_require__(4);
+var _classnames = __webpack_require__(3);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -2467,7 +2449,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _classnames = __webpack_require__(4);
+var _classnames = __webpack_require__(3);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -2989,11 +2971,11 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactApollo = __webpack_require__(3);
+var _reactApollo = __webpack_require__(4);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _classnames = __webpack_require__(4);
+var _classnames = __webpack_require__(3);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -3344,130 +3326,6 @@ module.exports = doc;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(1);
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _reactRouterDom = __webpack_require__(2);
-
-var _reactApollo = __webpack_require__(3);
-
-var _isLoggedIn = __webpack_require__(7);
-
-var _isLoggedIn2 = _interopRequireDefault(_isLoggedIn);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-let PrivateRoute = class PrivateRoute extends _react.Component {
-
-  componentDidMount() {}
-
-  redirectisNotAuthenticated(layout, props, component) {
-    const { data } = this.props;
-    if (data.user) {
-      return _react2.default.createElement(layout, props, _react2.default.createElement(component, props));
-    }
-    return _react2.default.createElement(_reactRouterDom.Redirect, { to: { pathname: '/login', state: { from: props.location } } });
-  }
-
-  render() {
-    const _props = this.props,
-          { data, component, layout } = _props,
-          rest = _objectWithoutProperties(_props, ['data', 'component', 'layout']);
-
-    return _react2.default.createElement(
-      'div',
-      null,
-      !data.loading && _react2.default.createElement(_reactRouterDom.Route, _extends({}, rest, {
-        render: props => this.redirectisNotAuthenticated(layout, props, component)
-      }))
-    );
-  }
-};
-PrivateRoute.propTypes = {
-  component: _propTypes2.default.func.isRequired,
-  data: _propTypes2.default.object,
-  layout: _propTypes2.default.func.isRequired
-};
-PrivateRoute.defaultProps = {
-  data: {
-    user: {}
-  }
-};
-exports.default = (0, _reactApollo.graphql)(_isLoggedIn2.default)(PrivateRoute);
-
-/***/ }),
-/* 68 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(1);
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _reactRouterDom = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-let PublicRoute = class PublicRoute extends _react.Component {
-
-  componentDidMount() {}
-
-  redirectisAuthenticated(layout, props, component) {
-    return _react2.default.createElement(layout, props, _react2.default.createElement(component, props));
-  }
-
-  render() {
-    const _props = this.props,
-          { component, layout } = _props,
-          rest = _objectWithoutProperties(_props, ['component', 'layout']);
-    return _react2.default.createElement(
-      'div',
-      null,
-      _react2.default.createElement(_reactRouterDom.Route, _extends({}, rest, { render: props => this.redirectisAuthenticated(layout, props, component) }))
-    );
-  }
-};
-PublicRoute.propTypes = {
-  component: _propTypes2.default.func.isRequired,
-  layout: _propTypes2.default.func.isRequired
-};
-PublicRoute.defaultProps = {};
-exports.default = PublicRoute;
-
-/***/ }),
-/* 69 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 exports.default = undefined;
 
 var _react = __webpack_require__(0);
@@ -3478,700 +3336,9 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _classnames = __webpack_require__(4);
+__webpack_require__(10);
 
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _Header = __webpack_require__(70);
-
-var _Header2 = _interopRequireDefault(_Header);
-
-var _Footer = __webpack_require__(73);
-
-var _Footer2 = _interopRequireDefault(_Footer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// import css from './PrivateLayout.css'
-
-let PrivateLayout = class PrivateLayout extends _react.Component {
-
-  componentDidMount() {}
-
-  render() {
-    return _react2.default.createElement(
-      'div',
-      null,
-      _react2.default.createElement(_Header2.default, null),
-      _react2.default.createElement(
-        'div',
-        { className: (0, _classnames2.default)('section', 'container') },
-        _react2.default.createElement(
-          'div',
-          { className: (0, _classnames2.default)('') },
-          this.props.children
-        )
-      ),
-      _react2.default.createElement(_Footer2.default, null)
-    );
-  }
-};
-PrivateLayout.propTypes = {
-  children: _propTypes2.default.object.isRequired
-};
-PrivateLayout.defaultProps = {};
-exports.default = PrivateLayout;
-
-/***/ }),
-/* 70 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = undefined;
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(2);
-
-var _classnames = __webpack_require__(4);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _MangroveLogo = __webpack_require__(71);
-
-var _MangroveLogo2 = _interopRequireDefault(_MangroveLogo);
-
-var _Header = __webpack_require__(72);
-
-var _Header2 = _interopRequireDefault(_Header);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-let Header = class Header extends _react.Component {
-  componentDidMount() {}
-
-  render() {
-    return _react2.default.createElement(
-      'div',
-      null,
-      _react2.default.createElement(
-        'header',
-        null,
-        _react2.default.createElement(
-          'nav',
-          { className: (0, _classnames2.default)(_Header2.default.header, 'navbar') },
-          _react2.default.createElement(
-            'div',
-            { className: 'navbar-brand' },
-            _react2.default.createElement(
-              _reactRouterDom.Link,
-              { className: 'navbar-item', to: '/' },
-              _react2.default.createElement(_MangroveLogo2.default, null),
-              'Mangrove Dashboard'
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'navbar-burger burger', 'data-target': 'navMenubd-example' },
-              _react2.default.createElement('span', null),
-              _react2.default.createElement('span', null),
-              _react2.default.createElement('span', null)
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { id: 'navMenubd-example', className: 'navbar-menu' },
-            _react2.default.createElement(
-              'div',
-              { className: 'navbar-start' },
-              _react2.default.createElement(
-                'div',
-                { className: 'navbar-item' },
-                _react2.default.createElement(
-                  _reactRouterDom.Link,
-                  { to: '/link' },
-                  'Ressources'
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'navbar-item' },
-                _react2.default.createElement(
-                  _reactRouterDom.Link,
-                  { to: '/bookclub' },
-                  'Bookclub'
-                )
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'navbar-end' },
-              _react2.default.createElement(
-                'div',
-                { className: 'navbar-item' },
-                _react2.default.createElement(
-                  _reactRouterDom.Link,
-                  { to: '/register' },
-                  'Register'
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'navbar-item' },
-                _react2.default.createElement(
-                  _reactRouterDom.Link,
-                  { to: '/login' },
-                  'Login'
-                ),
-                _react2.default.createElement(
-                  _reactRouterDom.Link,
-                  { to: '/logout' },
-                  'Logout'
-                )
-              )
-            )
-          )
-        )
-      )
-    );
-  }
-};
-exports.default = Header;
-
-/***/ }),
-/* 71 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = undefined;
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(1);
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-let MangroveLogo = class MangroveLogo extends _react.Component {
-
-  render() {
-    const { width, height, className } = this.props;
-    return _react2.default.createElement(
-      'svg',
-      {
-        width: width || '53',
-        height: height || '22',
-        className: className || '',
-        viewBox: '0 0 53 22'
-      },
-      _react2.default.createElement('path', {
-        d: 'M.43.099c1.011 9.796 8.598 17.856 18.723 20.533V.1H.431zm33.119 0v20.62c10.284-2.591 18.02-10.72 19.04-20.62h-19.04zm-12.59 0v20.948c1.435.28 2.91.46 4.422.518h.068V.099h-4.49zm6.295 0v21.466h.385c1.4-.055 2.77-.213 4.105-.459V.1h-4.49z',
-        fillRule: 'nonzero',
-        fill: '#FFF'
-      })
-    );
-  }
-};
-MangroveLogo.propTypes = {
-  width: _propTypes2.default.string,
-  height: _propTypes2.default.string,
-  className: _propTypes2.default.string
-};
-MangroveLogo.defaultProps = {
-  width: '53',
-  height: '22',
-  className: ''
-};
-exports.default = MangroveLogo;
-
-/***/ }),
-/* 72 */
-/***/ (function(module, exports) {
-
-module.exports = {
-	"header": "header-2zG4F7jLvGK6KP6LE87cJC"
-};
-
-/***/ }),
-/* 73 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _moment = __webpack_require__(74);
-
-var _moment2 = _interopRequireDefault(_moment);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// import css from './Footer.css'
-
-const Footer = () => _react2.default.createElement(
-  'footer',
-  { className: 'footer' },
-  _react2.default.createElement(
-    'div',
-    { className: 'container' },
-    _react2.default.createElement(
-      'div',
-      { className: 'content has-text-centered' },
-      _react2.default.createElement(
-        'p',
-        null,
-        'Made with',
-        ' ',
-        _react2.default.createElement(
-          'span',
-          { role: 'img', 'aria-label': 'wine' },
-          '\uD83C\uDF77'
-        ),
-        ' ',
-        'in Paris - \xA9 ',
-        (0, _moment2.default)().format('YYYY'),
-        '.'
-      ),
-      _react2.default.createElement(
-        'p',
-        null,
-        _react2.default.createElement(
-          'a',
-          { className: 'icon', href: 'https://github.com/jgthms/bulma' },
-          _react2.default.createElement('i', { className: 'fa fa-github' })
-        )
-      )
-    )
-  )
-);
-
-exports.default = Footer;
-
-/***/ }),
-/* 74 */
-/***/ (function(module, exports) {
-
-module.exports = require("moment");
-
-/***/ }),
-/* 75 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = undefined;
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(1);
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-let EmptyLayout = class EmptyLayout extends _react.Component {
-
-  componentDidMount() {}
-
-  render() {
-    return _react2.default.createElement(
-      'div',
-      null,
-      this.props.children
-    );
-  }
-};
-EmptyLayout.propTypes = {
-  children: _propTypes2.default.object.isRequired
-};
-EmptyLayout.defaultProps = {};
-exports.default = EmptyLayout;
-
-/***/ }),
-/* 76 */
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-/* 77 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; /* eslint-disable no-underscore-dangle */
-
-/*
-Custom Redux store creation.  Along with the default Apollo store,
-we can define custom reducers using `kit/config.addReducer()` which will
-be available on the server and in the browser.
-
-Store state is wrapped by `seamless-immutable` to enforce a pattern of
-immutability, to prevent weird side effects.
-*/
-
-// ----------------------
-// IMPORTS
-
-/* NPM */
-
-
-/* Local */
-
-
-exports.default = createNewStore;
-
-var _redux = __webpack_require__(78);
-
-var _reduxThunk = __webpack_require__(79);
-
-var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
-
-var _seamlessImmutable = __webpack_require__(80);
-
-var _seamlessImmutable2 = _interopRequireDefault(_seamlessImmutable);
-
-var _config = __webpack_require__(6);
-
-var _config2 = _interopRequireDefault(_config);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// ----------------------
-
-// Detect if we're both in the browser, AND we have dehydrated state
-const hasState = !!(!true && window.__STATE__);
-
-// Helper function that 'unwinds' the `config.reducers` Map, and provides
-// the `reducer` function or `initialState` (wrapped in `seamless-immutable`)
-// depending on what we asked for
-function unwind(reducer = true) {
-  // Unwind `config.reducers`.  If we're looking for the `reducer`, we'll
-  // wrap this in a `defaultReducer` function that properly handles the Redux
-  // 'undefined' sentinel value, or calls 'real' reducer if it's not undefined.
-  //
-  // If we're not looking for reducers, it'll pull out the `initialState`
-  // variable instead, which we'll further process below
-  const r = Object.assign({}, ...[].concat([..._config2.default.reducers].map(arr => ({
-    [arr[0]]: reducer ? function defaultReducer(state, action) {
-      // If `state` === undefined, this is Redux sending a sentinel value
-      // to check our set-up.  So we'll send back a plain object to prove
-      // that we're properly handling our reducer
-      if (typeof state === 'undefined') return {};
-
-      // Otherwise, call our real reducer with the {state, action}
-      return arr[1].reducer(state, action);
-    } : arr[1].initialState
-  }))));
-
-  // If this is a reducer, return at this point
-  if (reducer) return r;
-
-  // If not, we're looking for the state -- so let's map it and wrap the
-  // object in `seamless-immutable`, to avoid side-effects with Redux
-  return Object.assign({}, ...Object.keys(r).map(key => ({
-    [key]: (0, _seamlessImmutable2.default)(hasState && window.__STATE__[key] || r[key])
-  })));
-}
-
-function createNewStore(apolloClient) {
-  const store = (0, _redux.createStore)(
-  // By default, we'll use just the apollo reducer.  We can easily add our
-  // own here, for global store management outside of Apollo
-  (0, _redux.combineReducers)(_extends({
-    apollo: apolloClient.reducer()
-  }, unwind())),
-  // Initial server state, provided by the server.
-  _extends({
-    apollo: hasState && window.__STATE__.apollo || {}
-  }, unwind(false)), (0, _redux.compose)((0, _redux.applyMiddleware)(apolloClient.middleware(), _reduxThunk2.default),
-  // Enable Redux Devtools on the browser, for easy state debugging
-  // eslint-disable-next-line no-underscore-dangle
-   false ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f));
-
-  return store;
-}
-
-/***/ }),
-/* 78 */
-/***/ (function(module, exports) {
-
-module.exports = require("redux");
-
-/***/ }),
-/* 79 */
-/***/ (function(module, exports) {
-
-module.exports = require("redux-thunk");
-
-/***/ }),
-/* 80 */
-/***/ (function(module, exports) {
-
-module.exports = require("seamless-immutable");
-
-/***/ }),
-/* 81 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(1);
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// ----------------------
-
-/* eslint-disable react/no-danger, no-return-assign, no-param-reassign */
-
-// Component to render the full HTML response in React
-
-// ----------------------
-// IMPORTS
-const Html = ({ head, scripts, window, css, children }) => _react2.default.createElement(
-  'html',
-  { lang: 'en', prefix: 'og: http://ogp.me/ns#' },
-  _react2.default.createElement(
-    'head',
-    null,
-    _react2.default.createElement('meta', { charSet: 'utf-8' }),
-    _react2.default.createElement('meta', { httpEquiv: 'X-UA-Compatible', content: 'IE=edge' }),
-    _react2.default.createElement('meta', { httpEquiv: 'Content-Language', content: 'en' }),
-    _react2.default.createElement('meta', { name: 'viewport', content: 'width=device-width, initial-scale=1' }),
-    head.meta.toComponent(),
-    _react2.default.createElement('link', { rel: 'stylesheet', href: css }),
-    head.title.toComponent()
-  ),
-  _react2.default.createElement(
-    'body',
-    null,
-    _react2.default.createElement(
-      'div',
-      { id: 'main' },
-      children
-    ),
-    _react2.default.createElement('script', {
-      dangerouslySetInnerHTML: {
-        __html: Object.keys(window).reduce((out, key) => out += `window.${key}=${JSON.stringify(window[key])};`, '')
-      } }),
-    scripts.map(src => _react2.default.createElement('script', { key: src, src: src }))
-  )
-);
-
-Html.propTypes = {
-  head: _propTypes2.default.object.isRequired,
-  window: _propTypes2.default.object.isRequired,
-  scripts: _propTypes2.default.arrayOf(_propTypes2.default.string).isRequired,
-  css: _propTypes2.default.string.isRequired,
-  children: _propTypes2.default.element.isRequired
-};
-
-exports.default = Html;
-
-/***/ }),
-/* 82 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.createClient = createClient;
-exports.getNetworkInterface = getNetworkInterface;
-exports.browserClient = browserClient;
-
-var _reactApollo = __webpack_require__(3);
-
-var _config = __webpack_require__(6);
-
-var _config2 = _interopRequireDefault(_config);
-
-var _env = __webpack_require__(9);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// ----------------------
-
-// Helper function to create a new Apollo client, by merging in
-// passed options alongside any set by `config.setApolloOptions` and defaults
-
-
-/* ReactQL */
-
-// Configuration
-function createClient(opt = {}) {
-  return new _reactApollo.ApolloClient(Object.assign({
-    reduxRootSelector: state => state.apollo
-  }, _config2.default.apolloClientOptions, opt));
-}
-
-// Wrap `createNetworkInterface` to attach middleware
-
-
-// Get environment, to figure out where we're running the GraphQL server
-// ----------------------
-// IMPORTS
-
-/* NPM */
-
-// Apollo client library
-function getNetworkInterface(uri) {
-  const networkInterface = (0, _reactApollo.createNetworkInterface)({
-    uri,
-    opts: _config2.default.apolloNetworkOptions
-  });
-
-  // Attach middleware
-  networkInterface.use(_config2.default.apolloMiddleware.map(f => ({ applyMiddleware: f })));
-  networkInterface.useAfter(_config2.default.apolloAfterware.map(f => ({ applyAfterware: f })));
-
-  return networkInterface;
-}
-
-// Creates a new browser client
-function browserClient() {
-  // If we have an internal GraphQL server, we need to append it with a
-  // call to `getServerURL()` to add the correct host (in dev + production)
-  const uri = _config2.default.graphQLServer ? `${(0, _env.getServerURL)()}${_config2.default.graphQLEndpoint}` : _config2.default.graphQLEndpoint;
-
-  return createClient({
-    networkInterface: getNetworkInterface(uri)
-  });
-}
-
-/***/ }),
-/* 83 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-// ----------------------
-// IMPORTS
-
-const path = __webpack_require__(84);
-
-// ----------------------
-
-// Parent folder = project root
-const root = path.join(__dirname, '..');
-
-module.exports = {
-  // Root project folder.  This is the current dir.
-  root,
-
-  // Kit.  ReactQL starter kit code.  You can edit these files, but be
-  // aware that upgrading your starter kit could overwrite them
-  kit: path.join(root, 'kit'),
-
-  // Entry points.  This is where webpack will look for our browser.js,
-  // server.js and vendor.js files to start building
-  entry: path.join(root, 'kit', 'entry'),
-
-  // Webpack configuration files
-  webpack: path.join(root, 'kit', 'webpack'),
-
-  // Views for internal use
-  views: path.join(root, 'kit', 'views'),
-
-  // Source path; where we'll put our application files
-  src: path.join(root, 'src'),
-
-  // Static files.  HTML, images, etc that can be processed by Webpack
-  // before being moved into the final `dist` folder
-  static: path.join(root, 'static'),
-
-  // Dist path; where bundled assets will wind up
-  dist: path.join(root, 'dist'),
-
-  // Dist path for development; where dev assets will wind up
-  distDev: path.resolve(root, 'dist', 'dev'),
-
-  // Public.  This is where our web server will start looking to serve
-  // static files from
-  public: path.join(root, 'dist', 'public')
-};
-
-/***/ }),
-/* 84 */
-/***/ (function(module, exports) {
-
-module.exports = require("path");
-
-/***/ }),
-/* 85 */
-/***/ (function(module, exports) {
-
-module.exports = require("koa-bodyparser");
-
-/***/ }),
-/* 86 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = undefined;
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(1);
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-__webpack_require__(21);
-
-var _classnames = __webpack_require__(4);
+var _classnames = __webpack_require__(3);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -4314,6 +3481,848 @@ BookclubSearchContainer.defaultProps = {
   search: {}
 };
 exports.default = BookclubSearchContainer;
+
+/***/ }),
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactRouterDom = __webpack_require__(2);
+
+var _reactApollo = __webpack_require__(4);
+
+var _isLoggedIn = __webpack_require__(7);
+
+var _isLoggedIn2 = _interopRequireDefault(_isLoggedIn);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+let PrivateRoute = class PrivateRoute extends _react.Component {
+
+  componentDidMount() {}
+
+  redirectisNotAuthenticated(layout, props, component) {
+    const { data } = this.props;
+    if (data.user) {
+      return _react2.default.createElement(layout, props, _react2.default.createElement(component, props));
+    }
+    return _react2.default.createElement(_reactRouterDom.Redirect, { to: { pathname: '/login', state: { from: props.location } } });
+  }
+
+  render() {
+    const _props = this.props,
+          { data, component, layout } = _props,
+          rest = _objectWithoutProperties(_props, ['data', 'component', 'layout']);
+
+    return _react2.default.createElement(
+      'div',
+      null,
+      !data.loading && _react2.default.createElement(_reactRouterDom.Route, _extends({}, rest, {
+        render: props => this.redirectisNotAuthenticated(layout, props, component)
+      }))
+    );
+  }
+};
+PrivateRoute.propTypes = {
+  component: _propTypes2.default.func.isRequired,
+  data: _propTypes2.default.object,
+  layout: _propTypes2.default.func.isRequired
+};
+PrivateRoute.defaultProps = {
+  data: {
+    user: {}
+  }
+};
+exports.default = (0, _reactApollo.graphql)(_isLoggedIn2.default)(PrivateRoute);
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactRouterDom = __webpack_require__(2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+let PublicRoute = class PublicRoute extends _react.Component {
+
+  componentDidMount() {}
+
+  redirectisAuthenticated(layout, props, component) {
+    return _react2.default.createElement(layout, props, _react2.default.createElement(component, props));
+  }
+
+  render() {
+    const _props = this.props,
+          { component, layout } = _props,
+          rest = _objectWithoutProperties(_props, ['component', 'layout']);
+    return _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(_reactRouterDom.Route, _extends({}, rest, { render: props => this.redirectisAuthenticated(layout, props, component) }))
+    );
+  }
+};
+PublicRoute.propTypes = {
+  component: _propTypes2.default.func.isRequired,
+  layout: _propTypes2.default.func.isRequired
+};
+PublicRoute.defaultProps = {};
+exports.default = PublicRoute;
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _classnames = __webpack_require__(3);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _Header = __webpack_require__(71);
+
+var _Header2 = _interopRequireDefault(_Header);
+
+var _Footer = __webpack_require__(74);
+
+var _Footer2 = _interopRequireDefault(_Footer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import css from './PrivateLayout.css'
+
+let PrivateLayout = class PrivateLayout extends _react.Component {
+
+  componentDidMount() {}
+
+  render() {
+    return _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(_Header2.default, null),
+      _react2.default.createElement(
+        'div',
+        { className: (0, _classnames2.default)('section', 'container') },
+        _react2.default.createElement(
+          'div',
+          { className: (0, _classnames2.default)('') },
+          this.props.children
+        )
+      ),
+      _react2.default.createElement(_Footer2.default, null)
+    );
+  }
+};
+PrivateLayout.propTypes = {
+  children: _propTypes2.default.object.isRequired
+};
+PrivateLayout.defaultProps = {};
+exports.default = PrivateLayout;
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(2);
+
+var _classnames = __webpack_require__(3);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _MangroveLogo = __webpack_require__(72);
+
+var _MangroveLogo2 = _interopRequireDefault(_MangroveLogo);
+
+var _reactApollo = __webpack_require__(4);
+
+var _Header = __webpack_require__(73);
+
+var _Header2 = _interopRequireDefault(_Header);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+let Header = class Header extends _react.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showMenu: false
+    };
+    this.toggleMenu = this.toggleMenu.bind(this);
+  }
+
+  toggleMenu() {
+    const { showMenu } = this.state;
+    this.setState({ showMenu: !showMenu });
+  }
+
+  render() {
+    const { showMenu } = this.state;
+
+    return _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(
+        'header',
+        null,
+        _react2.default.createElement(
+          'nav',
+          { className: (0, _classnames2.default)(_Header2.default.header, 'navbar') },
+          _react2.default.createElement(
+            'div',
+            { className: 'navbar-brand' },
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { className: (0, _classnames2.default)(_Header2.default.logoLink, 'navbar-item'), to: '/' },
+              _react2.default.createElement(_MangroveLogo2.default, { className: (0, _classnames2.default)(_Header2.default.logo), width: '37' }),
+              'Mangrove Dashboard'
+            ),
+            _react2.default.createElement(
+              'div',
+              {
+                className: showMenu ? (0, _classnames2.default)('navbar-burger', 'burger', 'is-active') : (0, _classnames2.default)('navbar-burger', 'burger'),
+                onClick: this.toggleMenu
+              },
+              _react2.default.createElement('span', null),
+              _react2.default.createElement('span', null),
+              _react2.default.createElement('span', null)
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            {
+              className: showMenu ? (0, _classnames2.default)('navbar-menu', 'is-active') : (0, _classnames2.default)('navbar-menu')
+            },
+            _react2.default.createElement(
+              'div',
+              { className: 'navbar-start' },
+              _react2.default.createElement(
+                'div',
+                { className: 'navbar-item' },
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { className: _Header2.default.headerLink, to: '/link' },
+                  'Ressources'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'navbar-item' },
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { className: _Header2.default.headerLink, to: '/bookclub' },
+                  'Bookclub'
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'navbar-end' },
+              _react2.default.createElement(
+                'div',
+                { className: 'navbar-item' },
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { className: _Header2.default.headerLink, to: '/register' },
+                  'Register'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'navbar-item' },
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { className: _Header2.default.headerLink, to: '/login' },
+                  'Login'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'navbar-item' },
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { className: _Header2.default.headerLink, to: '/logout' },
+                  'Logout'
+                )
+              )
+            )
+          )
+        )
+      )
+    );
+  }
+};
+exports.default = Header;
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+let MangroveLogo = class MangroveLogo extends _react.Component {
+
+  render() {
+    const { width, height, className } = this.props;
+    return _react2.default.createElement(
+      'svg',
+      {
+        width: width || '53',
+        height: height || '22',
+        className: className || '',
+        viewBox: '0 0 53 22'
+      },
+      _react2.default.createElement('path', {
+        d: 'M.43.099c1.011 9.796 8.598 17.856 18.723 20.533V.1H.431zm33.119 0v20.62c10.284-2.591 18.02-10.72 19.04-20.62h-19.04zm-12.59 0v20.948c1.435.28 2.91.46 4.422.518h.068V.099h-4.49zm6.295 0v21.466h.385c1.4-.055 2.77-.213 4.105-.459V.1h-4.49z',
+        fillRule: 'nonzero',
+        fill: '#FFF'
+      })
+    );
+  }
+};
+MangroveLogo.propTypes = {
+  width: _propTypes2.default.string,
+  height: _propTypes2.default.string,
+  className: _propTypes2.default.string
+};
+MangroveLogo.defaultProps = {
+  width: '53',
+  height: '22',
+  className: ''
+};
+exports.default = MangroveLogo;
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports) {
+
+module.exports = {
+	"header": "header-2zG4F7jLvGK6KP6LE87cJC",
+	"headerLink": "headerLink-2B_CfzPCUcvE9Qe2Q0uaVO",
+	"logoLink": "logoLink-2TvZGbsgxMY3a28K7cmiL_",
+	"logo": "logo-1R6EsLBT0JSYnuTx7vyhgQ"
+};
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _moment = __webpack_require__(75);
+
+var _moment2 = _interopRequireDefault(_moment);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import css from './Footer.css'
+
+const Footer = () => _react2.default.createElement(
+  'footer',
+  { className: 'footer' },
+  _react2.default.createElement(
+    'div',
+    { className: 'container' },
+    _react2.default.createElement(
+      'div',
+      { className: 'content has-text-centered' },
+      _react2.default.createElement(
+        'p',
+        null,
+        'Made with',
+        ' ',
+        _react2.default.createElement(
+          'span',
+          { role: 'img', 'aria-label': 'wine' },
+          '\uD83C\uDF77'
+        ),
+        ' ',
+        'in Paris - \xA9 ',
+        (0, _moment2.default)().format('YYYY'),
+        '.'
+      ),
+      _react2.default.createElement(
+        'p',
+        null,
+        _react2.default.createElement(
+          'a',
+          { className: 'icon', href: 'https://github.com/jgthms/bulma' },
+          _react2.default.createElement('i', { className: 'fa fa-github' })
+        )
+      )
+    )
+  )
+);
+
+exports.default = Footer;
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports) {
+
+module.exports = require("moment");
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+let EmptyLayout = class EmptyLayout extends _react.Component {
+
+  componentDidMount() {}
+
+  render() {
+    return _react2.default.createElement(
+      'div',
+      null,
+      this.props.children
+    );
+  }
+};
+EmptyLayout.propTypes = {
+  children: _propTypes2.default.object.isRequired
+};
+EmptyLayout.defaultProps = {};
+exports.default = EmptyLayout;
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; /* eslint-disable no-underscore-dangle */
+
+/*
+Custom Redux store creation.  Along with the default Apollo store,
+we can define custom reducers using `kit/config.addReducer()` which will
+be available on the server and in the browser.
+
+Store state is wrapped by `seamless-immutable` to enforce a pattern of
+immutability, to prevent weird side effects.
+*/
+
+// ----------------------
+// IMPORTS
+
+/* NPM */
+
+
+/* Local */
+
+
+exports.default = createNewStore;
+
+var _redux = __webpack_require__(79);
+
+var _reduxThunk = __webpack_require__(80);
+
+var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+var _seamlessImmutable = __webpack_require__(81);
+
+var _seamlessImmutable2 = _interopRequireDefault(_seamlessImmutable);
+
+var _config = __webpack_require__(6);
+
+var _config2 = _interopRequireDefault(_config);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// ----------------------
+
+// Detect if we're both in the browser, AND we have dehydrated state
+const hasState = !!(!true && window.__STATE__);
+
+// Helper function that 'unwinds' the `config.reducers` Map, and provides
+// the `reducer` function or `initialState` (wrapped in `seamless-immutable`)
+// depending on what we asked for
+function unwind(reducer = true) {
+  // Unwind `config.reducers`.  If we're looking for the `reducer`, we'll
+  // wrap this in a `defaultReducer` function that properly handles the Redux
+  // 'undefined' sentinel value, or calls 'real' reducer if it's not undefined.
+  //
+  // If we're not looking for reducers, it'll pull out the `initialState`
+  // variable instead, which we'll further process below
+  const r = Object.assign({}, ...[].concat([..._config2.default.reducers].map(arr => ({
+    [arr[0]]: reducer ? function defaultReducer(state, action) {
+      // If `state` === undefined, this is Redux sending a sentinel value
+      // to check our set-up.  So we'll send back a plain object to prove
+      // that we're properly handling our reducer
+      if (typeof state === 'undefined') return {};
+
+      // Otherwise, call our real reducer with the {state, action}
+      return arr[1].reducer(state, action);
+    } : arr[1].initialState
+  }))));
+
+  // If this is a reducer, return at this point
+  if (reducer) return r;
+
+  // If not, we're looking for the state -- so let's map it and wrap the
+  // object in `seamless-immutable`, to avoid side-effects with Redux
+  return Object.assign({}, ...Object.keys(r).map(key => ({
+    [key]: (0, _seamlessImmutable2.default)(hasState && window.__STATE__[key] || r[key])
+  })));
+}
+
+function createNewStore(apolloClient) {
+  const store = (0, _redux.createStore)(
+  // By default, we'll use just the apollo reducer.  We can easily add our
+  // own here, for global store management outside of Apollo
+  (0, _redux.combineReducers)(_extends({
+    apollo: apolloClient.reducer()
+  }, unwind())),
+  // Initial server state, provided by the server.
+  _extends({
+    apollo: hasState && window.__STATE__.apollo || {}
+  }, unwind(false)), (0, _redux.compose)((0, _redux.applyMiddleware)(apolloClient.middleware(), _reduxThunk2.default),
+  // Enable Redux Devtools on the browser, for easy state debugging
+  // eslint-disable-next-line no-underscore-dangle
+   false ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f));
+
+  return store;
+}
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports) {
+
+module.exports = require("redux");
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports) {
+
+module.exports = require("redux-thunk");
+
+/***/ }),
+/* 81 */
+/***/ (function(module, exports) {
+
+module.exports = require("seamless-immutable");
+
+/***/ }),
+/* 82 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// ----------------------
+
+/* eslint-disable react/no-danger, no-return-assign, no-param-reassign */
+
+// Component to render the full HTML response in React
+
+// ----------------------
+// IMPORTS
+const Html = ({ head, scripts, window, css, children }) => _react2.default.createElement(
+  'html',
+  { lang: 'en', prefix: 'og: http://ogp.me/ns#' },
+  _react2.default.createElement(
+    'head',
+    null,
+    _react2.default.createElement('meta', { charSet: 'utf-8' }),
+    _react2.default.createElement('meta', { httpEquiv: 'X-UA-Compatible', content: 'IE=edge' }),
+    _react2.default.createElement('meta', { httpEquiv: 'Content-Language', content: 'en' }),
+    _react2.default.createElement('meta', { name: 'viewport', content: 'width=device-width, initial-scale=1' }),
+    head.meta.toComponent(),
+    _react2.default.createElement('link', { rel: 'stylesheet', href: css }),
+    head.title.toComponent()
+  ),
+  _react2.default.createElement(
+    'body',
+    null,
+    _react2.default.createElement(
+      'div',
+      { id: 'main' },
+      children
+    ),
+    _react2.default.createElement('script', {
+      dangerouslySetInnerHTML: {
+        __html: Object.keys(window).reduce((out, key) => out += `window.${key}=${JSON.stringify(window[key])};`, '')
+      } }),
+    scripts.map(src => _react2.default.createElement('script', { key: src, src: src }))
+  )
+);
+
+Html.propTypes = {
+  head: _propTypes2.default.object.isRequired,
+  window: _propTypes2.default.object.isRequired,
+  scripts: _propTypes2.default.arrayOf(_propTypes2.default.string).isRequired,
+  css: _propTypes2.default.string.isRequired,
+  children: _propTypes2.default.element.isRequired
+};
+
+exports.default = Html;
+
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createClient = createClient;
+exports.getNetworkInterface = getNetworkInterface;
+exports.browserClient = browserClient;
+
+var _reactApollo = __webpack_require__(4);
+
+var _config = __webpack_require__(6);
+
+var _config2 = _interopRequireDefault(_config);
+
+var _env = __webpack_require__(9);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// ----------------------
+
+// Helper function to create a new Apollo client, by merging in
+// passed options alongside any set by `config.setApolloOptions` and defaults
+
+
+/* ReactQL */
+
+// Configuration
+function createClient(opt = {}) {
+  return new _reactApollo.ApolloClient(Object.assign({
+    reduxRootSelector: state => state.apollo
+  }, _config2.default.apolloClientOptions, opt));
+}
+
+// Wrap `createNetworkInterface` to attach middleware
+
+
+// Get environment, to figure out where we're running the GraphQL server
+// ----------------------
+// IMPORTS
+
+/* NPM */
+
+// Apollo client library
+function getNetworkInterface(uri) {
+  const networkInterface = (0, _reactApollo.createNetworkInterface)({
+    uri,
+    opts: _config2.default.apolloNetworkOptions
+  });
+
+  // Attach middleware
+  networkInterface.use(_config2.default.apolloMiddleware.map(f => ({ applyMiddleware: f })));
+  networkInterface.useAfter(_config2.default.apolloAfterware.map(f => ({ applyAfterware: f })));
+
+  return networkInterface;
+}
+
+// Creates a new browser client
+function browserClient() {
+  // If we have an internal GraphQL server, we need to append it with a
+  // call to `getServerURL()` to add the correct host (in dev + production)
+  const uri = _config2.default.graphQLServer ? `${(0, _env.getServerURL)()}${_config2.default.graphQLEndpoint}` : _config2.default.graphQLEndpoint;
+
+  return createClient({
+    networkInterface: getNetworkInterface(uri)
+  });
+}
+
+/***/ }),
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// ----------------------
+// IMPORTS
+
+const path = __webpack_require__(85);
+
+// ----------------------
+
+// Parent folder = project root
+const root = path.join(__dirname, '..');
+
+module.exports = {
+  // Root project folder.  This is the current dir.
+  root,
+
+  // Kit.  ReactQL starter kit code.  You can edit these files, but be
+  // aware that upgrading your starter kit could overwrite them
+  kit: path.join(root, 'kit'),
+
+  // Entry points.  This is where webpack will look for our browser.js,
+  // server.js and vendor.js files to start building
+  entry: path.join(root, 'kit', 'entry'),
+
+  // Webpack configuration files
+  webpack: path.join(root, 'kit', 'webpack'),
+
+  // Views for internal use
+  views: path.join(root, 'kit', 'views'),
+
+  // Source path; where we'll put our application files
+  src: path.join(root, 'src'),
+
+  // Static files.  HTML, images, etc that can be processed by Webpack
+  // before being moved into the final `dist` folder
+  static: path.join(root, 'static'),
+
+  // Dist path; where bundled assets will wind up
+  dist: path.join(root, 'dist'),
+
+  // Dist path for development; where dev assets will wind up
+  distDev: path.resolve(root, 'dist', 'dev'),
+
+  // Public.  This is where our web server will start looking to serve
+  // static files from
+  public: path.join(root, 'dist', 'public')
+};
+
+/***/ }),
+/* 85 */
+/***/ (function(module, exports) {
+
+module.exports = require("path");
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports) {
+
+module.exports = require("koa-bodyparser");
 
 /***/ })
 /******/ ]);
