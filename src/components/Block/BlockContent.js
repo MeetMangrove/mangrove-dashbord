@@ -6,8 +6,8 @@ import ClassNames from 'classnames'
 import TwitterLogo from 'src/components/Icons/TwitterLogo'
 import FacebookLogo from 'src/components/Icons/FacebookLogo'
 import SlackLogo from 'src/components/Icons/SlackLogo'
-// import SnapChatLogo from 'src/components/Icons/SnapchatLogo'
-// import DriveLogo from 'src/components/Icons/DriveLogo'
+import SnapChatLogo from 'src/components/Icons/SnapchatLogo'
+import DriveLogo from 'src/components/Icons/DriveLogo'
 import TrelloLogo from 'src/components/Icons/TrelloLogo'
 
 import css from './BlockContent.css'
@@ -30,8 +30,8 @@ export default class BlockContent extends Component {
       <div className={ClassNames(css.listContentWrapper)}>
         {links &&
           links.map(link => (
-            <div className={ClassNames(css.listContentItemWrapper)}>
-              <div key={link.id} className={ClassNames(css.listContentItemContent, 'content')}>
+            <div key={link.id} className={ClassNames(css.listContentItemWrapper)}>
+              <div className={ClassNames(css.listContentItemContent, 'content')}>
                 {link.icon === 'Slack' && (
                   <SlackLogo className={css.listContentItemLogo} width="29" height="29" />
                 )}
@@ -42,7 +42,13 @@ export default class BlockContent extends Component {
                   <TrelloLogo className={css.listContentItemLogo} width="29" height="29" />
                 )}
                 {link.icon === 'Twitter' && (
-                  <TwitterLogo className={css.listContentItemLogo} width="29" height="29" />
+                  <TwitterLogo className={css.listContentItemLogo} width="28" height="23" />
+                )}
+                {link.icon === 'Snapchat' && (
+                  <SnapChatLogo className={css.listContentItemLogo} width="29" height="29" />
+                )}
+                {link.icon === 'Drive' && (
+                  <DriveLogo className={css.listContentItemLogo} width="29" height="29" />
                 )}
                 <a href={link.url}>{link.title}</a>
               </div>

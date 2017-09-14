@@ -1,0 +1,8 @@
+query {
+  __type(name: "TypeLink") {
+    name
+    enumValues {
+      name
+    }
+  }
+}

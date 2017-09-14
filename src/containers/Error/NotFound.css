@@ -1,0 +1,66 @@
+#svg-container {
+  text-align: center;
+}
+
+svg {
+  width: 50%;
+  height: auto;
+}
+
+@keyframes hair-animation {
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes drool-animation {
+  to {
+    transform: scale(1.7);
+    opacity: 1;
+  }
+}
+
+@keyframes light_twitch {
+  100% {
+    transform: rotate(0.8deg);
+  }
+}
+
+@keyframes twitch {
+  100% {
+    transform: rotate(2deg);
+  }
+}
+
+#drool {
+  animation: drool-animation 10s ease-in forwards;
+  transform: scale(0.2);
+  transform-origin: top center;
+  opacity: 0.8;
+}
+
+#eyebrow {
+  animation: twitch 2s infinite alternate;
+}
+
+#hair_1 {
+  animation: twitch 2s infinite alternate;
+}
+
+#hair_x {
+  animation: hair-animation 2s linear 1 forwards;
+  transform: scale(0.7);
+  transform-origin: center center;
+  opacity: 1;
+}
+
+#hair_y {
+  animation: light_twitch 2s infinite alternate;
+}
+
+#HAIR {
+  animation: hair-animation 800ms linear 1 forwards;
+  transform: scale(0);
+  transform-origin: center center;
+  opacity: 0;
+}

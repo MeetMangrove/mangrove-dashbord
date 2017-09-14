@@ -19,13 +19,14 @@
   font-size: 14px;
   letter-spacing: 0.38px;
   border-radius: 3px;
-  :hover {
+  &:hover {
     color: white;
     text-decoration: none;
     background-position: right center;
   }
-  :focus {
+  &:focus {
     border: none;
+    outline: 0;
   }
 }
 
@@ -69,7 +70,7 @@
     font-weight: 400;
     letter-spacing: 0.26px;
     text-decoration: underline;
-    :hover {
+    &:hover {
       font-weight: 400;
       color: #9b9b9b;
       text-decoration: underline;
@@ -96,17 +97,13 @@
   display: block;
   margin: 0 auto 20px auto;
   margin-right: auto;
-  :-webkit-autofill {
+  &:-webkit-autofill {
     background-color: #f4f8fb !important;
   }
 }
 
-.input-login:focus {
+.inputLogin:focus {
   background-color: #f4f8fb !important;
   color: #9b9b9b;
   border: none;
-}
-
-.input-group-login {
-  margin: 10px 0;
 }

@@ -1,0 +1,9 @@
+query($id: String!) {
+  Link(id: $id) {
+    id
+    icon
+    url
+    description
+    type
+  }
+}

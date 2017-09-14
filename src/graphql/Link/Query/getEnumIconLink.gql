@@ -1,0 +1,8 @@
+query {
+  __type(name: "Icons") {
+    name
+    enumValues {
+      name
+    }
+  }
+}

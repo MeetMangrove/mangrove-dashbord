@@ -1,0 +1,5 @@
+mutation($title: String!, $description: String, $icon: Icons!, $type: TypeLink!, $url: String!) {
+  createLink(title: $title, description: $description, icon: $icon, type: $type, url: $url) {
+    id
+  }
+}

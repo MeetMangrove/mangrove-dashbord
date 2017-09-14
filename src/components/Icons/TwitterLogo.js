@@ -9,8 +9,8 @@ export default class TwitterLogo extends Component {
   }
 
   static defaultProps = {
-    width: '300.00006',
-    height: '244.18703',
+    width: '28',
+    height: '23',
     className: ''
   }
 
@@ -18,8 +18,8 @@ export default class TwitterLogo extends Component {
     const { width, height, className } = this.props
     return (
       <svg
-        width={width || '300.00006'}
-        height={height || '244.18703'}
+        width={width || '28'}
+        height={height || '23'}
         className={className || ''}
         viewBox="0 0 300.00006 244.18703"
       >

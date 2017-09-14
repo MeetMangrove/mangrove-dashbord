@@ -47,9 +47,9 @@ export default class Login extends Component {
           <h3 className={css.titleLogin}>You{"'"}re a Mangrove member? Log in here:</h3>
           <div className="columns">
             <div className="column is-10 is-offset-1 ">
-              <div className="control has-icons-left is-large is-loading">
+              <div className="control has-icons-left is-large">
                 <input
-                  className="input is-large"
+                  className={ClassNames('input', 'is-large', css.inputLogin)}
                   name="email"
                   placeholder="email"
                   type="text"
@@ -65,9 +65,9 @@ export default class Login extends Component {
           </div>
           <div className="columns">
             <div className="column is-10 is-offset-1 ">
-              <div className="control has-icons-left is-large is-loading">
+              <div className="control has-icons-left is-large">
                 <input
-                  className="input is-large"
+                  className={ClassNames('input', 'is-large', css.inputLogin)}
                   placeholder="password"
                   type="password"
                   ref={password => {
@@ -79,15 +79,6 @@ export default class Login extends Component {
                 </span>
               </div>
             </div>
-          </div>
-          <div className="bd-more-loves">
-            <p className="bd-more-loves-container">
-              <a className="button is-medium is-danger bd-rainbow" href="http://bulma.io/love/">
-                <span>
-                  See more <strong>love</strong> 🤗
-                </span>
-              </a>
-            </p>
           </div>
           <div className={css.btnLoginWrapper}>
             <button

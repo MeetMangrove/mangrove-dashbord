@@ -29,7 +29,7 @@ export default class Header extends Component {
             <div id="navMenubd-example" className="navbar-menu">
               <div className="navbar-start">
                 <div className="navbar-item">
-                  <Link to="/links">Ressources</Link>
+                  <Link to="/link">Ressources</Link>
                 </div>
                 <div className="navbar-item">
                   <Link to="/bookclub">Bookclub</Link>

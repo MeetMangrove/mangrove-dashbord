@@ -7,7 +7,7 @@ import Block from 'src/components/Block/Block'
 
 import linkQuery from 'src/graphql/Link/Query/getAllLinks.gql'
 
-class RessourcesListContainer extends Component {
+class RessourceListContainer extends Component {
   static propTypes = {
     linkMisc: PropTypes.object,
     linkRetreat: PropTypes.object,
@@ -98,7 +98,7 @@ class RessourcesListContainer extends Component {
 export default graphql(linkQuery, { name: 'linkMisc', options: { variables: { type: 'Misc' } } })(
   graphql(linkQuery, { name: 'linkRetreat', options: { variables: { type: 'Retreat' } } })(
     graphql(linkQuery, { name: 'linkSocial', options: { variables: { type: 'Social' } } })(
-      RessourcesListContainer
+      RessourceListContainer
     )
   )
 )
