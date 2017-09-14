@@ -703,21 +703,21 @@ var _app = __webpack_require__(34);
 
 var _app2 = _interopRequireDefault(_app);
 
-var _redux = __webpack_require__(75);
+var _redux = __webpack_require__(77);
 
 var _redux2 = _interopRequireDefault(_redux);
 
-var _ssr = __webpack_require__(79);
+var _ssr = __webpack_require__(81);
 
 var _ssr2 = _interopRequireDefault(_ssr);
 
-var _apollo = __webpack_require__(80);
+var _apollo = __webpack_require__(82);
 
 var _config = __webpack_require__(6);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _paths = __webpack_require__(81);
+var _paths = __webpack_require__(83);
 
 var _paths2 = _interopRequireDefault(_paths);
 
@@ -1081,7 +1081,7 @@ _config2.default.routes.forEach(route => {
 // `koa-bodyparser` is used to process POST requests.  Check that it's enabled
 // (default) and apply a custom config if we need one
 if (_config2.default.enableBodyParser) {
-  app.use(__webpack_require__(83)(
+  app.use(__webpack_require__(85)(
   // Pass in any options that may have been set in userland
   _config2.default.bodyParserOptions));
 }
@@ -1241,7 +1241,7 @@ var _LocalStorageManager = __webpack_require__(5);
 
 var _LocalStorageManager2 = _interopRequireDefault(_LocalStorageManager);
 
-__webpack_require__(74);
+__webpack_require__(76);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1336,25 +1336,32 @@ var _RessourceEdit = __webpack_require__(63);
 
 var _RessourceEdit2 = _interopRequireDefault(_RessourceEdit);
 
-var _PrivateRoute = __webpack_require__(65);
+var _Search = __webpack_require__(86);
+
+var _Search2 = _interopRequireDefault(_Search);
+
+var _PrivateRoute = __webpack_require__(67);
 
 var _PrivateRoute2 = _interopRequireDefault(_PrivateRoute);
 
-var _PublicRoute = __webpack_require__(66);
+var _PublicRoute = __webpack_require__(68);
 
 var _PublicRoute2 = _interopRequireDefault(_PublicRoute);
 
-var _PrivateLayout = __webpack_require__(67);
+var _PrivateLayout = __webpack_require__(69);
 
 var _PrivateLayout2 = _interopRequireDefault(_PrivateLayout);
 
-var _EmptyLayout = __webpack_require__(73);
+var _EmptyLayout = __webpack_require__(75);
 
 var _EmptyLayout2 = _interopRequireDefault(_EmptyLayout);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Layout
+
+
+// Routes
 const Layout = () => _react2.default.createElement(
   'div',
   null,
@@ -1368,11 +1375,16 @@ const Layout = () => _react2.default.createElement(
     _react2.default.createElement(_PrivateRoute2.default, { layout: _PrivateLayout2.default, path: '/link', component: _RessourceList2.default, exact: true }),
     _react2.default.createElement(_PrivateRoute2.default, { layout: _PrivateLayout2.default, path: '/link/edit', component: _RessourceEdit2.default, exact: true }),
     _react2.default.createElement(_PrivateRoute2.default, { layout: _PrivateLayout2.default, path: '/link/edit/:id', component: _RessourceEdit2.default, exact: true }),
+    _react2.default.createElement(_PrivateRoute2.default, {
+      layout: _PrivateLayout2.default,
+      path: '/bookclub/search',
+      component: _Search2.default,
+      exact: true
+    }),
     _react2.default.createElement(_PublicRoute2.default, { layout: _EmptyLayout2.default, component: _NotFound2.default })
   )
 );
 
-// Routes
 exports.default = Layout;
 
 /***/ }),
@@ -2161,6 +2173,8 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactApollo = __webpack_require__(3);
 
+var _reactRouterDom = __webpack_require__(2);
+
 var _reactKonami = __webpack_require__(50);
 
 var _reactKonami2 = _interopRequireDefault(_reactKonami);
@@ -2187,7 +2201,14 @@ let RessourceListContainer = class RessourceListContainer extends _react.Compone
     this.handleEasterEgg = this.handleEasterEgg.bind(this);
   }
 
-  componentDidMount() {}
+  componentWillUpdate(nextProps) {
+    if (this.props.location.search === '?refresh') {
+      console.log('h');
+      this.props.linkMisc.refetch();
+      this.props.linkSocial.refetch();
+      this.props.linkRetreat.refetch();
+    }
+  }
 
   handleEasterEgg() {
     this.setState({ rickroll: true });
@@ -2266,21 +2287,38 @@ let RessourceListContainer = class RessourceListContainer extends _react.Compone
             )
           )
         )
+      ),
+      _react2.default.createElement(
+        'section',
+        { className: 'section' },
+        _react2.default.createElement(
+          'div',
+          { className: 'container' },
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: '/link/edit', className: 'has-text-centered has-text-grey-light' },
+            'Add a link in this page?'
+          )
+        )
       )
     );
   }
 };
 RessourceListContainer.propTypes = {
+  data: _propTypes2.default.object,
+  location: _propTypes2.default.object,
   linkMisc: _propTypes2.default.object,
   linkRetreat: _propTypes2.default.object,
   linkSocial: _propTypes2.default.object
 };
 RessourceListContainer.defaultProps = {
+  data: {},
+  location: {},
   linkMisc: {},
   linkSocial: {},
   linkRetreat: {}
 };
-exports.default = (0, _reactApollo.graphql)(_getAllLinks2.default, { name: 'linkMisc', options: { variables: { type: 'Misc' } } })((0, _reactApollo.graphql)(_getAllLinks2.default, { name: 'linkRetreat', options: { variables: { type: 'Retreat' } } })((0, _reactApollo.graphql)(_getAllLinks2.default, { name: 'linkSocial', options: { variables: { type: 'Social' } } })(RessourceListContainer)));
+exports.default = (0, _reactApollo.graphql)(_getAllLinks2.default, { name: 'linkMisc', options: { variables: { type: 'Misc' } } })((0, _reactApollo.graphql)(_getAllLinks2.default, { name: 'linkRetreat', options: { variables: { type: 'Retreat' } } })((0, _reactApollo.graphql)(_getAllLinks2.default, { name: 'linkSocial', options: { variables: { type: 'Social' } } })((0, _reactRouterDom.withRouter)(RessourceListContainer))));
 
 /***/ }),
 /* 50 */
@@ -2953,6 +2991,8 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactApollo = __webpack_require__(3);
 
+var _reactRouterDom = __webpack_require__(2);
+
 var _classnames = __webpack_require__(4);
 
 var _classnames2 = _interopRequireDefault(_classnames);
@@ -2961,11 +3001,11 @@ var _CreateLink = __webpack_require__(64);
 
 var _CreateLink2 = _interopRequireDefault(_CreateLink);
 
-var _getEnumTypeLink = __webpack_require__(84);
+var _getEnumTypeLink = __webpack_require__(65);
 
 var _getEnumTypeLink2 = _interopRequireDefault(_getEnumTypeLink);
 
-var _getEnumIconLink = __webpack_require__(85);
+var _getEnumIconLink = __webpack_require__(66);
 
 var _getEnumIconLink2 = _interopRequireDefault(_getEnumIconLink);
 
@@ -2989,7 +3029,7 @@ let RessourceEditContainer = class RessourceEditContainer extends _react.Compone
       type: this.categoryInput.value,
       icon: this.iconInput.value
     };
-    console.log(link);
+
     this.props.createLink({
       variables: {
         title: link.title,
@@ -2998,8 +3038,8 @@ let RessourceEditContainer = class RessourceEditContainer extends _react.Compone
         type: link.type,
         icon: link.icon
       }
-    }).then(() => {
-      console.log('DONE MF');
+    }).then(linkId => {
+      this.props.history.push('/link?refresh');
     });
   }
 
@@ -3183,8 +3223,8 @@ let RessourceEditContainer = class RessourceEditContainer extends _react.Compone
                 'div',
                 { className: 'control' },
                 _react2.default.createElement(
-                  'button',
-                  { className: 'button is-link' },
+                  _reactRouterDom.Link,
+                  { className: 'button is-link', to: '/link' },
                   'Cancel'
                 )
               )
@@ -3196,6 +3236,7 @@ let RessourceEditContainer = class RessourceEditContainer extends _react.Compone
   }
 };
 RessourceEditContainer.propTypes = {
+  history: _propTypes2.default.object,
   link: _propTypes2.default.object,
   createLink: _propTypes2.default.func,
   enumTypeLink: _propTypes2.default.object,
@@ -3203,13 +3244,14 @@ RessourceEditContainer.propTypes = {
   mathc: _propTypes2.default.object
 };
 RessourceEditContainer.defaultProps = {
+  history: {},
   link: {},
   createLink: () => {},
   enumTypeLink: {},
   enumIconLink: {},
   match: {}
 };
-exports.default = (0, _reactApollo.graphql)(_CreateLink2.default, { name: 'createLink' })((0, _reactApollo.graphql)(_getEnumTypeLink2.default, { name: 'enumTypeLink' })((0, _reactApollo.graphql)(_getEnumIconLink2.default, { name: 'enumIconLink' })(RessourceEditContainer)));
+exports.default = (0, _reactApollo.graphql)(_CreateLink2.default, { name: 'createLink' })((0, _reactApollo.graphql)(_getEnumTypeLink2.default, { name: 'enumTypeLink' })((0, _reactApollo.graphql)(_getEnumIconLink2.default, { name: 'enumIconLink' })((0, _reactRouterDom.withRouter)(RessourceEditContainer))));
 
 /***/ }),
 /* 64 */
@@ -3240,6 +3282,60 @@ module.exports = doc;
 
 /***/ }),
 /* 65 */
+/***/ (function(module, exports) {
+
+
+    var doc = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","variableDefinitions":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":null,"name":{"kind":"Name","value":"__type"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"StringValue","value":"TypeLink"}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":null,"name":{"kind":"Name","value":"name"},"arguments":[],"directives":[],"selectionSet":null},{"kind":"Field","alias":null,"name":{"kind":"Name","value":"enumValues"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":null,"name":{"kind":"Name","value":"name"},"arguments":[],"directives":[],"selectionSet":null}]}}]}}]}}],"loc":{"start":0,"end":86}};
+    doc.loc.source = {"body":"query {\n  __type(name: \"TypeLink\") {\n    name\n    enumValues {\n      name\n    }\n  }\n}\n","name":"GraphQL request","locationOffset":{"line":1,"column":1}};
+  
+
+    var names = {};
+    function unique(defs) {
+      return defs.filter(
+        function(def) {
+          if (def.kind !== 'FragmentDefinition') return true;
+          var name = def.name.value
+          if (names[name]) {
+            return false;
+          } else {
+            names[name] = true;
+            return true;
+          }
+        }
+      )
+    }
+  
+module.exports = doc;
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports) {
+
+
+    var doc = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","variableDefinitions":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":null,"name":{"kind":"Name","value":"__type"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"StringValue","value":"Icons"}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":null,"name":{"kind":"Name","value":"name"},"arguments":[],"directives":[],"selectionSet":null},{"kind":"Field","alias":null,"name":{"kind":"Name","value":"enumValues"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":null,"name":{"kind":"Name","value":"name"},"arguments":[],"directives":[],"selectionSet":null}]}}]}}]}}],"loc":{"start":0,"end":83}};
+    doc.loc.source = {"body":"query {\n  __type(name: \"Icons\") {\n    name\n    enumValues {\n      name\n    }\n  }\n}\n","name":"GraphQL request","locationOffset":{"line":1,"column":1}};
+  
+
+    var names = {};
+    function unique(defs) {
+      return defs.filter(
+        function(def) {
+          if (def.kind !== 'FragmentDefinition') return true;
+          var name = def.name.value
+          if (names[name]) {
+            return false;
+          } else {
+            names[name] = true;
+            return true;
+          }
+        }
+      )
+    }
+  
+module.exports = doc;
+
+/***/ }),
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3310,7 +3406,7 @@ PrivateRoute.defaultProps = {
 exports.default = (0, _reactApollo.graphql)(_isLoggedIn2.default)(PrivateRoute);
 
 /***/ }),
-/* 66 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3363,7 +3459,7 @@ PublicRoute.defaultProps = {};
 exports.default = PublicRoute;
 
 /***/ }),
-/* 67 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3386,11 +3482,11 @@ var _classnames = __webpack_require__(4);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _Header = __webpack_require__(68);
+var _Header = __webpack_require__(70);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _Footer = __webpack_require__(71);
+var _Footer = __webpack_require__(73);
 
 var _Footer2 = _interopRequireDefault(_Footer);
 
@@ -3427,7 +3523,7 @@ PrivateLayout.defaultProps = {};
 exports.default = PrivateLayout;
 
 /***/ }),
-/* 68 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3448,11 +3544,11 @@ var _classnames = __webpack_require__(4);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _MangroveLogo = __webpack_require__(69);
+var _MangroveLogo = __webpack_require__(71);
 
 var _MangroveLogo2 = _interopRequireDefault(_MangroveLogo);
 
-var _Header = __webpack_require__(70);
+var _Header = __webpack_require__(72);
 
 var _Header2 = _interopRequireDefault(_Header);
 
@@ -3549,7 +3645,7 @@ let Header = class Header extends _react.Component {
 exports.default = Header;
 
 /***/ }),
-/* 69 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3603,7 +3699,7 @@ MangroveLogo.defaultProps = {
 exports.default = MangroveLogo;
 
 /***/ }),
-/* 70 */
+/* 72 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -3611,7 +3707,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 71 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3625,7 +3721,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _moment = __webpack_require__(72);
+var _moment = __webpack_require__(74);
 
 var _moment2 = _interopRequireDefault(_moment);
 
@@ -3673,13 +3769,13 @@ const Footer = () => _react2.default.createElement(
 exports.default = Footer;
 
 /***/ }),
-/* 72 */
+/* 74 */
 /***/ (function(module, exports) {
 
 module.exports = require("moment");
 
 /***/ }),
-/* 73 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3719,13 +3815,13 @@ EmptyLayout.defaultProps = {};
 exports.default = EmptyLayout;
 
 /***/ }),
-/* 74 */
+/* 76 */
 /***/ (function(module, exports) {
 
 
 
 /***/ }),
-/* 75 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3757,13 +3853,13 @@ immutability, to prevent weird side effects.
 
 exports.default = createNewStore;
 
-var _redux = __webpack_require__(76);
+var _redux = __webpack_require__(78);
 
-var _reduxThunk = __webpack_require__(77);
+var _reduxThunk = __webpack_require__(79);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _seamlessImmutable = __webpack_require__(78);
+var _seamlessImmutable = __webpack_require__(80);
 
 var _seamlessImmutable2 = _interopRequireDefault(_seamlessImmutable);
 
@@ -3829,25 +3925,25 @@ function createNewStore(apolloClient) {
 }
 
 /***/ }),
-/* 76 */
+/* 78 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux");
 
 /***/ }),
-/* 77 */
+/* 79 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-thunk");
 
 /***/ }),
-/* 78 */
+/* 80 */
 /***/ (function(module, exports) {
 
 module.exports = require("seamless-immutable");
 
 /***/ }),
-/* 79 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3916,7 +4012,7 @@ Html.propTypes = {
 exports.default = Html;
 
 /***/ }),
-/* 80 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3989,7 +4085,7 @@ function browserClient() {
 }
 
 /***/ }),
-/* 81 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3998,7 +4094,7 @@ function browserClient() {
 // ----------------------
 // IMPORTS
 
-const path = __webpack_require__(82);
+const path = __webpack_require__(84);
 
 // ----------------------
 
@@ -4042,70 +4138,182 @@ module.exports = {
 };
 
 /***/ }),
-/* 82 */
+/* 84 */
 /***/ (function(module, exports) {
 
 module.exports = require("path");
 
 /***/ }),
-/* 83 */
+/* 85 */
 /***/ (function(module, exports) {
 
 module.exports = require("koa-bodyparser");
 
 /***/ }),
-/* 84 */
-/***/ (function(module, exports) {
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 
 
-    var doc = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","variableDefinitions":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":null,"name":{"kind":"Name","value":"__type"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"StringValue","value":"TypeLink"}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":null,"name":{"kind":"Name","value":"name"},"arguments":[],"directives":[],"selectionSet":null},{"kind":"Field","alias":null,"name":{"kind":"Name","value":"enumValues"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":null,"name":{"kind":"Name","value":"name"},"arguments":[],"directives":[],"selectionSet":null}]}}]}}]}}],"loc":{"start":0,"end":86}};
-    doc.loc.source = {"body":"query {\n  __type(name: \"TypeLink\") {\n    name\n    enumValues {\n      name\n    }\n  }\n}\n","name":"GraphQL request","locationOffset":{"line":1,"column":1}};
-  
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
 
-    var names = {};
-    function unique(defs) {
-      return defs.filter(
-        function(def) {
-          if (def.kind !== 'FragmentDefinition') return true;
-          var name = def.name.value
-          if (names[name]) {
-            return false;
-          } else {
-            names[name] = true;
-            return true;
-          }
-        }
-      )
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+__webpack_require__(21);
+
+var _classnames = __webpack_require__(4);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+let BookclubSearchContainer = class BookclubSearchContainer extends _react.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isSearchLoading: false,
+      query: '',
+      results: []
+    };
+
+    this.handleSearchInput = this.handleSearchInput.bind(this);
+  }
+
+  handleSearchInput(e) {
+    e.preventDefault();
+    this.setState({ query: this.inputSearch.value });
+    this.searchApiBook();
+  }
+
+  searchApiBook() {
+    const { isSearchLoading } = this.state;
+    if (!isSearchLoading) {
+      this.setState({ isSearchLoading: true, results: [] });
+
+      const { query } = this.state;
+      window.fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(query)}&printType=books&orderBy=newest&maxResults=39`).then(data => data.json()).then(res => {
+        this.setState({ isSearchLoading: false, results: res.items || [] });
+        console.log(this.state);
+      }).catch(res => {
+        this.setState({ isSearchLoading: false, results: [] });
+      });
     }
-  
-module.exports = doc;
+  }
 
-/***/ }),
-/* 85 */
-/***/ (function(module, exports) {
-
-
-    var doc = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","variableDefinitions":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":null,"name":{"kind":"Name","value":"__type"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"StringValue","value":"Icons"}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":null,"name":{"kind":"Name","value":"name"},"arguments":[],"directives":[],"selectionSet":null},{"kind":"Field","alias":null,"name":{"kind":"Name","value":"enumValues"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":null,"name":{"kind":"Name","value":"name"},"arguments":[],"directives":[],"selectionSet":null}]}}]}}]}}],"loc":{"start":0,"end":83}};
-    doc.loc.source = {"body":"query {\n  __type(name: \"Icons\") {\n    name\n    enumValues {\n      name\n    }\n  }\n}\n","name":"GraphQL request","locationOffset":{"line":1,"column":1}};
-  
-
-    var names = {};
-    function unique(defs) {
-      return defs.filter(
-        function(def) {
-          if (def.kind !== 'FragmentDefinition') return true;
-          var name = def.name.value
-          if (names[name]) {
-            return false;
-          } else {
-            names[name] = true;
-            return true;
-          }
-        }
+  render() {
+    const { isSearchLoading, results } = this.state;
+    return _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(
+        'div',
+        { className: 'field' },
+        _react2.default.createElement(
+          'div',
+          {
+            className: isSearchLoading ? (0, _classnames2.default)('control', 'is-large', 'is-loading') : (0, _classnames2.default)('control', 'is-large')
+          },
+          _react2.default.createElement(
+            'form',
+            { onSubmit: this.handleSearchInput },
+            _react2.default.createElement('input', {
+              className: (0, _classnames2.default)('input', 'is-large'),
+              type: 'text',
+              ref: input => {
+                this.inputSearch = input;
+              },
+              placeholder: 'Search Book'
+            }),
+            _react2.default.createElement(
+              'button',
+              { type: 'submit', className: 'button is-primary' },
+              'Search'
+            )
+          )
+        )
+      ),
+      !isSearchLoading && results && _react2.default.createElement(
+        'div',
+        { className: 'columns' },
+        results.length && results.map(result => _react2.default.createElement(
+          'div',
+          { className: 'column' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card-image' },
+              _react2.default.createElement(
+                'figure',
+                { className: 'image is-4by3' },
+                _react2.default.createElement('img', {
+                  src: `https://books.google.com/books/content/images/frontcover/${result.id}?fife=w300-rw`,
+                  alt: 'Book image'
+                })
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'card-content' },
+              _react2.default.createElement(
+                'div',
+                { className: 'media' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'media-content' },
+                  _react2.default.createElement(
+                    'p',
+                    { className: 'title is-4' },
+                    result.volumeInfo.title
+                  ),
+                  _react2.default.createElement(
+                    'p',
+                    { className: 'subtitle is-6' },
+                    result.volumeInfo.authors.map(author => _react2.default.createElement(
+                      'span',
+                      null,
+                      author
+                    ))
+                  )
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'content' },
+                result.volumeInfo.description,
+                _react2.default.createElement(
+                  'time',
+                  { dateTime: '2016-1-1' },
+                  result.volumeInfo.publishedDate
+                )
+              )
+            )
+          )
+        ))
       )
-    }
-  
-module.exports = doc;
+    );
+  }
+};
+BookclubSearchContainer.propTypes = {
+  search: _propTypes2.default.object
+};
+BookclubSearchContainer.defaultProps = {
+  search: {}
+};
+exports.default = BookclubSearchContainer;
 
 /***/ })
 /******/ ]);

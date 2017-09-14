@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
+import { Link, withRouter } from 'react-router-dom'
 import ClassNames from 'classnames'
 
 import createLink from 'src/graphql/Link/Mutation/CreateLink.gql'
@@ -10,6 +11,7 @@ import getEnumIconLink from 'src/graphql/Link/Query/getEnumIconLink.gql'
 
 class RessourceEditContainer extends Component {
   static propTypes = {
+    history: PropTypes.object,
     link: PropTypes.object,
     createLink: PropTypes.func,
     enumTypeLink: PropTypes.object,
@@ -18,6 +20,7 @@ class RessourceEditContainer extends Component {
   }
 
   static defaultProps = {
+    history: {},
     link: {},
     createLink: () => {},
     enumTypeLink: {},
@@ -41,7 +44,7 @@ class RessourceEditContainer extends Component {
       type: this.categoryInput.value,
       icon: this.iconInput.value
     }
-    console.log(link)
+
     this.props
       .createLink({
         variables: {
@@ -52,8 +55,8 @@ class RessourceEditContainer extends Component {
           icon: link.icon
         }
       })
-      .then(() => {
-        console.log('DONE MF')
+      .then(linkId => {
+        this.props.history.push('/link?refresh')
       })
   }
 
@@ -161,7 +164,9 @@ class RessourceEditContainer extends Component {
                   <button className="button is-primary">Submit</button>
                 </div>
                 <div className="control">
-                  <button className="button is-link">Cancel</button>
+                  <Link className="button is-link" to="/link">
+                    Cancel
+                  </Link>
                 </div>
               </div>
             </div>
@@ -174,6 +179,6 @@ class RessourceEditContainer extends Component {
 
 export default graphql(createLink, { name: 'createLink' })(
   graphql(getEnumTypeLink, { name: 'enumTypeLink' })(
-    graphql(getEnumIconLink, { name: 'enumIconLink' })(RessourceEditContainer)
+    graphql(getEnumIconLink, { name: 'enumIconLink' })(withRouter(RessourceEditContainer))
   )
 )

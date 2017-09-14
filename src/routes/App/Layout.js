@@ -13,6 +13,8 @@ import NotFound from 'src/containers/Error/NotFound'
 import RessourceListContainer from 'src/containers/Ressource/RessourceList'
 import LinkEdit from 'src/containers/Ressource/RessourceEdit'
 
+import BookclubSearchContainer from 'src/containers/Bookclub/Search'
+
 // Layout
 import PrivateRoute from 'src/utils/PrivateRoute'
 import PublicRoute from 'src/utils/PublicRoute'
@@ -29,6 +31,12 @@ const Layout = () => (
       <PrivateRoute layout={PrivateLayout} path="/link" component={RessourceListContainer} exact />
       <PrivateRoute layout={PrivateLayout} path="/link/edit" component={LinkEdit} exact />
       <PrivateRoute layout={PrivateLayout} path="/link/edit/:id" component={LinkEdit} exact />
+      <PrivateRoute
+        layout={PrivateLayout}
+        path="/bookclub/search"
+        component={BookclubSearchContainer}
+        exact
+      />
       <PublicRoute layout={EmptyLayout} component={NotFound} />
     </Switch>
   </div>

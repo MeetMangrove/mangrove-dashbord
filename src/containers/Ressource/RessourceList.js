@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
+import { Link, withRouter } from 'react-router-dom'
 
 import Konami from 'react-konami'
 import Block from 'src/components/Block/Block'
@@ -9,12 +10,16 @@ import linkQuery from 'src/graphql/Link/Query/getAllLinks.gql'
 
 class RessourceListContainer extends Component {
   static propTypes = {
+    data: PropTypes.object,
+    location: PropTypes.object,
     linkMisc: PropTypes.object,
     linkRetreat: PropTypes.object,
     linkSocial: PropTypes.object
   }
 
   static defaultProps = {
+    data: {},
+    location: {},
     linkMisc: {},
     linkSocial: {},
     linkRetreat: {}
@@ -30,7 +35,14 @@ class RessourceListContainer extends Component {
     this.handleEasterEgg = this.handleEasterEgg.bind(this)
   }
 
-  componentDidMount() {}
+  componentWillUpdate(nextProps) {
+    if (this.props.location.search === '?refresh') {
+      console.log('h')
+      this.props.linkMisc.refetch()
+      this.props.linkSocial.refetch()
+      this.props.linkRetreat.refetch()
+    }
+  }
 
   handleEasterEgg() {
     this.setState({ rickroll: true })
@@ -90,6 +102,13 @@ class RessourceListContainer extends Component {
             </article>
           </div>
         </div>
+        <section className="section">
+          <div className="container">
+            <Link to="/link/edit" className="has-text-centered has-text-grey-light">
+              Add a link in this page?
+            </Link>
+          </div>
+        </section>
       </div>
     )
   }
@@ -98,7 +117,7 @@ class RessourceListContainer extends Component {
 export default graphql(linkQuery, { name: 'linkMisc', options: { variables: { type: 'Misc' } } })(
   graphql(linkQuery, { name: 'linkRetreat', options: { variables: { type: 'Retreat' } } })(
     graphql(linkQuery, { name: 'linkSocial', options: { variables: { type: 'Social' } } })(
-      RessourceListContainer
+      withRouter(RessourceListContainer)
     )
   )
 )
