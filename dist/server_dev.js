@@ -85,13 +85,13 @@ module.exports = require("react-router-dom");
 /* 3 */
 /***/ (function(module, exports) {
 
-module.exports = require("classnames");
+module.exports = require("react-apollo");
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-apollo");
+module.exports = require("classnames");
 
 /***/ }),
 /* 5 */
@@ -663,7 +663,7 @@ var _koa = __webpack_require__(23);
 
 var _koa2 = _interopRequireDefault(_koa);
 
-var _reactApollo = __webpack_require__(4);
+var _reactApollo = __webpack_require__(3);
 
 var _koaSslify = __webpack_require__(24);
 
@@ -1414,7 +1414,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _reactApollo = __webpack_require__(4);
+var _reactApollo = __webpack_require__(3);
 
 var _LocalStorageManager = __webpack_require__(5);
 
@@ -1487,7 +1487,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _classnames = __webpack_require__(3);
+var _classnames = __webpack_require__(4);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -1713,7 +1713,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _reactApollo = __webpack_require__(4);
+var _reactApollo = __webpack_require__(3);
 
 var _LocalStorageManager = __webpack_require__(5);
 
@@ -1984,7 +1984,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _classnames = __webpack_require__(3);
+var _classnames = __webpack_require__(4);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -2153,7 +2153,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactApollo = __webpack_require__(4);
+var _reactApollo = __webpack_require__(3);
 
 var _reactRouterDom = __webpack_require__(2);
 
@@ -2382,7 +2382,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _classnames = __webpack_require__(3);
+var _classnames = __webpack_require__(4);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -2449,7 +2449,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _classnames = __webpack_require__(3);
+var _classnames = __webpack_require__(4);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -2971,11 +2971,11 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactApollo = __webpack_require__(4);
+var _reactApollo = __webpack_require__(3);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _classnames = __webpack_require__(3);
+var _classnames = __webpack_require__(4);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -3338,7 +3338,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 __webpack_require__(10);
 
-var _classnames = __webpack_require__(3);
+var _classnames = __webpack_require__(4);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -3505,7 +3505,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _reactApollo = __webpack_require__(4);
+var _reactApollo = __webpack_require__(3);
 
 var _isLoggedIn = __webpack_require__(7);
 
@@ -3626,7 +3626,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _classnames = __webpack_require__(3);
+var _classnames = __webpack_require__(4);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -3687,7 +3687,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _classnames = __webpack_require__(3);
+var _classnames = __webpack_require__(4);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -3695,7 +3695,7 @@ var _MangroveLogo = __webpack_require__(72);
 
 var _MangroveLogo2 = _interopRequireDefault(_MangroveLogo);
 
-var _reactApollo = __webpack_require__(4);
+var _reactApollo = __webpack_require__(3);
 
 var _Header = __webpack_require__(73);
 
@@ -3711,6 +3711,11 @@ let Header = class Header extends _react.Component {
       showMenu: false
     };
     this.toggleMenu = this.toggleMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
+  }
+
+  closeMenu() {
+    this.setState({ showMenu: false });
   }
 
   toggleMenu() {
@@ -3742,7 +3747,7 @@ let Header = class Header extends _react.Component {
             _react2.default.createElement(
               'div',
               {
-                className: showMenu ? (0, _classnames2.default)('navbar-burger', 'burger', 'is-active') : (0, _classnames2.default)('navbar-burger', 'burger'),
+                className: showMenu ? (0, _classnames2.default)('navbar-burger', 'burger', _Header2.default.burgerMenu, 'is-active') : (0, _classnames2.default)('navbar-burger', 'burger', _Header2.default.burgerMenu),
                 onClick: this.toggleMenu
               },
               _react2.default.createElement('span', null),
@@ -3763,7 +3768,7 @@ let Header = class Header extends _react.Component {
                 { className: 'navbar-item' },
                 _react2.default.createElement(
                   _reactRouterDom.Link,
-                  { className: _Header2.default.headerLink, to: '/link' },
+                  { className: _Header2.default.headerLink, onClick: this.closeMenu, to: '/link' },
                   'Ressources'
                 )
               ),
@@ -3772,7 +3777,7 @@ let Header = class Header extends _react.Component {
                 { className: 'navbar-item' },
                 _react2.default.createElement(
                   _reactRouterDom.Link,
-                  { className: _Header2.default.headerLink, to: '/bookclub' },
+                  { className: _Header2.default.headerLink, onClick: this.closeMenu, to: '/bookclub' },
                   'Bookclub'
                 )
               )
@@ -3785,7 +3790,7 @@ let Header = class Header extends _react.Component {
                 { className: 'navbar-item' },
                 _react2.default.createElement(
                   _reactRouterDom.Link,
-                  { className: _Header2.default.headerLink, to: '/register' },
+                  { className: _Header2.default.headerLink, onClick: this.closeMenu, to: '/register' },
                   'Register'
                 )
               ),
@@ -3794,7 +3799,7 @@ let Header = class Header extends _react.Component {
                 { className: 'navbar-item' },
                 _react2.default.createElement(
                   _reactRouterDom.Link,
-                  { className: _Header2.default.headerLink, to: '/login' },
+                  { className: _Header2.default.headerLink, onClick: this.closeMenu, to: '/login' },
                   'Login'
                 )
               ),
@@ -3803,7 +3808,7 @@ let Header = class Header extends _react.Component {
                 { className: 'navbar-item' },
                 _react2.default.createElement(
                   _reactRouterDom.Link,
-                  { className: _Header2.default.headerLink, to: '/logout' },
+                  { className: _Header2.default.headerLink, onClick: this.closeMenu, to: '/logout' },
                   'Logout'
                 )
               )
@@ -3878,7 +3883,8 @@ module.exports = {
 	"header": "header-2zG4F7jLvGK6KP6LE87cJC",
 	"headerLink": "headerLink-2B_CfzPCUcvE9Qe2Q0uaVO",
 	"logoLink": "logoLink-2TvZGbsgxMY3a28K7cmiL_",
-	"logo": "logo-1R6EsLBT0JSYnuTx7vyhgQ"
+	"logo": "logo-1R6EsLBT0JSYnuTx7vyhgQ",
+	"burgerMenu": "burgerMenu-l9DSCn53fCHZxfN8xAwYv"
 };
 
 /***/ }),
@@ -4200,7 +4206,7 @@ exports.createClient = createClient;
 exports.getNetworkInterface = getNetworkInterface;
 exports.browserClient = browserClient;
 
-var _reactApollo = __webpack_require__(4);
+var _reactApollo = __webpack_require__(3);
 
 var _config = __webpack_require__(6);
 

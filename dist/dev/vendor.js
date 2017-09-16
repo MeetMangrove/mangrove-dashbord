@@ -4802,7 +4802,7 @@ function consoleAssert(expression) {
     }
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
 
 /***/ }),
 /* 4 */
@@ -5219,431 +5219,6 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 /***/ }),
 /* 10 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["f"] = getMutationDefinition;
-/* harmony export (immutable) */ __webpack_exports__["a"] = checkDocument;
-/* harmony export (immutable) */ __webpack_exports__["h"] = getOperationName;
-/* harmony export (immutable) */ __webpack_exports__["d"] = getFragmentDefinitions;
-/* harmony export (immutable) */ __webpack_exports__["i"] = getQueryDefinition;
-/* harmony export (immutable) */ __webpack_exports__["g"] = getOperationDefinition;
-/* unused harmony export getFragmentDefinition */
-/* harmony export (immutable) */ __webpack_exports__["b"] = createFragmentMap;
-/* harmony export (immutable) */ __webpack_exports__["e"] = getFragmentQueryDocument;
-/* harmony export (immutable) */ __webpack_exports__["c"] = getDefaultValues;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_storeUtils__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util_assign__ = __webpack_require__(17);
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-
-
-function getMutationDefinition(doc) {
-    checkDocument(doc);
-    var mutationDef = null;
-    doc.definitions.forEach(function (definition) {
-        if (definition.kind === 'OperationDefinition' &&
-            definition.operation === 'mutation') {
-            mutationDef = definition;
-        }
-    });
-    if (!mutationDef) {
-        throw new Error('Must contain a mutation definition.');
-    }
-    return mutationDef;
-}
-function checkDocument(doc) {
-    if (doc.kind !== 'Document') {
-        throw new Error("Expecting a parsed GraphQL document. Perhaps you need to wrap the query string in a \"gql\" tag? http://docs.apollostack.com/apollo-client/core.html#gql");
-    }
-    var foundOperation = false;
-    doc.definitions.forEach(function (definition) {
-        switch (definition.kind) {
-            case 'FragmentDefinition':
-                break;
-            case 'OperationDefinition':
-                if (foundOperation) {
-                    throw new Error('Queries must have exactly one operation definition.');
-                }
-                foundOperation = true;
-                break;
-            default:
-                throw new Error("Schema type definitions not allowed in queries. Found: \"" + definition.kind + "\"");
-        }
-    });
-}
-function getOperationName(doc) {
-    var res = null;
-    doc.definitions.forEach(function (definition) {
-        if (definition.kind === 'OperationDefinition' && definition.name) {
-            res = definition.name.value;
-        }
-    });
-    return res;
-}
-function getFragmentDefinitions(doc) {
-    var fragmentDefinitions = doc.definitions.filter(function (definition) {
-        if (definition.kind === 'FragmentDefinition') {
-            return true;
-        }
-        else {
-            return false;
-        }
-    });
-    return fragmentDefinitions;
-}
-function getQueryDefinition(doc) {
-    checkDocument(doc);
-    var queryDef = null;
-    doc.definitions.map(function (definition) {
-        if (definition.kind === 'OperationDefinition' &&
-            definition.operation === 'query') {
-            queryDef = definition;
-        }
-    });
-    if (!queryDef) {
-        throw new Error('Must contain a query definition.');
-    }
-    return queryDef;
-}
-function getOperationDefinition(doc) {
-    checkDocument(doc);
-    var opDef = null;
-    doc.definitions.map(function (definition) {
-        if (definition.kind === 'OperationDefinition') {
-            opDef = definition;
-        }
-    });
-    if (!opDef) {
-        throw new Error('Must contain a query definition.');
-    }
-    return opDef;
-}
-function getFragmentDefinition(doc) {
-    if (doc.kind !== 'Document') {
-        throw new Error("Expecting a parsed GraphQL document. Perhaps you need to wrap the query string in a \"gql\" tag? http://docs.apollostack.com/apollo-client/core.html#gql");
-    }
-    if (doc.definitions.length > 1) {
-        throw new Error('Fragment must have exactly one definition.');
-    }
-    var fragmentDef = doc.definitions[0];
-    if (fragmentDef.kind !== 'FragmentDefinition') {
-        throw new Error('Must be a fragment definition.');
-    }
-    return fragmentDef;
-}
-function createFragmentMap(fragments) {
-    if (fragments === void 0) { fragments = []; }
-    var symTable = {};
-    fragments.forEach(function (fragment) {
-        symTable[fragment.name.value] = fragment;
-    });
-    return symTable;
-}
-function getFragmentQueryDocument(document, fragmentName) {
-    var actualFragmentName = fragmentName;
-    var fragments = [];
-    document.definitions.forEach(function (definition) {
-        if (definition.kind === 'OperationDefinition') {
-            throw new Error("Found a " + definition.operation + " operation" + (definition.name
-                ? " named '" + definition.name.value + "'"
-                : '') + ". " +
-                'No operations are allowed when using a fragment as a query. Only fragments are allowed.');
-        }
-        if (definition.kind === 'FragmentDefinition') {
-            fragments.push(definition);
-        }
-    });
-    if (typeof actualFragmentName === 'undefined') {
-        if (fragments.length !== 1) {
-            throw new Error("Found " + fragments.length + " fragments. `fragmentName` must be provided when there is not exactly 1 fragment.");
-        }
-        actualFragmentName = fragments[0].name.value;
-    }
-    var query = __assign({}, document, { definitions: [
-            {
-                kind: 'OperationDefinition',
-                operation: 'query',
-                selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                        {
-                            kind: 'FragmentSpread',
-                            name: {
-                                kind: 'Name',
-                                value: actualFragmentName,
-                            },
-                        },
-                    ],
-                },
-            }
-        ].concat(document.definitions) });
-    return query;
-}
-function getDefaultValues(definition) {
-    if (definition.variableDefinitions && definition.variableDefinitions.length) {
-        var defaultValues = definition.variableDefinitions
-            .filter(function (_a) {
-            var defaultValue = _a.defaultValue;
-            return defaultValue;
-        })
-            .map(function (_a) {
-            var variable = _a.variable, defaultValue = _a.defaultValue;
-            var defaultValueObj = {};
-            Object(__WEBPACK_IMPORTED_MODULE_0__data_storeUtils__["j" /* valueToObjectRepresentation */])(defaultValueObj, variable.name, defaultValue);
-            return defaultValueObj;
-        });
-        return __WEBPACK_IMPORTED_MODULE_1__util_assign__["a" /* assign */].apply(void 0, [{}].concat(defaultValues));
-    }
-    return {};
-}
-//# sourceMappingURL=getFromAST.js.map
-
-/***/ }),
-/* 11 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["j"] = valueToObjectRepresentation;
-/* harmony export (immutable) */ __webpack_exports__["h"] = storeKeyNameFromField;
-/* harmony export (immutable) */ __webpack_exports__["a"] = getStoreKeyName;
-/* harmony export (immutable) */ __webpack_exports__["g"] = resultKeyNameFromField;
-/* harmony export (immutable) */ __webpack_exports__["c"] = isField;
-/* harmony export (immutable) */ __webpack_exports__["e"] = isInlineFragment;
-/* harmony export (immutable) */ __webpack_exports__["b"] = graphQLResultHasError;
-/* harmony export (immutable) */ __webpack_exports__["d"] = isIdValue;
-/* harmony export (immutable) */ __webpack_exports__["i"] = toIdValue;
-/* harmony export (immutable) */ __webpack_exports__["f"] = isJsonValue;
-function isStringValue(value) {
-    return value.kind === 'StringValue';
-}
-function isBooleanValue(value) {
-    return value.kind === 'BooleanValue';
-}
-function isIntValue(value) {
-    return value.kind === 'IntValue';
-}
-function isFloatValue(value) {
-    return value.kind === 'FloatValue';
-}
-function isVariable(value) {
-    return value.kind === 'Variable';
-}
-function isObjectValue(value) {
-    return value.kind === 'ObjectValue';
-}
-function isListValue(value) {
-    return value.kind === 'ListValue';
-}
-function isEnumValue(value) {
-    return value.kind === 'EnumValue';
-}
-function valueToObjectRepresentation(argObj, name, value, variables) {
-    if (isIntValue(value) || isFloatValue(value)) {
-        argObj[name.value] = Number(value.value);
-    }
-    else if (isBooleanValue(value) || isStringValue(value)) {
-        argObj[name.value] = value.value;
-    }
-    else if (isObjectValue(value)) {
-        var nestedArgObj_1 = {};
-        value.fields.map(function (obj) {
-            return valueToObjectRepresentation(nestedArgObj_1, obj.name, obj.value, variables);
-        });
-        argObj[name.value] = nestedArgObj_1;
-    }
-    else if (isVariable(value)) {
-        var variableValue = (variables || {})[value.name.value];
-        argObj[name.value] = variableValue;
-    }
-    else if (isListValue(value)) {
-        argObj[name.value] = value.values.map(function (listValue) {
-            var nestedArgArrayObj = {};
-            valueToObjectRepresentation(nestedArgArrayObj, name, listValue, variables);
-            return nestedArgArrayObj[name.value];
-        });
-    }
-    else if (isEnumValue(value)) {
-        argObj[name.value] = value.value;
-    }
-    else {
-        throw new Error("The inline argument \"" + name.value + "\" of kind \"" + value
-            .kind + "\" is not supported.\n                    Use variables instead of inline arguments to overcome this limitation.");
-    }
-}
-function storeKeyNameFromField(field, variables) {
-    var directivesObj = null;
-    if (field.directives) {
-        directivesObj = {};
-        field.directives.forEach(function (directive) {
-            directivesObj[directive.name.value] = {};
-            if (directive.arguments) {
-                directive.arguments.forEach(function (_a) {
-                    var name = _a.name, value = _a.value;
-                    return valueToObjectRepresentation(directivesObj[directive.name.value], name, value, variables);
-                });
-            }
-        });
-    }
-    var argObj = null;
-    if (field.arguments && field.arguments.length) {
-        argObj = {};
-        field.arguments.forEach(function (_a) {
-            var name = _a.name, value = _a.value;
-            return valueToObjectRepresentation(argObj, name, value, variables);
-        });
-    }
-    return getStoreKeyName(field.name.value, argObj, directivesObj);
-}
-function getStoreKeyName(fieldName, args, directives) {
-    if (directives &&
-        directives['connection'] &&
-        directives['connection']['key']) {
-        if (directives['connection']['filter'] &&
-            directives['connection']['filter'].length > 0) {
-            var filterKeys = directives['connection']['filter']
-                ? directives['connection']['filter']
-                : [];
-            filterKeys.sort();
-            var queryArgs_1 = args;
-            var filteredArgs_1 = {};
-            filterKeys.forEach(function (key) {
-                filteredArgs_1[key] = queryArgs_1[key];
-            });
-            return directives['connection']['key'] + "(" + JSON.stringify(filteredArgs_1) + ")";
-        }
-        else {
-            return directives['connection']['key'];
-        }
-    }
-    if (args) {
-        var stringifiedArgs = JSON.stringify(args);
-        return fieldName + "(" + stringifiedArgs + ")";
-    }
-    return fieldName;
-}
-function resultKeyNameFromField(field) {
-    return field.alias ? field.alias.value : field.name.value;
-}
-function isField(selection) {
-    return selection.kind === 'Field';
-}
-function isInlineFragment(selection) {
-    return selection.kind === 'InlineFragment';
-}
-function graphQLResultHasError(result) {
-    return result.errors && result.errors.length;
-}
-function isIdValue(idObject) {
-    return (idObject != null &&
-        typeof idObject === 'object' &&
-        idObject.type === 'id');
-}
-function toIdValue(id, generated) {
-    if (generated === void 0) { generated = false; }
-    return {
-        type: 'id',
-        id: id,
-        generated: generated,
-    };
-}
-function isJsonValue(jsonObject) {
-    return (jsonObject != null &&
-        typeof jsonObject === 'object' &&
-        jsonObject.type === 'json');
-}
-//# sourceMappingURL=storeUtils.js.map
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-  Copyright (c) 2016 Jed Watson.
-  Licensed under the MIT License (MIT), see
-  http://jedwatson.github.io/classnames
-*/
-/* global define */
-
-(function () {
-	'use strict';
-
-	var hasOwn = {}.hasOwnProperty;
-
-	function classNames () {
-		var classes = [];
-
-		for (var i = 0; i < arguments.length; i++) {
-			var arg = arguments[i];
-			if (!arg) continue;
-
-			var argType = typeof arg;
-
-			if (argType === 'string' || argType === 'number') {
-				classes.push(arg);
-			} else if (Array.isArray(arg)) {
-				classes.push(classNames.apply(null, arg));
-			} else if (argType === 'object') {
-				for (var key in arg) {
-					if (hasOwn.call(arg, key) && arg[key]) {
-						classes.push(key);
-					}
-				}
-			}
-		}
-
-		return classes.join(' ');
-	}
-
-	if (typeof module !== 'undefined' && module.exports) {
-		module.exports = classNames;
-	} else if (true) {
-		// register as 'classnames', consistent with npm package name
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
-			return classNames;
-		}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else {
-		window.classNames = classNames;
-	}
-}());
-
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {(function (global, factory) {
@@ -6345,6 +5920,431 @@ Object.defineProperty(exports, '__esModule', { value: true });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
+/* 11 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["f"] = getMutationDefinition;
+/* harmony export (immutable) */ __webpack_exports__["a"] = checkDocument;
+/* harmony export (immutable) */ __webpack_exports__["h"] = getOperationName;
+/* harmony export (immutable) */ __webpack_exports__["d"] = getFragmentDefinitions;
+/* harmony export (immutable) */ __webpack_exports__["i"] = getQueryDefinition;
+/* harmony export (immutable) */ __webpack_exports__["g"] = getOperationDefinition;
+/* unused harmony export getFragmentDefinition */
+/* harmony export (immutable) */ __webpack_exports__["b"] = createFragmentMap;
+/* harmony export (immutable) */ __webpack_exports__["e"] = getFragmentQueryDocument;
+/* harmony export (immutable) */ __webpack_exports__["c"] = getDefaultValues;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_storeUtils__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util_assign__ = __webpack_require__(17);
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+
+
+function getMutationDefinition(doc) {
+    checkDocument(doc);
+    var mutationDef = null;
+    doc.definitions.forEach(function (definition) {
+        if (definition.kind === 'OperationDefinition' &&
+            definition.operation === 'mutation') {
+            mutationDef = definition;
+        }
+    });
+    if (!mutationDef) {
+        throw new Error('Must contain a mutation definition.');
+    }
+    return mutationDef;
+}
+function checkDocument(doc) {
+    if (doc.kind !== 'Document') {
+        throw new Error("Expecting a parsed GraphQL document. Perhaps you need to wrap the query string in a \"gql\" tag? http://docs.apollostack.com/apollo-client/core.html#gql");
+    }
+    var foundOperation = false;
+    doc.definitions.forEach(function (definition) {
+        switch (definition.kind) {
+            case 'FragmentDefinition':
+                break;
+            case 'OperationDefinition':
+                if (foundOperation) {
+                    throw new Error('Queries must have exactly one operation definition.');
+                }
+                foundOperation = true;
+                break;
+            default:
+                throw new Error("Schema type definitions not allowed in queries. Found: \"" + definition.kind + "\"");
+        }
+    });
+}
+function getOperationName(doc) {
+    var res = null;
+    doc.definitions.forEach(function (definition) {
+        if (definition.kind === 'OperationDefinition' && definition.name) {
+            res = definition.name.value;
+        }
+    });
+    return res;
+}
+function getFragmentDefinitions(doc) {
+    var fragmentDefinitions = doc.definitions.filter(function (definition) {
+        if (definition.kind === 'FragmentDefinition') {
+            return true;
+        }
+        else {
+            return false;
+        }
+    });
+    return fragmentDefinitions;
+}
+function getQueryDefinition(doc) {
+    checkDocument(doc);
+    var queryDef = null;
+    doc.definitions.map(function (definition) {
+        if (definition.kind === 'OperationDefinition' &&
+            definition.operation === 'query') {
+            queryDef = definition;
+        }
+    });
+    if (!queryDef) {
+        throw new Error('Must contain a query definition.');
+    }
+    return queryDef;
+}
+function getOperationDefinition(doc) {
+    checkDocument(doc);
+    var opDef = null;
+    doc.definitions.map(function (definition) {
+        if (definition.kind === 'OperationDefinition') {
+            opDef = definition;
+        }
+    });
+    if (!opDef) {
+        throw new Error('Must contain a query definition.');
+    }
+    return opDef;
+}
+function getFragmentDefinition(doc) {
+    if (doc.kind !== 'Document') {
+        throw new Error("Expecting a parsed GraphQL document. Perhaps you need to wrap the query string in a \"gql\" tag? http://docs.apollostack.com/apollo-client/core.html#gql");
+    }
+    if (doc.definitions.length > 1) {
+        throw new Error('Fragment must have exactly one definition.');
+    }
+    var fragmentDef = doc.definitions[0];
+    if (fragmentDef.kind !== 'FragmentDefinition') {
+        throw new Error('Must be a fragment definition.');
+    }
+    return fragmentDef;
+}
+function createFragmentMap(fragments) {
+    if (fragments === void 0) { fragments = []; }
+    var symTable = {};
+    fragments.forEach(function (fragment) {
+        symTable[fragment.name.value] = fragment;
+    });
+    return symTable;
+}
+function getFragmentQueryDocument(document, fragmentName) {
+    var actualFragmentName = fragmentName;
+    var fragments = [];
+    document.definitions.forEach(function (definition) {
+        if (definition.kind === 'OperationDefinition') {
+            throw new Error("Found a " + definition.operation + " operation" + (definition.name
+                ? " named '" + definition.name.value + "'"
+                : '') + ". " +
+                'No operations are allowed when using a fragment as a query. Only fragments are allowed.');
+        }
+        if (definition.kind === 'FragmentDefinition') {
+            fragments.push(definition);
+        }
+    });
+    if (typeof actualFragmentName === 'undefined') {
+        if (fragments.length !== 1) {
+            throw new Error("Found " + fragments.length + " fragments. `fragmentName` must be provided when there is not exactly 1 fragment.");
+        }
+        actualFragmentName = fragments[0].name.value;
+    }
+    var query = __assign({}, document, { definitions: [
+            {
+                kind: 'OperationDefinition',
+                operation: 'query',
+                selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                        {
+                            kind: 'FragmentSpread',
+                            name: {
+                                kind: 'Name',
+                                value: actualFragmentName,
+                            },
+                        },
+                    ],
+                },
+            }
+        ].concat(document.definitions) });
+    return query;
+}
+function getDefaultValues(definition) {
+    if (definition.variableDefinitions && definition.variableDefinitions.length) {
+        var defaultValues = definition.variableDefinitions
+            .filter(function (_a) {
+            var defaultValue = _a.defaultValue;
+            return defaultValue;
+        })
+            .map(function (_a) {
+            var variable = _a.variable, defaultValue = _a.defaultValue;
+            var defaultValueObj = {};
+            Object(__WEBPACK_IMPORTED_MODULE_0__data_storeUtils__["j" /* valueToObjectRepresentation */])(defaultValueObj, variable.name, defaultValue);
+            return defaultValueObj;
+        });
+        return __WEBPACK_IMPORTED_MODULE_1__util_assign__["a" /* assign */].apply(void 0, [{}].concat(defaultValues));
+    }
+    return {};
+}
+//# sourceMappingURL=getFromAST.js.map
+
+/***/ }),
+/* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["j"] = valueToObjectRepresentation;
+/* harmony export (immutable) */ __webpack_exports__["h"] = storeKeyNameFromField;
+/* harmony export (immutable) */ __webpack_exports__["a"] = getStoreKeyName;
+/* harmony export (immutable) */ __webpack_exports__["g"] = resultKeyNameFromField;
+/* harmony export (immutable) */ __webpack_exports__["c"] = isField;
+/* harmony export (immutable) */ __webpack_exports__["e"] = isInlineFragment;
+/* harmony export (immutable) */ __webpack_exports__["b"] = graphQLResultHasError;
+/* harmony export (immutable) */ __webpack_exports__["d"] = isIdValue;
+/* harmony export (immutable) */ __webpack_exports__["i"] = toIdValue;
+/* harmony export (immutable) */ __webpack_exports__["f"] = isJsonValue;
+function isStringValue(value) {
+    return value.kind === 'StringValue';
+}
+function isBooleanValue(value) {
+    return value.kind === 'BooleanValue';
+}
+function isIntValue(value) {
+    return value.kind === 'IntValue';
+}
+function isFloatValue(value) {
+    return value.kind === 'FloatValue';
+}
+function isVariable(value) {
+    return value.kind === 'Variable';
+}
+function isObjectValue(value) {
+    return value.kind === 'ObjectValue';
+}
+function isListValue(value) {
+    return value.kind === 'ListValue';
+}
+function isEnumValue(value) {
+    return value.kind === 'EnumValue';
+}
+function valueToObjectRepresentation(argObj, name, value, variables) {
+    if (isIntValue(value) || isFloatValue(value)) {
+        argObj[name.value] = Number(value.value);
+    }
+    else if (isBooleanValue(value) || isStringValue(value)) {
+        argObj[name.value] = value.value;
+    }
+    else if (isObjectValue(value)) {
+        var nestedArgObj_1 = {};
+        value.fields.map(function (obj) {
+            return valueToObjectRepresentation(nestedArgObj_1, obj.name, obj.value, variables);
+        });
+        argObj[name.value] = nestedArgObj_1;
+    }
+    else if (isVariable(value)) {
+        var variableValue = (variables || {})[value.name.value];
+        argObj[name.value] = variableValue;
+    }
+    else if (isListValue(value)) {
+        argObj[name.value] = value.values.map(function (listValue) {
+            var nestedArgArrayObj = {};
+            valueToObjectRepresentation(nestedArgArrayObj, name, listValue, variables);
+            return nestedArgArrayObj[name.value];
+        });
+    }
+    else if (isEnumValue(value)) {
+        argObj[name.value] = value.value;
+    }
+    else {
+        throw new Error("The inline argument \"" + name.value + "\" of kind \"" + value
+            .kind + "\" is not supported.\n                    Use variables instead of inline arguments to overcome this limitation.");
+    }
+}
+function storeKeyNameFromField(field, variables) {
+    var directivesObj = null;
+    if (field.directives) {
+        directivesObj = {};
+        field.directives.forEach(function (directive) {
+            directivesObj[directive.name.value] = {};
+            if (directive.arguments) {
+                directive.arguments.forEach(function (_a) {
+                    var name = _a.name, value = _a.value;
+                    return valueToObjectRepresentation(directivesObj[directive.name.value], name, value, variables);
+                });
+            }
+        });
+    }
+    var argObj = null;
+    if (field.arguments && field.arguments.length) {
+        argObj = {};
+        field.arguments.forEach(function (_a) {
+            var name = _a.name, value = _a.value;
+            return valueToObjectRepresentation(argObj, name, value, variables);
+        });
+    }
+    return getStoreKeyName(field.name.value, argObj, directivesObj);
+}
+function getStoreKeyName(fieldName, args, directives) {
+    if (directives &&
+        directives['connection'] &&
+        directives['connection']['key']) {
+        if (directives['connection']['filter'] &&
+            directives['connection']['filter'].length > 0) {
+            var filterKeys = directives['connection']['filter']
+                ? directives['connection']['filter']
+                : [];
+            filterKeys.sort();
+            var queryArgs_1 = args;
+            var filteredArgs_1 = {};
+            filterKeys.forEach(function (key) {
+                filteredArgs_1[key] = queryArgs_1[key];
+            });
+            return directives['connection']['key'] + "(" + JSON.stringify(filteredArgs_1) + ")";
+        }
+        else {
+            return directives['connection']['key'];
+        }
+    }
+    if (args) {
+        var stringifiedArgs = JSON.stringify(args);
+        return fieldName + "(" + stringifiedArgs + ")";
+    }
+    return fieldName;
+}
+function resultKeyNameFromField(field) {
+    return field.alias ? field.alias.value : field.name.value;
+}
+function isField(selection) {
+    return selection.kind === 'Field';
+}
+function isInlineFragment(selection) {
+    return selection.kind === 'InlineFragment';
+}
+function graphQLResultHasError(result) {
+    return result.errors && result.errors.length;
+}
+function isIdValue(idObject) {
+    return (idObject != null &&
+        typeof idObject === 'object' &&
+        idObject.type === 'id');
+}
+function toIdValue(id, generated) {
+    if (generated === void 0) { generated = false; }
+    return {
+        type: 'id',
+        id: id,
+        generated: generated,
+    };
+}
+function isJsonValue(jsonObject) {
+    return (jsonObject != null &&
+        typeof jsonObject === 'object' &&
+        jsonObject.type === 'json');
+}
+//# sourceMappingURL=storeUtils.js.map
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+  Copyright (c) 2016 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames () {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg)) {
+				classes.push(classNames.apply(null, arg));
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if (typeof module !== 'undefined' && module.exports) {
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+			return classNames;
+		}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {
+		window.classNames = classNames;
+	}
+}());
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6799,8 +6799,8 @@ function isTest() {
 /* unused harmony export assertIdValue */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_graphql_anywhere__ = __webpack_require__(279);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_graphql_anywhere___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_graphql_anywhere__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__storeUtils__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__queries_getFromAST__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__storeUtils__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__queries_getFromAST__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util_isEqual__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__util_assign__ = __webpack_require__(17);
 var __assign = (this && this.__assign) || Object.assign || function(t) {
@@ -7134,7 +7134,7 @@ var createPath = function createPath(location) {
 "use strict";
 /* WEBPACK VAR INJECTION */(function(console) {/* harmony export (immutable) */ __webpack_exports__["a"] = addTypenameToDocument;
 /* harmony export (immutable) */ __webpack_exports__["b"] = removeConnectionDirectiveFromDocument;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getFromAST__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getFromAST__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util_cloneDeep__ = __webpack_require__(275);
 
 
@@ -7233,8 +7233,8 @@ function removeConnectionDirectiveFromDocument(doc) {
 /* WEBPACK VAR INJECTION */(function(console) {/* harmony export (immutable) */ __webpack_exports__["a"] = writeQueryToStore;
 /* harmony export (immutable) */ __webpack_exports__["b"] = writeResultToStore;
 /* unused harmony export writeSelectionSetToStore */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__queries_getFromAST__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__storeUtils__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__queries_getFromAST__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__storeUtils__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__queries_directives__ = __webpack_require__(278);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util_environment__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__util_assign__ = __webpack_require__(17);
@@ -9720,7 +9720,7 @@ function isWriteAction(action) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__util_isEqual__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__util_maybeDeepFreeze__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__queries_networkStatus__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__queries_getFromAST__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__queries_getFromAST__ = __webpack_require__(11);
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -11826,7 +11826,7 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13), __webpack_require__(34), __webpack_require__(3)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14), __webpack_require__(34), __webpack_require__(3)))
 
 /***/ }),
 /* 59 */
@@ -13818,8 +13818,8 @@ function compose() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__actions__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__writeToStore__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_proxy__ = __webpack_require__(78);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__queries_getFromAST__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__storeUtils__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__queries_getFromAST__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__storeUtils__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__replaceQueryResults__ = __webpack_require__(283);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__readFromStore__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__util_errorHandling__ = __webpack_require__(82);
@@ -13979,7 +13979,7 @@ function data(previousState, action, config) {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReduxDataProxy; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return TransactionDataProxy; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__queries_getFromAST__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__queries_getFromAST__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__optimistic_data_store__ = __webpack_require__(79);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__readFromStore__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__writeToStore__ = __webpack_require__(24);
@@ -29807,7 +29807,7 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
 
 /***/ }),
 /* 220 */
@@ -50249,7 +50249,7 @@ var freeGlobal = typeof global == 'object' && global && global.Object === Object
 
 /* harmony default export */ __webpack_exports__["a"] = (freeGlobal);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(14)))
 
 /***/ }),
 /* 263 */
@@ -50440,7 +50440,7 @@ if (typeof self !== 'undefined') {
 
 var result = (0, _ponyfill2['default'])(root);
 exports['default'] = result;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13), __webpack_require__(74)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14), __webpack_require__(74)(module)))
 
 /***/ }),
 /* 269 */
@@ -50735,12 +50735,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__core_ObservableQuery__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__data_readFromStore__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__data_writeToStore__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__queries_getFromAST__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__queries_getFromAST__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__queries_networkStatus__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__queries_queryTransform__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__errors_ApolloError__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ApolloClient__ = __webpack_require__(284);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__data_storeUtils__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__data_storeUtils__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__data_fragmentMatcher__ = __webpack_require__(52);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createNetworkInterface", function() { return __WEBPACK_IMPORTED_MODULE_0__transport_networkInterface__["c"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createBatchingNetworkInterface", function() { return __WEBPACK_IMPORTED_MODULE_1__transport_batchedNetworkInterface__["b"]; });
@@ -51788,7 +51788,7 @@ function replaceQueryResults(state, _a, config) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__core_QueryManager__ = __webpack_require__(294);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__util_environment__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__data_storeUtils__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__data_storeUtils__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__data_proxy__ = __webpack_require__(78);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__version__ = __webpack_require__(300);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__version___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__version__);
@@ -53971,7 +53971,7 @@ function warnOnceInDevelopment(msg, type) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__queries_store__ = __webpack_require__(296);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__queries_networkStatus__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__store__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__queries_getFromAST__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__queries_getFromAST__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__queries_queryTransform__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__data_resultReducers__ = __webpack_require__(297);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__data_fragmentMatcher__ = __webpack_require__(52);
@@ -55703,7 +55703,7 @@ var pick = baseRest(function(object, props) {
 
 module.exports = pick;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
 
 /***/ }),
 /* 302 */,
@@ -57123,7 +57123,7 @@ exports.mapStateOnServer = mapStateOnServer;
 exports.reducePropsToState = reducePropsToState;
 exports.requestAnimationFrame = requestAnimationFrame;
 exports.warn = warn;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13), __webpack_require__(3)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14), __webpack_require__(3)))
 
 /***/ }),
 /* 324 */,
