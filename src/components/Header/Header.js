@@ -67,7 +67,7 @@ class Header extends Component {
                   </Link>
                 </div>
                 <div className="navbar-item">
-                  <Link className={css.headerLink} onClick={this.closeMenu} to="/bookclub">
+                  <Link className={css.headerLink} onClick={this.closeMenu} to="/bookclub/search">
                     Bookclub
                   </Link>
                 </div>

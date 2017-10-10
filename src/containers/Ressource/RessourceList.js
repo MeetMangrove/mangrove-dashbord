@@ -71,7 +71,7 @@ class RessourceListContainer extends Component {
               linkMisc.allLinks.length > 0 && (
                 <div className="columns">
                   <div className="column">
-                    <Block links={linkMisc.allLinks} titleBlock="Retreat" />
+                    <Block links={linkMisc.allLinks} titleBlock="Misc:" />
                   </div>
                 </div>
               )}

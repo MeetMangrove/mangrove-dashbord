@@ -2230,7 +2230,7 @@ let RessourceListContainer = class RessourceListContainer extends _react.Compone
               _react2.default.createElement(
                 'div',
                 { className: 'column' },
-                _react2.default.createElement(_Block2.default, { links: linkMisc.allLinks, titleBlock: 'Retreat' })
+                _react2.default.createElement(_Block2.default, { links: linkMisc.allLinks, titleBlock: 'Misc:' })
               )
             )
           )
@@ -3414,7 +3414,7 @@ let BookclubSearchContainer = class BookclubSearchContainer extends _react.Compo
       !isSearchLoading && results && _react2.default.createElement(
         'div',
         { className: 'columns' },
-        results.length && results.map(result => _react2.default.createElement(
+        results.length && results.map((key, result) => _react2.default.createElement(
           'div',
           { className: 'column' },
           _react2.default.createElement(
@@ -3630,6 +3630,10 @@ var _classnames = __webpack_require__(4);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
+var _reactHelmet = __webpack_require__(11);
+
+var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
+
 var _Header = __webpack_require__(71);
 
 var _Header2 = _interopRequireDefault(_Header);
@@ -3650,6 +3654,7 @@ let PrivateLayout = class PrivateLayout extends _react.Component {
     return _react2.default.createElement(
       'div',
       null,
+      _react2.default.createElement(_reactHelmet2.default, { title: 'Mangrove Dashboard' }),
       _react2.default.createElement(_Header2.default, null),
       _react2.default.createElement(
         'div',
@@ -3777,7 +3782,7 @@ let Header = class Header extends _react.Component {
                 { className: 'navbar-item' },
                 _react2.default.createElement(
                   _reactRouterDom.Link,
-                  { className: _Header2.default.headerLink, onClick: this.closeMenu, to: '/bookclub' },
+                  { className: _Header2.default.headerLink, onClick: this.closeMenu, to: '/bookclub/search' },
                   'Bookclub'
                 )
               )

@@ -86,7 +86,7 @@ export default class BookclubSearchContainer extends Component {
         results && (
           <div className="columns">
             {results.length &&
-              results.map(result => (
+              results.map((key, result) => (
                 <div className="column">
                   <div className="card">
                     <div className="card-image">
